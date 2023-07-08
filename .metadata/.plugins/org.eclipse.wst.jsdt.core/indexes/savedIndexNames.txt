@@ -1,0 +1,8 @@
+INDEX VERSION 1.4+C:\Users\Usuario\Desktop\Laureano\Universidad\2023\Java (elect)\Proyecto\.metadata\.plugins\org.eclipse.wst.jsdt.core\indexes
+3621487864.index
+4152316381.index
+841643359.index
+1987546959.index
+2872670455.index
+26522493.index
+1609693338.index

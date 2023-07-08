@@ -1,0 +1,46 @@
+<%@page import="java.util.LinkedList"%>
+<%@page import="entities.Empleado"%>
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Foodtruck</title>
+<%
+	LinkedList<Empleado> le = (LinkedList<Empleado>)request.getAttribute("listaEmpleados");
+%>
+</head>
+<body>
+
+<div>
+		<table>
+			<thead>
+			<tr>
+				<th>DNI</th>
+				<th>Nombre</th>
+				<th>Turno</th>
+				<th>Rol</th>
+				<th></th>
+			</tr>
+			</thead>
+			<tbody>
+			<% for (Empleado e : le){ %>
+				<tr>
+					<td><%=e.getDni()%></td>
+					<td><%=e.getNombre()%></td>
+					<td><%=e.getTurno() %></td>
+					<td>Rol</td>
+					<td><a href="empleadoeditar/<%=e.getDni()%>">editar</a></td>
+					<td>borrar</td>
+					
+				</tr>
+				
+			<%} %>
+			</tbody>
+		</table>
+		
+	</div>
+
+</body>
+</html>

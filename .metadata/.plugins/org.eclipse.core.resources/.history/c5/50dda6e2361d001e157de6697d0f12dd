@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<h1>Hello world!</h1>
+	
+	<form action="listadoclientes" method="post"">
+		<div>
+			<label>DNI</label>
+			<input name="dni">
+		</div>
+		<div>
+			<label>Nombre</label>
+			<input name="nombre">
+		</div>
+		<div>
+			<label>Dirección</label>
+			<input name="direccion">
+		</div>
+		<button type="submit">Submit</button>
+		
+	</form>
+</body>
+</html>
