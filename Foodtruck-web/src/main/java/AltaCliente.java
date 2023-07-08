@@ -1,35 +1,42 @@
 
 
 import java.io.IOException;
+import java.util.LinkedList;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import data.EmpleadoDAO;
-import entities.Empleado;
+import data.ClienteDAO;
+import entities.Cliente;
+
 
 /**
- * Servlet implementation class Login
+ * Servlet implementation class AltaCliente
  */
-@WebServlet("/login")
-public class Login extends HttpServlet {
+@WebServlet("/listadoclientes")
+public class AltaCliente extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public Login() {
+    public AltaCliente() {
         super();
-        // TODO Auto-generated constructor stub
     }
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.getRequestDispatcher("WEB-INF/login.jsp").forward(request, response);
+		
+		ClienteDAO cdao = new ClienteDAO();
+		LinkedList<Cliente> clientes = cdao.getAll();
+		request.setAttribute("listaclientes", clientes);
+		request.getRequestDispatcher("WEB-INF/listadoClientes.jsp").forward(request, response);
+		
 	}
 
 	/**
@@ -38,23 +45,16 @@ public class Login extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		String dni = request.getParameter("dni");
-		String pass = request.getParameter("password");
+		String nom = request.getParameter("nombre");
+		String dir = request.getParameter("direccion");
 		
-		Empleado e = new Empleado();
-		e.setDni(dni);
-		e.setPassword(pass);
-		System.out.println(dni + pass);
+		Cliente c = new Cliente(dni,nom,dir);
 		
-		EmpleadoDAO edao = new EmpleadoDAO();
-		Empleado emp = edao.login(e);
+		ClienteDAO cdao = new ClienteDAO();
 		
-		if (emp != null) {
-			System.out.println("Lo encontré");
-			response.sendRedirect("administracion.html");
-		} else {
-			request.getRequestDispatcher("WEB-INF/login.jsp").forward(request, response);
-		}
+		cdao.newCliente(c);
 		
+		doGet(request, response);
 	}
 
 }

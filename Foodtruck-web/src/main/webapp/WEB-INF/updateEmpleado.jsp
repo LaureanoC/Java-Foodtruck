@@ -10,7 +10,7 @@
 </head>
 <body>
 
-	<form action="empleadoeditar?dni=<%=e%>" method="post"">
+	<form action="empleadoeditar?dni=<%=e%>" method="post">
 		<p>Empleado con DNI: <%=e%></p>
 		<div>
 			<label>Nombre</label>

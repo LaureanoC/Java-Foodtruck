@@ -12,7 +12,7 @@
 <body>
 	<div class="login">
         <div class="login__container">
-            <form action="" method="post">
+            <form method="post">
                 <h1>Iniciar Sesión</h1>
                 <div class="container">
                     <label for="dni">DNI</label>

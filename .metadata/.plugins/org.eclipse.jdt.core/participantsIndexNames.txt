@@ -1,3 +1,0 @@
-INDEX VERSION 1.134
-C:\Users\Usuario\Desktop\Laureano\Universidad\2023\Java (elect)\Proyecto\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\841643359.index
-\Foodtruck\src\main\java
