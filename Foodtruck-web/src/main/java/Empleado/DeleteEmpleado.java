@@ -1,3 +1,4 @@
+package Empleado;
 
 
 import java.io.IOException;
@@ -9,22 +10,22 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import data.ClienteDAO;
-import entities.Cliente;
-
+import data.EmpleadoDAO;
+import entities.Empleado;
 
 /**
- * Servlet implementation class AltaCliente
+ * Servlet implementation class DeleteEmpleado
  */
-@WebServlet("/listadoclientes")
-public class AltaCliente extends HttpServlet {
+@WebServlet("/empleadoborrar")
+public class DeleteEmpleado extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public AltaCliente() {
+    public DeleteEmpleado() {
         super();
+        // TODO Auto-generated constructor stub
     }
 
 	/**
@@ -32,10 +33,18 @@ public class AltaCliente extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		ClienteDAO cdao = new ClienteDAO();
-		LinkedList<Cliente> clientes = cdao.getAll();
-		request.setAttribute("listaclientes", clientes);
-		request.getRequestDispatcher("WEB-INF/listadoClientes.jsp").forward(request, response);
+		String dni = request.getParameter("dni");
+		
+		Empleado e = new Empleado();
+		e.setDni(dni);
+		EmpleadoDAO edao = new EmpleadoDAO();
+		
+		edao.deleteEmpleado(e);
+		LinkedList<Empleado> empleados = edao.getAll();
+		request.setAttribute("listaEmpleados", empleados);
+		
+		request.getRequestDispatcher("WEB-INF/listadoEmpleados.jsp").forward(request, response);
+		
 		
 	}
 
@@ -43,17 +52,7 @@ public class AltaCliente extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
-		String dni = request.getParameter("dni");
-		String nom = request.getParameter("nombre");
-		String dir = request.getParameter("direccion");
-		
-		Cliente c = new Cliente(dni,nom,dir);
-		
-		ClienteDAO cdao = new ClienteDAO();
-		
-		cdao.newCliente(c);
-		
+		// TODO Auto-generated method stub
 		doGet(request, response);
 	}
 

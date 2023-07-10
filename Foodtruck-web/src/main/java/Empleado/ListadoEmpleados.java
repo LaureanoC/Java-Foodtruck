@@ -1,3 +1,4 @@
+package Empleado;
 
 
 import java.io.IOException;
@@ -9,20 +10,20 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import data.ClienteDAO;
-import entities.Cliente;
+import data.EmpleadoDAO;
+import entities.Empleado;
 
 /**
- * Servlet implementation class DeleteCliente
+ * Servlet implementation class ListadoEmpleados
  */
-@WebServlet("/clienteborrar")
-public class DeleteCliente extends HttpServlet {
+@WebServlet("/listadoempleados")
+public class ListadoEmpleados extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public DeleteCliente() {
+    public ListadoEmpleados() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -31,17 +32,12 @@ public class DeleteCliente extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String dni = request.getParameter("dni");
 		
-		Cliente c = new Cliente();
-		c.setDni(dni);
-		ClienteDAO cdao = new ClienteDAO();
+		EmpleadoDAO edao = new EmpleadoDAO();
+		LinkedList<Empleado> empleados = edao.getAll();
+		request.setAttribute("listaEmpleados", empleados);
 		
-		cdao.deleteCliente(c);
-		LinkedList<Cliente> clientes = cdao.getAll();
-		request.setAttribute("listaclientes", clientes);
-		
-		request.getRequestDispatcher("WEB-INF/listadoClientes.jsp").forward(request, response);
+		request.getRequestDispatcher("WEB-INF/listadoEmpleados.jsp").forward(request, response);
 		
 	}
 
@@ -49,7 +45,16 @@ public class DeleteCliente extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
+			
+		String dni = request.getParameter("dni");
+		String nom = request.getParameter("nombre");
+		String tur = request.getParameter("turno");
+		String pass = request.getParameter("password");
+		
+		EmpleadoDAO edao = new EmpleadoDAO();
+		Empleado e = new Empleado(dni,nom,tur,pass);
+		edao.newEmpleado(e);
+		
 		doGet(request, response);
 	}
 

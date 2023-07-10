@@ -16,7 +16,7 @@
                 <h1>Iniciar Sesión</h1>
                 <div class="container">
                     <label for="dni">DNI</label>
-                    <input class="input"type="text" name="dni">
+                    <input class="input"type="text" maxlength="8" name="dni">
                 </div>
                 
                 <div class="container">

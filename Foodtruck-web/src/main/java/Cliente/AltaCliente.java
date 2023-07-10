@@ -1,3 +1,4 @@
+package Cliente;
 
 
 import java.io.IOException;
@@ -9,22 +10,22 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import data.EmpleadoDAO;
-import entities.Empleado;
+import data.ClienteDAO;
+import entities.Cliente;
+
 
 /**
- * Servlet implementation class DeleteEmpleado
+ * Servlet implementation class AltaCliente
  */
-@WebServlet("/empleadoborrar")
-public class DeleteEmpleado extends HttpServlet {
+@WebServlet("/listadoclientes")
+public class AltaCliente extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public DeleteEmpleado() {
+    public AltaCliente() {
         super();
-        // TODO Auto-generated constructor stub
     }
 
 	/**
@@ -32,18 +33,10 @@ public class DeleteEmpleado extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		String dni = request.getParameter("dni");
-		
-		Empleado e = new Empleado();
-		e.setDni(dni);
-		EmpleadoDAO edao = new EmpleadoDAO();
-		
-		edao.deleteEmpleado(e);
-		LinkedList<Empleado> empleados = edao.getAll();
-		request.setAttribute("listaEmpleados", empleados);
-		
-		request.getRequestDispatcher("WEB-INF/listadoEmpleados.jsp").forward(request, response);
-		
+		ClienteDAO cdao = new ClienteDAO();
+		LinkedList<Cliente> clientes = cdao.getAll();
+		request.setAttribute("listaclientes", clientes);
+		request.getRequestDispatcher("WEB-INF/listadoClientes.jsp").forward(request, response);
 		
 	}
 
@@ -51,7 +44,17 @@ public class DeleteEmpleado extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
+		
+		String dni = request.getParameter("dni");
+		String nom = request.getParameter("nombre");
+		String dir = request.getParameter("direccion");
+		
+		Cliente c = new Cliente(dni,nom,dir);
+		
+		ClienteDAO cdao = new ClienteDAO();
+		
+		cdao.newCliente(c);
+		
 		doGet(request, response);
 	}
 

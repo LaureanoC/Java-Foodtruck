@@ -1,3 +1,4 @@
+package Empleado;
 
 
 import java.io.IOException;
@@ -33,8 +34,13 @@ public class UpdateEmpleado extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String dni = request.getParameter("dni");
 		
-		request.setAttribute("dni", dni);
-		
+		EmpleadoDAO edao = new EmpleadoDAO();
+		Empleado e = new Empleado();
+		e.setDni(dni);
+		e = edao.getEmpleado(e);
+		request.setAttribute("emp", e);
+		System.out.println("Nombre: " + e.getNombre());
+	
 		request.getRequestDispatcher("WEB-INF/updateEmpleado.jsp").forward(request, response);
 		
 	}
