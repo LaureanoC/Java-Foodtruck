@@ -50,8 +50,10 @@ public class Login extends HttpServlet {
 		
 		if (emp != null) {
 			System.out.println("Lo encontré");
+			request.getSession().setAttribute("empleado", emp);
 			response.sendRedirect("administracion.html");
 		} else {
+			request.setAttribute("mensaje", "Las credenciales no coinciden con nuestros datos.");
 			request.getRequestDispatcher("WEB-INF/login.jsp").forward(request, response);
 		}
 		

@@ -7,6 +7,11 @@
 <link rel="stylesheet" href="style/reset.css">
 <link rel="stylesheet" href="style/login.css">
 <title>Foodtruck</title>
+<% String mensaje = (String)request.getAttribute("mensaje");
+   if(mensaje == null){
+   	mensaje = "";
+   }
+%>
 
 </head>
 <body>
@@ -23,7 +28,7 @@
                     <label for="password">Contraseña</label>
                     <input class="input" type="password" name="password">
                 </div>
-                <p class="errores"></p>
+                <p class="errores"><%=mensaje%></p>
                 <button class="button" type="submit">Login</button>
             </form>
         </div>

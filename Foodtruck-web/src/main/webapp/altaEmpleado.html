@@ -6,6 +6,7 @@
     <link rel="stylesheet" href="style/reset.css">
     <link rel="stylesheet" href="style/header.css">
     <link rel="stylesheet" href="style/altaEmpleado.css">
+    
     <title>Foodtruck</title>
 </head>
 <body>
@@ -25,7 +26,7 @@
                 <h1>Alta Empleado</h1>
                 <div class="form__item">
                     <label>DNI</label>
-                    <input type="text" name="dni"  maxlength="8">
+                    <input name="dni">
                 </div>
                 <div class="form__item">
                     <label>Nombre</label>
@@ -34,9 +35,17 @@
                 <div class="form__item">
                     <label>Turno</label>
                     <select name="turno">
-						<option value="none" selected disabled hidden>Select an Option</option>
                         <option value="Tarde">Tarde</option>
                         <option value="Noche">Noche</option>
+                    </select>
+                </div>
+
+                <div class="form__item">
+                    <label>Rol</label>
+                    <select name="rol">
+						<option value="Chef">Chef</option>
+                        <option value="Delivery">Delivery</option>
+                        <option value="Mozo">Mozo</option>
                     </select>
                 </div>
                 <div class="form__item">
