@@ -18,16 +18,7 @@
     <%LinkedList<Empleado> le = (LinkedList<Empleado>)request.getAttribute("listaEmpleados");%>
 </head>
 <body>
-    <header>
-        <div class="header">
-            <div class="header__container">
-                <nav><a>Logo</a></nav>
-                <nav><a>Pedidos</a></nav>
-                <nav><a>Productos</a></nav>
-                <nav><a href="administracion.html">Administración</a></nav>
-            </div>
-        </div>
-    </header>
+<jsp:include page="header.jsp"/>
 
     <div class="tabla">
 		<div class="tabla__container">

@@ -161,6 +161,31 @@ public class RolDAO {
 
 	}
 	
+public void deleteRolEmpleado(Empleado emp) {
+		
+		PreparedStatement st = null;
+		try {
+
+			st = DbConnector.getInstancia().getConn().prepareStatement("DELETE from empleado_rol WHERE dniEmpleado=?");
+			st.setString(1, emp.getDni());
+			st.executeUpdate();
+			System.out.println("Se elimino la fk");
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if (st != null) {
+					st.close();
+				}
+				DbConnector.getInstancia().releaseConn();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+
+	}
+	
 	public void setRoles(Empleado emp) {
 		
 		PreparedStatement stmt=null;

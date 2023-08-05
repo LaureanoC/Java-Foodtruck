@@ -10,16 +10,7 @@
 <title>Foodtruck</title>
 </head>
 <body>
-	<header>
-        <div class="header">
-            <div class="header__container">
-                <nav><a>Logo</a></nav>
-                <nav><a>Pedidos</a></nav>
-                <nav><a>Productos</a></nav>
-                <nav><a href="administracion.html">Administración</a></nav>
-            </div>
-        </div>
-    </header>
+<jsp:include page="header.jsp"/>
 	
 	<div class="form">
         <form action="listadoclientes" method="post">
@@ -27,7 +18,7 @@
                 <h1>Nuevo Cliente</h1>
                 <div class="form__item">
                     <label>DNI</label>
-                    <input name="dni">
+                    <input name="dni" maxlength="8">
                 </div>
                 <div class="form__item">
                     <label>Nombre</label>

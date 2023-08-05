@@ -17,19 +17,10 @@
     <% Empleado e = (Empleado) request.getAttribute("emp");%>
 </head>
 <body>
-    <header>
-        <div class="header">
-            <div class="header__container">
-                <nav><a>Logo</a></nav>
-                <nav><a>Pedidos</a></nav>
-                <nav><a>Productos</a></nav>
-                <nav><a href="administracion.html">Administración</a></nav>
-            </div>
-        </div>
-    </header>
+ <jsp:include page="header.jsp"/>
 
-    <div class="form" action="empleadoeditar?dni=<%=e.getDni()%>" method="post">
-        <form action="listadoempleados" method="post">
+    <div class="form" >
+        <form action="empleadoeditar?dni=<%=e.getDni()%>" method="post">
             <div class="form__container">
                 <h1>Modificar Empleado</h1>
                 <div class="form__item">
@@ -48,6 +39,16 @@
                         <option value="Noche">Noche</option>
                     </select>
                 </div>
+                
+                 <div class="form__item">
+                    <label>Rol</label>
+                    <select name="rol">
+						<option value="Chef">Chef</option>
+                        <option value="Delivery">Delivery</option>
+                        <option value="Mozo">Mozo</option>
+                    </select>
+                </div>
+                
                 <div class="form__item">
                     <label>Contraseña</label>
                     <input name="password">

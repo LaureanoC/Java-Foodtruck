@@ -143,7 +143,6 @@ public class EmpleadoDAO {
 
 		PreparedStatement stmt = null;
 		RolDAO rdao = new RolDAO();
-	
 		try {
 
 			stmt = DbConnector.getInstancia().getConn()
@@ -153,9 +152,21 @@ public class EmpleadoDAO {
 			stmt.setString(3, e.getTurno());
 			stmt.setString(4, e.getPassword());
 			stmt.setString(5, e.getDni());
-
+			
 			stmt.executeUpdate();
 			
+			rdao.deleteRolEmpleado(e);
+			
+			for (Rol r : e.getColeccionRoles()) {
+				
+				stmt = DbConnector.getInstancia().getConn()
+						.prepareStatement("INSERT INTO empleado_rol (dniEmpleado,idRol) VALUES (?,?)");
+				
+				stmt.setString(1, e.getDni());
+				stmt.setInt(2, r.getId());
+
+				stmt.executeUpdate();
+			}
 			
 
 		} catch (SQLException ex) {

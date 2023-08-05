@@ -15,16 +15,7 @@
 <%LinkedList<Cliente> lc = (LinkedList<Cliente>)request.getAttribute("listaclientes"); %>
 </head>
 <body>
-<header>
-        <div class="header">
-            <div class="header__container">
-                <nav><a>Logo</a></nav>
-                <nav><a>Pedidos</a></nav>
-                <nav><a>Productos</a></nav>
-                <nav><a href="administracion.html">Administración</a></nav>
-            </div>
-        </div>
-    </header>
+<jsp:include page="header.jsp"/>
 
 <div class="tabla">
 		<div class="tabla__container">
@@ -45,7 +36,7 @@
                         <td><%=c.getDni() %></td>
                         <td><%=c.getNombre() %></td>
                         <td><%=c.getDireccion()%></td>
-                        <td class="link"><a href="clienteditar?dni=<%=c.getDni()%>"><i class="fa-solid fa-pencil"></i></a></td>
+                        <td class="link"><a href="clienteeditar?dni=<%=c.getDni()%>"><i class="fa-solid fa-pencil"></i></a></td>
                         <td class="link"><a href="clienteborrar?dni=<%=c.getDni()%>"><i class="fa-regular fa-circle-xmark"></i></a></td>
                     </tr>
                    <%} %>
