@@ -142,6 +142,8 @@ public class EmpleadoDAO {
 	public void updateEmpleado(Empleado e) {
 
 		PreparedStatement stmt = null;
+		RolDAO rdao = new RolDAO();
+	
 		try {
 
 			stmt = DbConnector.getInstancia().getConn()
@@ -153,6 +155,8 @@ public class EmpleadoDAO {
 			stmt.setString(5, e.getDni());
 
 			stmt.executeUpdate();
+			
+			
 
 		} catch (SQLException ex) {
 			ex.printStackTrace();
