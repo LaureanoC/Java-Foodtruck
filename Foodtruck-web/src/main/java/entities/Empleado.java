@@ -8,6 +8,7 @@ public class Empleado {
 	private String nombre;
 	private String turno;
 	private String password;
+	private Boolean habilitado;
 	private LinkedList<Rol> roles = new LinkedList<Rol>();
 	
 	public Empleado() {
@@ -77,11 +78,19 @@ public class Empleado {
 		
 		for (Rol r : roles) {
 			
-			texto += r.getDesc()+"\n";
+			texto += r.getDesc();
 		}
 		
 		return texto;
 		
+	}
+	
+	public Boolean getHabilitado() {
+		return this.habilitado;
+	}
+	
+	public void setHabilitado(Boolean b) {
+		this.habilitado = b;
 	}
 
 	

@@ -49,7 +49,7 @@ public class Login extends HttpServlet {
 		Empleado emp = edao.login(e);
 		
 		if (emp != null) {
-			System.out.println("Lo encontré");
+			
 			request.getSession().setAttribute("empleado", emp);
 			response.sendRedirect("administracion.html");
 		} else {

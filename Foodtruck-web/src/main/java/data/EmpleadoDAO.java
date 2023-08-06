@@ -18,7 +18,7 @@ public class EmpleadoDAO {
 
 		try {
 			stmt = DbConnector.getInstancia().getConn().createStatement();
-			rs = stmt.executeQuery("SELECT dniEmpleado, nombre, turno FROM Empleado");
+			rs = stmt.executeQuery("SELECT dniEmpleado, nombre, turno, habilitado FROM Empleado order by habilitado desc, turno asc ");
 			RolDAO rdao = new RolDAO();
 			
 			if (rs != null) {
@@ -29,6 +29,8 @@ public class EmpleadoDAO {
 					e.setDni(rs.getString("dniEmpleado"));
 					e.setNombre(rs.getString("nombre"));
 					e.setTurno(rs.getString("turno"));
+					e.setHabilitado(rs.getBoolean("habilitado"));
+					
 
 					rdao.setRoles(e);
 					
@@ -76,6 +78,7 @@ public class EmpleadoDAO {
 				e.setDni(rs.getString("dniEmpleado"));
 				e.setNombre(rs.getString("nombre"));
 				e.setTurno(rs.getString("turno"));
+				e.setHabilitado(rs.getBoolean("habilitado"));
 				
 				rdao.setRoles(e);
 			}
@@ -104,7 +107,7 @@ public class EmpleadoDAO {
 		PreparedStatement stmt = null;
 		try {
 			stmt = DbConnector.getInstancia().getConn()
-					.prepareStatement("INSERT INTO Empleado (dniEmpleado,nombre, turno, password) VALUES (?,?,?,?)");
+					.prepareStatement("INSERT INTO Empleado (dniEmpleado,nombre, turno, password, habilitado) VALUES (?,?,?,?,1)");
 
 			stmt.setString(1, e.getDni());
 			stmt.setString(2, e.getNombre());
@@ -246,6 +249,52 @@ public class EmpleadoDAO {
 		}
 
 		return e;
+	}
+	
+	public void deshabilitarEmpleado(Empleado emp) {
+		PreparedStatement stmt = null;
+		try {
+			stmt = DbConnector.getInstancia().getConn().prepareStatement("UPDATE empleado set habilitado=0 where dniEmpleado=?");
+			stmt.setString(1, emp.getDni());
+			stmt.executeUpdate();
+
+		} catch (SQLException ex) {
+			ex.printStackTrace();
+
+		} finally {
+			try {
+				if (stmt != null) {
+					stmt.close();
+				}
+				DbConnector.getInstancia().releaseConn();
+			} catch (SQLException ex) {
+				ex.printStackTrace();
+			}
+		}
+	}
+	
+	public void habilitarEmpleado(Empleado emp) {
+		PreparedStatement stmt = null;
+		
+		
+		try {
+			stmt = DbConnector.getInstancia().getConn().prepareStatement("UPDATE empleado set habilitado=1 where dniEmpleado=?");
+			stmt.setString(1, emp.getDni());
+			stmt.executeUpdate();
+
+		} catch (SQLException ex) {
+			ex.printStackTrace();
+
+		} finally {
+			try {
+				if (stmt != null) {
+					stmt.close();
+				}
+				DbConnector.getInstancia().releaseConn();
+			} catch (SQLException ex) {
+				ex.printStackTrace();
+			}
+		}
 	}
 	
 	
