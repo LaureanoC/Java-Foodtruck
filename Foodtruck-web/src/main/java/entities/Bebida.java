@@ -5,6 +5,19 @@ public class Bebida {
 	float precio;
 	String nombre;
 	float litros;
+	
+	public Bebida() {
+		
+	}
+	
+	public Bebida(float precio, String nombre, float litros) {
+
+		this.precio = precio;
+		this.nombre = nombre;
+		this.litros = litros;
+	}
+	
+	
 	public int getId() {
 		return id;
 	}

@@ -139,5 +139,44 @@ public class BebidaDAO {
 	
 	
 	}
-}
+	
+	public Bebida getBebida(Bebida b) {
+		PreparedStatement stmt = null;
+		ResultSet rs = null;
+		Bebida be = null;
+		try {
+			stmt = DbConnector.getInstancia().getConn().prepareStatement("Select * from Bebida where idBebida=?");
 
+			stmt.setInt(1, b.getId());
+
+			rs = stmt.executeQuery();
+
+			if (rs != null & rs.next()) {
+
+				be = new Bebida();
+				be.setId(rs.getInt("idBebida"));
+				be.setNombre(rs.getString("nombreBebida"));
+				be.setPrecio(rs.getFloat("precioBebida"));
+				be.setLitros(rs.getFloat("litrosBebida"));
+			}
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+
+		} finally {
+			try {
+				if (rs != null) {
+					rs.close();
+				}
+				if (stmt != null) {
+					stmt.close();
+				}
+				DbConnector.getInstancia().releaseConn();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+
+		return be;
+	}
+}

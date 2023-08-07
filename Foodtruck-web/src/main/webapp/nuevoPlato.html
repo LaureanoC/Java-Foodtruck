@@ -6,11 +6,10 @@
     <link rel="stylesheet" href="style/reset.css">
     <link rel="stylesheet" href="style/header.css">
     <link rel="stylesheet" href="style/altaEmpleado.css">
-    
     <title>Foodtruck</title>
 </head>
 <body>
-<header>
+    <header>
         <div class="header">
             <div class="header__container">
                 <nav><a>Logo</a></nav>
@@ -21,40 +20,33 @@
         </div>
     </header>
 	<div class="form">
-        <form action="listadoempleados" method="post">
+        <form action="altaplato" method="post">
             <div class="form__container">
-                <h1>Nuevo Empleado</h1>
+                <h1>Alta Plato</h1>
                 <div class="form__item">
-                    <label>DNI</label>
-                    <input name="dni" maxlength="8" minlength="8">
+                    <label>ID</label>
+                    <input type="text" name="id">
                 </div>
                 <div class="form__item">
                     <label>Nombre</label>
                     <input name="nombre">
                 </div>
-                <div class="form__item">
-                    <label>Turno</label>
-                    <select name="turno">
-                        <option value="Tarde">Tarde</option>
-                        <option value="Noche">Noche</option>
-                    </select>
+                  <div class="form__item">
+                    <label>Receta</label>
+                    <input name="receta">
                 </div>
-
-                <div class="form__item">
-                    <label>Rol</label>
-                    <select name="rol">
-						<option value="Chef">Chef</option>
-                        <option value="Delivery">Delivery</option>
-                        <option value="Mozo">Mozo</option>
-                    </select>
+                 <div class="form__item">
+                    <label>Precio</label>
+                    <input name="precio">
                 </div>
-                <div class="form__item">
-                    <label>Contraseña</label>
-                    <input name="password">
+                 <div class="form__item">
+                    <label>Descripcion</label>
+                    <input name="descripcion">
                 </div>
-                <button class="button" type="submit">Agregar</button>	
-            </div>      
+                 <button class="button" type="submit">Agregar</button>
+               </div>
         </form>
+        
     </div>
     
 </body>

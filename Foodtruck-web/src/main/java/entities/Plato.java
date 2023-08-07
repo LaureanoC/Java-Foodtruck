@@ -6,6 +6,21 @@ public class Plato {
 	String receta;
 	float precio;
 	String descripcion;
+	
+	public Plato (String nombre, String receta, float precio, String descripcion) {
+		
+		this.nombre = nombre;
+		this.receta = receta;
+		this.precio = precio;
+		this.descripcion = descripcion;
+	}
+	
+	public Plato() {
+		
+	}
+	
+	
+	
 	public int getId() {
 		return id;
 	}
