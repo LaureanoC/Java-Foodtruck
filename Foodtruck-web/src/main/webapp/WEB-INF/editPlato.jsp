@@ -1,4 +1,4 @@
-<%@page import="entities.Bebida"%>
+<%@page import="entities.Plato"%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -6,33 +6,33 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style/reset.css">
     <link rel="stylesheet" href="style/header.css">
-    <link rel="stylesheet" href="style/altaEmpleado.css">
+    <link rel="stylesheet" href="style/altaPlato.css">
     <title>Foodtruck</title>
     
-    <% Bebida be1 = (Bebida) request.getAttribute("be1");%>
+    <% Plato plato = (Plato) request.getAttribute("plato");%>
     
 </head>
 <body>
- <jsp:include page="header.jsp"/>
+    <jsp:include page="header.jsp"/>
  
 	<div class="form">
-        <form action="editbebida?id=<%=be1.getId()%>" method="post">
+        <form action="editplato?id=<%=plato.getId()%>" method="post">
             <div class="form__container">
-                <h1>Editar Bebida</h1>
+                <h1>Editar Plato</h1>
  
  				 <div class="form__item">
                     <label>Nombre</label>
-                    <input name="nombre" value=<%=be1.getNombre() %>>
+                    <input name="nombre" value=<%=plato.getNombre() %>>
                 </div>
  
                 <div class="form__item">
                     <label>Precio</label>
-                    <input name="precio" value=<%= be1.getPrecio() %>>
+                    <input name="precio" value=<%= plato.getPrecio() %>>
                 </div>
                  
                  <div class="form__item">
-                    <label>Litros</label>
-                    <input name="litros" value=<%=be1.getLitros() %>>
+                    <label>Descripción</label>
+                    <input name="descripcion" value=<%=plato.getDescripcion() %>>
                 </div>
                
                  <button class="button" type="submit">Editar</button>

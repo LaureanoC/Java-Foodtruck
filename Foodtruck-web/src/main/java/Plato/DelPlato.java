@@ -1,30 +1,26 @@
 package Plato;
 
 import java.io.IOException;
-import java.util.LinkedList;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-
 import data.PlatoDAO;
-
 import entities.Plato;
 
 /**
- * Servlet implementation class AltaPlato
+ * Servlet implementation class DelPlato
  */
-@WebServlet({ "/AltaPlato", "/altaPlato", "/Altaplato", "/altaplato" })
-public class AltaPlato extends HttpServlet {
+@WebServlet("/deleteplato")
+public class DelPlato extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public AltaPlato() {
+    public DelPlato() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -33,33 +29,24 @@ public class AltaPlato extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// TODO Auto-generated method stub
 		
-		PlatoDAO listadoPlato = new PlatoDAO();
-		LinkedList<Plato> platos = listadoPlato.getAll();
-		request.setAttribute("listadoPlato", platos);
-		request.getRequestDispatcher("WEB-INF/listadoPlatos.jsp").forward(request, response);
+		int id = Integer.parseInt(request.getParameter("id"));
+		Plato platoBorrar = new Plato();
+		platoBorrar.setId(id);
+		PlatoDAO platoDAO = new PlatoDAO();
+		platoDAO.delPlato(platoBorrar);
+		response.sendRedirect("AltaPlato");
+		
+		
 		
 	}
-
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
-
-		String nombre = request.getParameter("nombre");
-		float precio = Float.parseFloat(request.getParameter("precio"));
-		String descripcion = request.getParameter("descripcion");
-		
-		Plato p = new Plato(nombre,precio,descripcion);
-		
-		PlatoDAO pdao = new PlatoDAO();
-		
-		pdao.newPlato(p);
-		
+		// TODO Auto-generated method stub
 		doGet(request, response);
-		
-
 	}
 
 }

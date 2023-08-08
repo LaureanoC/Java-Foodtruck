@@ -28,13 +28,13 @@
 <div>
 
 	<div class="tabla">
-		<div class="tabla_:container">
+		<div class="tabla__container">
+		<h1>Listado de Platos</h1>
 			<table>
 			<thead>
 			<tr>
 				<th>Id</th>
 				<th>Nombre</th>
-				<th>Receta</th>
 				<th>Precio</th>
 				<th>Descripción</th>
 				<th>Editar</th>
@@ -46,19 +46,16 @@
 				<tr>
 					<td><%=p.getId()%></td>
 					<td><%=p.getNombre()%></td>
-					<td><%=p.getReceta()%></td>
 					<td><%=p.getPrecio()%></td>
 					<td><%=p.getDescripcion()%></td>
-					<td><a href="editplato?id=<%=p.getId()%>">editar</a></td>
-					<td><a href="deleteplato?id=<%=p.getId()%>">borrar</a></td>
-					<td class="link"><a href="#"><i class="fa-solid fa-pencil"></i></a></td>
-                    <td class="link"><a href="#"><i class="fa-regular fa-circle-xmark"></i></a></td>
+					<td><a href="editplato?id=<%=p.getId()%>"><i class="fa-solid fa-pencil"></i></a></td>
+					<td><a href="deleteplato?id=<%=p.getId()%>"><i class="fa-regular fa-circle-xmark"></i></a></td>
 				</tr>
 				
 			<%} %>
 			</tbody>
 		</table>
-		<a class="button" href="nuevoPlato2.html">Nuevo Plato</a>
+		<a class="button" href="nuevoPlato.html">Nuevo Plato</a>
 		</div>
 	</div>
 
