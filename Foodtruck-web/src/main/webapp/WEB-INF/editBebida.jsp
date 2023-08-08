@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style/reset.css">
     <link rel="stylesheet" href="style/header.css">
-    <link rel="stylesheet" href="style/altaEmpleado.css">
+    <link rel="stylesheet" href="style/altaBebida.css">
     <title>Foodtruck</title>
     
     <% Bebida be1 = (Bebida) request.getAttribute("be1");%>
