@@ -33,7 +33,7 @@
 			<table>
 			<thead>
 			<tr>
-				<th>Id</th>
+				<th>Imagen</th>
 				<th>Nombre</th>
 				<th>Precio</th>
 				<th>Descripción</th>
@@ -44,7 +44,7 @@
 			<tbody>
 			<% for (Plato p : lp){ %>
 				<tr>
-					<td><%=p.getId()%></td>
+					<td><img src="<%=p.getFoto() %>" width="50" height="50" border-radius="16"/></td>
 					<td><%=p.getNombre()%></td>
 					<td><%=p.getPrecio()%></td>
 					<td><%=p.getDescripcion()%></td>

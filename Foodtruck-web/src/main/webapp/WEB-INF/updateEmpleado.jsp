@@ -29,7 +29,7 @@
                 </div>
                 <div class="form__item">
                     <label>Nombre</label>
-                    <input name="nombre" type="text" value=<%=e.getNombre()%>>
+                    <input name="nombre" type="text" value="<%=e.getNombre()%>">
                 </div>
                 <div class="form__item">
                     <label>Turno</label>

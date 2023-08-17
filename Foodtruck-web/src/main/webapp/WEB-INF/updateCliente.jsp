@@ -29,12 +29,12 @@
                 </div>
                 <div class="form__item">
                     <label>Nombre</label>
-                    <input name="nombre" type="text" value=<%=c.getNombre()%>>
+                    <input name="nombre" type="text" value="<%=c.getNombre()%>">
                 </div>
                 
                 <div class="form__item">
                     <label>Dirección</label>
-                    <input name="direccion" type="text" value=<%=c.getDireccion()%>>
+                    <input name="direccion" type="text" value="<%=c.getDireccion()%>">
                 </div>
                 
                 <button class="button" type="submit">Modificar</button>	

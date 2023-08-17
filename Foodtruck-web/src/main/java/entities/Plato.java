@@ -5,6 +5,7 @@ public class Plato {
 	String nombre;
 	float precio;
 	String descripcion;
+	String foto;
 	
 	public Plato (String nombre, float precio, String descripcion) {
 		
@@ -19,6 +20,14 @@ public class Plato {
 	
 	
 	
+	public String getFoto() {
+		return foto;
+	}
+
+	public void setFoto(String foto) {
+		this.foto = foto;
+	}
+
 	public int getId() {
 		return id;
 	}

@@ -15,7 +15,7 @@ public class PlatoDAO {
 		
 		try {
 			stmt= DbConnector.getInstancia().getConn().createStatement();
-			rs= stmt.executeQuery("select idPlato, nombrePlato, precioPlato, descripcion from plato");
+			rs= stmt.executeQuery("select idPlato, nombrePlato, precioPlato, descripcion, imagen from plato order by nombrePlato");
 			
 			if(rs!=null) {
 				while(rs.next()) {
@@ -25,6 +25,7 @@ public class PlatoDAO {
 					
 					p.setPrecio(rs.getFloat("precioPlato"));
 					p.setDescripcion(rs.getString("descripcion"));
+					p.setFoto(rs.getString("imagen"));
 					
 					platos.add(p);
 				}
@@ -57,12 +58,13 @@ public void newPlato(Plato newPlato) {
 			
 			
 			stmt = DbConnector.getInstancia().getConn()
-			.prepareStatement("insert into plato (nombrePlato, precioPlato, descripcion)" + "values(?,?,?)",
+			.prepareStatement("insert into plato (nombrePlato, precioPlato, descripcion, imagen)" + "values(?,?,?,?)",
 					Statement.RETURN_GENERATED_KEYS);
 			
 			stmt.setString(1, newPlato.getNombre());
 			stmt.setFloat(2, newPlato.getPrecio());
 			stmt.setString(3, newPlato.getDescripcion());
+			stmt.setString(4, newPlato.getFoto());
 			stmt.executeUpdate();
 			keyRS= stmt.getGeneratedKeys();
 			
@@ -115,11 +117,12 @@ public void updateBebida(Plato updPlato) {
 	PreparedStatement stmt = null;
 	try {
 		stmt = DbConnector.getInstancia().getConn()
-				.prepareStatement("UPDATE plato SET nombrePlato=?, precioPlato=?, descripcion=? where idPlato=?");
+				.prepareStatement("UPDATE plato SET nombrePlato=?, precioPlato=?, descripcion=?, imagen=? where idPlato=?");
 	stmt.setString(1, updPlato.getNombre());
 	stmt.setFloat(2, updPlato.getPrecio());
 	stmt.setString(3, updPlato.getDescripcion());
-	stmt.setInt(4, updPlato.getId());
+	stmt.setString(4, updPlato.getFoto());
+	stmt.setInt(5, updPlato.getId());
 	stmt.executeUpdate();
 	
 
@@ -158,6 +161,7 @@ public Plato getPlato(Plato p) {
 			pl.setNombre(rs.getString("nombrePlato"));
 			pl.setPrecio(rs.getFloat("precioPlato"));
 			pl.setDescripcion(rs.getString("descripcion"));
+			pl.setFoto(rs.getString("imagen"));
 			
 		}
 

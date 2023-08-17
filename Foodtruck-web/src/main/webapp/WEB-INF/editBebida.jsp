@@ -22,7 +22,7 @@
  
  				 <div class="form__item">
                     <label>Nombre</label>
-                    <input name="nombre" value=<%=be1.getNombre() %>>
+                    <input name="nombre" value="<%=be1.getNombre() %>">
                 </div>
  
                 <div class="form__item">

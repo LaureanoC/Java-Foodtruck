@@ -16,13 +16,13 @@
     <jsp:include page="header.jsp"/>
  
 	<div class="form">
-        <form action="editplato?id=<%=plato.getId()%>" method="post">
+        <form action="editplato?id=<%=plato.getId()%>" method="post" enctype="multipart/form-data">
             <div class="form__container">
                 <h1>Editar Plato</h1>
  
  				 <div class="form__item">
                     <label>Nombre</label>
-                    <input name="nombre" value=<%=plato.getNombre() %>>
+                    <input name="nombre" value="<%=plato.getNombre() %>">
                 </div>
  
                 <div class="form__item">
@@ -32,7 +32,12 @@
                  
                  <div class="form__item">
                     <label>Descripción</label>
-                    <input name="descripcion" value=<%=plato.getDescripcion() %>>
+                    <input name="descripcion" value="<%=plato.getDescripcion() %>">
+                </div>
+                
+                <div class="form__item">
+                    <label>Imagen</label>
+                    <input name="imagen" type="file" value="<%=plato.getFoto()%>">
                 </div>
                
                  <button class="button" type="submit">Editar</button>

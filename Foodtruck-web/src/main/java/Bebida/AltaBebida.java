@@ -54,7 +54,7 @@ public class AltaBebida extends HttpServlet {
 		
 		bdao.newBebida(b);
 		
-		doGet(request, response);
+		response.sendRedirect("altabebida");
 		
 	}
 
