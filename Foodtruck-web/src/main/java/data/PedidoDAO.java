@@ -5,10 +5,14 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.LinkedList;
+import java.sql.Timestamp;
 
 import entities.Cliente;
 import entities.Empleado;
+import entities.LineaPedido;
 import entities.Pedido;
+import entities.Plato;
+import entities.Rol;
 
 public class PedidoDAO {
 
@@ -17,6 +21,7 @@ public class PedidoDAO {
 		Statement stmt = null;
 		ResultSet rs = null;
 		LinkedList<Pedido> pedidos = new LinkedList<Pedido>();
+		PlatoDAO pdao = new PlatoDAO();
 
 		try {
 			stmt = DbConnector.getInstancia().getConn().createStatement();
@@ -38,14 +43,18 @@ public class PedidoDAO {
 					
 					e.setDni(dniEmpleado);
 					c.setDni(dniCliente);
-					
+	
 					p.setEmpleado(e);
 					p.setCliente(c);
+		
+					pdao.setPlatos(p);
 					
-
 					pedidos.add(p);
+					
+					
 				}
-
+				
+				
 			}
 
 		} catch (SQLException e) {
@@ -74,6 +83,7 @@ public class PedidoDAO {
 		Pedido pe = null;
 		EmpleadoDAO edao = new EmpleadoDAO();
 		ClienteDAO cdao = new ClienteDAO();
+		PlatoDAO pdao = new PlatoDAO();
 		try {
 			stmt = DbConnector.getInstancia().getConn().prepareStatement("Select * from Pedido WHERE idPedido=?");
 
@@ -100,6 +110,8 @@ public class PedidoDAO {
 				pe.setEmpleado(edao.getEmpleado(e));
 				pe.setCliente(cdao.getCliente(c));
 				
+				pdao.setPlatos(pe);
+				
 				
 			}
 
@@ -125,16 +137,52 @@ public class PedidoDAO {
 	
 	public void newPedido(Pedido p) {
 		PreparedStatement stmt = null;
+		ResultSet keyRS=null;
 		try {
 			stmt = DbConnector.getInstancia().getConn()
-					.prepareStatement("INSERT INTO Pedido (estadoPedido, tipoPedido, dniEmpleado, dniCliente) VALUES (?,?,?,?)");
+					.prepareStatement("INSERT INTO Pedido (estadoPedido, tipoPedido, dniEmpleado, dniCliente) VALUES (?,?,?,?)",
+							Statement.RETURN_GENERATED_KEYS);
 
 			stmt.setString(1,p.getEstado());
 			stmt.setString(2, p.getTipoPedido());
 			stmt.setString(3, p.getEmpleado().getDni());
-			stmt.setString(4, p.getCliente().getDni());
+			
+			if(p.getCliente().getDni() != null) {
+				stmt.setString(4, p.getCliente().getDni());
+			} else {
+				stmt.setString(4, null);
+			}
+			
 			
 			stmt.executeUpdate();
+			keyRS= stmt.getGeneratedKeys();
+			
+			if(keyRS != null && keyRS.next()) {
+				p.setId(keyRS.getInt(1));
+			}
+			
+			
+			for (LineaPedido lp : p.getLineas()) {
+				
+				if(lp.getProducto() instanceof Plato ) {
+					
+					stmt = DbConnector.getInstancia().getConn()
+							.prepareStatement("INSERT INTO pedido_Plato (idPedido,idPlato,fechaHoraPedido,cantidad) VALUES (?,?,?,?)");
+					
+					Plato pl = (Plato) lp.getProducto();
+					
+					stmt.setInt(1, p.getId());
+					stmt.setInt(2, pl.getId());
+					Timestamp hora = this.getPedido(p).getFechaHora();
+					stmt.setTimestamp(3, hora);
+					stmt.setInt(4, lp.getCantidad());
+					
+				}
+				
+	
+
+				stmt.executeUpdate();
+			}
 
 		} catch (SQLException e) {
 			e.printStackTrace();

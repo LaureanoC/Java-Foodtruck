@@ -1,5 +1,6 @@
 package entities;
 import java.sql.Timestamp;
+import java.util.LinkedList;
 
 public class Pedido {
 	
@@ -9,6 +10,7 @@ public class Pedido {
 	private String tipoPedido;
 	private Empleado empleado;
 	private Cliente cliente;
+	private LinkedList<LineaPedido> lineaPedidos = new LinkedList<LineaPedido>();
 	
 	public int getId() {
 		return id;
@@ -45,6 +47,16 @@ public class Pedido {
 	}
 	public void setFechaHora(Timestamp fechaHora) {
 		this.fechaHora = fechaHora;
+	}
+	
+	public void addLineaPedido(LineaPedido lp) {
+		
+		this.lineaPedidos.add(lp);
+		
+	}
+	
+	public LinkedList<LineaPedido> getLineas(){
+		return this.lineaPedidos;
 	}
 	
 	

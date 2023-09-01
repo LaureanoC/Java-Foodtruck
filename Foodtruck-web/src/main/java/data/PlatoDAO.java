@@ -185,5 +185,50 @@ public Plato getPlato(Plato p) {
 	return pl;
 }
 
+public void setPlatos(Pedido p) {
+	
+	PreparedStatement stmt=null;
+	ResultSet rs=null;
+	
+	try {
+		stmt=DbConnector.getInstancia().getConn().prepareStatement
+		("select * from pedido p inner join pedido_plato pp on p.idPedido = pp.idPedido inner join plato pl on pl.idPlato = pp.idPlato where p.idPedido = ?");
+		stmt.setInt(1, p.getId());
+		rs= stmt.executeQuery();
+		if(rs!=null) {
+			
+			while(rs.next()) {
+				
+				LineaPedido lp = new LineaPedido();
+				Plato plato = new Plato();
+				plato.setId(rs.getInt("idPlato"));
+				plato.setNombre(rs.getString("nombrePlato"));
+				plato.setPrecio(rs.getInt("precioPlato"));
+				plato.setDescripcion(rs.getString("descripcion"));
+				plato.setFoto(rs.getString("imagen"));
+				
+				lp.setProducto(plato);
+				lp.setCantidad(rs.getInt("cantidad"));
+				
+				
+				p.addLineaPedido(lp);
+			}
+		}
+		
+	} catch (SQLException e) {
+		e.printStackTrace();
+	}finally {
+		try {
+			if(rs!=null) {rs.close();}
+			if(stmt!=null) {stmt.close();}
+			DbConnector.getInstancia().releaseConn();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+}
+
+
+
 
 }
