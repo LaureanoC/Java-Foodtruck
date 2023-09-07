@@ -12,7 +12,8 @@ import entities.Empleado;
 import entities.LineaPedido;
 import entities.Pedido;
 import entities.Plato;
-import entities.Rol;
+
+
 
 public class PedidoDAO {
 
@@ -22,6 +23,7 @@ public class PedidoDAO {
 		ResultSet rs = null;
 		LinkedList<Pedido> pedidos = new LinkedList<Pedido>();
 		PlatoDAO pdao = new PlatoDAO();
+		BebidaDAO bdao = new BebidaDAO();
 
 		try {
 			stmt = DbConnector.getInstancia().getConn().createStatement();
@@ -48,6 +50,8 @@ public class PedidoDAO {
 					p.setCliente(c);
 		
 					pdao.setPlatos(p);
+					bdao.setBebidas(p);
+					
 					
 					pedidos.add(p);
 					
@@ -84,6 +88,7 @@ public class PedidoDAO {
 		EmpleadoDAO edao = new EmpleadoDAO();
 		ClienteDAO cdao = new ClienteDAO();
 		PlatoDAO pdao = new PlatoDAO();
+		BebidaDAO bdao = new BebidaDAO();
 		try {
 			stmt = DbConnector.getInstancia().getConn().prepareStatement("Select * from Pedido WHERE idPedido=?");
 
@@ -111,6 +116,7 @@ public class PedidoDAO {
 				pe.setCliente(cdao.getCliente(c));
 				
 				pdao.setPlatos(pe);
+				bdao.setBebidas(pe);
 				
 				
 			}
@@ -179,6 +185,7 @@ public class PedidoDAO {
 					
 				}
 				
+				//a terminar, solo me falta esto
 	
 
 				stmt.executeUpdate();

@@ -1,6 +1,7 @@
 import java.util.LinkedList;
 
 import data.PedidoDAO;
+import entities.Bebida;
 import entities.Cliente;
 import entities.Empleado;
 import entities.LineaPedido;
@@ -23,9 +24,16 @@ public class Prueba {
 			
 			for(LineaPedido lp : p.getLineas()) {
 				
-				Plato plato = (Plato) lp.getProducto();
+				if (lp.getProducto() instanceof Plato) {
+					Plato plato = (Plato) lp.getProducto();
+					System.out.println("Linea: " + plato.getNombre());
+				} else {
+					Bebida bebida = (Bebida) lp.getProducto();
+					System.out.println("Linea: " + bebida.getNombre());
+				}
 				
-				System.out.println("Linea: " + plato.getNombre());
+				
+				
 				
 			}
 			

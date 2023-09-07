@@ -179,4 +179,49 @@ public class BebidaDAO {
 
 		return be;
 	}
+	
+	public void setBebidas(Pedido p) {
+		
+		PreparedStatement stmt=null;
+		ResultSet rs=null;
+		
+		try {
+			stmt=DbConnector.getInstancia().getConn().prepareStatement
+			("select * from pedido p inner join pedido_bebida pb on p.idPedido = pb.idPedido inner join bebida b on b.idBebida = pb.idBebida where p.idPedido = ?");
+			stmt.setInt(1, p.getId());
+			rs= stmt.executeQuery();
+			if(rs!=null) {
+				
+				while(rs.next()) {
+					
+					LineaPedido lp = new LineaPedido();
+					Bebida bebida = new Bebida();
+					bebida.setId(rs.getInt("idBebida"));
+					bebida.setNombre(rs.getString("nombreBebida"));
+					bebida.setPrecio(rs.getInt("precioBebida"));
+					bebida.setLitros(rs.getFloat("litrosBebida"));
+					
+					
+					lp.setProducto(bebida);
+					lp.setCantidad(rs.getInt("cantidad"));
+					
+					
+					p.addLineaPedido(lp);
+				}
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			try {
+				if(rs!=null) {rs.close();}
+				if(stmt!=null) {stmt.close();}
+				DbConnector.getInstancia().releaseConn();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+	}
+	
+	
 }
