@@ -20,16 +20,16 @@
 	 <jsp:include page="header.jsp"/>
 	
 	<div class="form">
-        <form action="nuevopedido" method="post">
+        <form action="iniciarpedido" method="post">
 			
 			<% for (Plato plato : platos){ %>
 				<label><%=plato.getNombre()%></label>
-				<input type="checkbox" name="checkbox" value="<%=plato.getNombre()%>" id="<%=plato.getNombre()%>">
+				<input type="checkbox" name="checkboxplato" value="<%=plato.getId()%>" id="<%=plato.getNombre()%>">
 			<%} %>
 			
 			<% for (Bebida bebida : bebidas){ %>
 				<label><%=bebida.getNombre()%></label>
-				<input type="checkbox" name="checkbox" value="<%=bebida.getNombre()%>" id="<%=bebida.getNombre()%>">
+				<input type="checkbox" name="checkboxbebida" value="<%=bebida.getId()%>" id="<%=bebida.getNombre()%>">
 			<%} %>
             
             

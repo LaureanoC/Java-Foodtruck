@@ -8,10 +8,12 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import data.BebidaDAO;
 import data.PlatoDAO;
 import entities.Bebida;
+import entities.LineaPedido;
 import entities.Plato;
 
 
@@ -50,6 +52,30 @@ public class IniciarPedido extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
+		String[] checkboxplato = request.getParameterValues("checkboxplato");
+		LinkedList<LineaPedido> lineas = new LinkedList<LineaPedido>();
+		
+		
+		PlatoDAO pdao = new PlatoDAO();
+		
+		if (checkboxplato != null) {
+			for (String valor : checkboxplato) {
+				System.out.println(valor);
+				Plato p = new Plato();
+				p.setId(Integer.parseInt(valor));
+				p = pdao.getPlato(p);
+				LineaPedido lp = new LineaPedido();
+				lp.setProducto(p);
+				lp.setCantidad(1);
+				lineas.add(lp);
+				
+			}
+		}
+		
+		HttpSession session = request.getSession();
+		session.setAttribute("lineas", lineas);
+		
+		response.sendRedirect("nuevopedido");
 		
 	}
 
