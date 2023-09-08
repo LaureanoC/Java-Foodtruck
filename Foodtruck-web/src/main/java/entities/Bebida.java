@@ -5,7 +5,18 @@ public class Bebida {
 	float precio;
 	String nombre;
 	float litros;
+	String foto;
 	
+	
+	
+	public String getFoto() {
+		return foto;
+	}
+
+	public void setFoto(String foto) {
+		this.foto = foto;
+	}
+
 	public Bebida() {
 		
 	}
@@ -15,6 +26,14 @@ public class Bebida {
 		this.precio = precio;
 		this.nombre = nombre;
 		this.litros = litros;
+	}
+	
+	public Bebida(float precio, String nombre, float litros, String foto) {
+
+		this.precio = precio;
+		this.nombre = nombre;
+		this.litros = litros;
+		this.foto = foto;
 	}
 	
 	

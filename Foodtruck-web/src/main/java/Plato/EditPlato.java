@@ -92,7 +92,7 @@ public class EditPlato extends HttpServlet {
 		
 	}
 	
-private String saveFile(Part part, File pathUploads) {
+		private String saveFile(Part part, File pathUploads) {
 		
 		String pathAbsolute = "";
 		String fileName = "";

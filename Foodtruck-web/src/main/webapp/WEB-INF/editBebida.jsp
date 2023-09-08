@@ -16,7 +16,7 @@
  <jsp:include page="header.jsp"/>
  
 	<div class="form">
-        <form action="editbebida?id=<%=be1.getId()%>" method="post">
+        <form action="editbebida?id=<%=be1.getId()%>" method="post" enctype="multipart/form-data">
             <div class="form__container">
                 <h1>Editar Bebida</h1>
  
@@ -34,9 +34,13 @@
                     <label>Litros</label>
                     <input name="litros" value=<%=be1.getLitros() %>>
                 </div>
-               
+                  <div class="form__item">
+                    <label>Imagen</label>
+                    <input name="imagen" type="file" value="<%=be1.getFoto()%>">
+                </div>
                  <button class="button" type="submit">Editar</button>
                </div>
+               
         </form>
         
     </div>

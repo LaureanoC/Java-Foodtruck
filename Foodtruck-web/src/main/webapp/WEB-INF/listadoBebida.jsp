@@ -35,6 +35,7 @@
 			<tbody>
 			<% for (Bebida b : Be){ %>
 				<tr>
+				<td><img src="<%=b.getFoto() %>" width="50" height="50" border-radius="16"/></td>
 					<td><%=b.getId()%></td>
 					<td><%=b.getNombre()%></td>
 					<td><%=b.getPrecio()%></td>

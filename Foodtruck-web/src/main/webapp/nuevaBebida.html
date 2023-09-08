@@ -20,7 +20,7 @@
         </div>
     </header>
 	<div class="form">
-        <form action="altabebida" method="POST">
+        <form action="altabebida" method="POST" enctype="multipart/form-data">
 			
             <div class="form__container">
                 <h1>Nueva Bebida</h1>
@@ -38,6 +38,11 @@
                  <div class="form__item">
                     <label>Litros</label>
                     <input name="litros">
+                </div>
+                
+                 <div class="form__item">
+                    <label>Imagen</label>
+                    <input name="imagen" type="file">
                 </div>
                  <button class="button" type="submit">Agregar</button>
                </div>

@@ -14,6 +14,14 @@ public class Plato {
 		this.descripcion = descripcion;
 	}
 	
+	public Plato (String nombre, float precio, String descripcion, String foto) {
+		
+		this.nombre = nombre;
+		this.precio = precio;
+		this.descripcion = descripcion;
+		this.foto = foto;
+	}
+	
 	public Plato() {
 		
 	}

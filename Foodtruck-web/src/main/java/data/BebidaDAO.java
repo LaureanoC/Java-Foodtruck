@@ -16,7 +16,7 @@ public class BebidaDAO {
 		
 		try {
 			stmt= DbConnector.getInstancia().getConn().createStatement();
-			rs= stmt.executeQuery("select idBebida, precioBebida, nombreBebida, litrosBebida from bebida");
+			rs= stmt.executeQuery("select idBebida, precioBebida, nombreBebida, litrosBebida, imagen from bebida order by nombreBebida");
 			
 			if(rs!=null) {
 				while(rs.next()) {
@@ -25,7 +25,7 @@ public class BebidaDAO {
 					b.setPrecio(rs.getFloat("precioBebida"));
 					b.setNombre(rs.getString("nombreBebida"));
 					b.setLitros(rs.getFloat("litrosBebida"));
-					
+					b.setFoto(rs.getString("imagen"));
 					bebidas.add(b);
 				}
 			}
@@ -59,12 +59,13 @@ public class BebidaDAO {
 			
 			
 			stmt = DbConnector.getInstancia().getConn()
-			.prepareStatement("insert into bebida (precioBebida, nombreBebida, litrosBebida)" + "values(?,?,?)",
+			.prepareStatement("insert into bebida (precioBebida, nombreBebida, litrosBebida, imagen)" + "values(?,?,?,?)",
 					Statement.RETURN_GENERATED_KEYS);
 			
 			stmt.setFloat(1, newBebida.getPrecio());
 			stmt.setString(2, newBebida.getNombre());
 			stmt.setFloat(3, newBebida.getLitros());
+			stmt.setString(4, newBebida.getFoto());
 			stmt.executeUpdate();
 			keyRS= stmt.getGeneratedKeys();
 			
@@ -115,11 +116,12 @@ public class BebidaDAO {
 		PreparedStatement stmt = null;
 		try {
 			stmt = DbConnector.getInstancia().getConn()
-					.prepareStatement("UPDATE bebida SET precioBebida=?, nombreBebida=?, litrosBebida=? where idBebida=?");
+					.prepareStatement("UPDATE bebida SET precioBebida=?, nombreBebida=?, litrosBebida=?, imagen=? where idBebida=?");
 		stmt.setFloat(1, updBebida.getPrecio());
 		stmt.setString(2, updBebida.getNombre() );
 		stmt.setFloat(3, updBebida.getLitros());
-		stmt.setInt(4, updBebida.getId());
+		stmt.setString(4, updBebida.getFoto());
+		stmt.setInt(5, updBebida.getId());
 		stmt.executeUpdate();
 		
 
@@ -158,6 +160,7 @@ public class BebidaDAO {
 				be.setNombre(rs.getString("nombreBebida"));
 				be.setPrecio(rs.getFloat("precioBebida"));
 				be.setLitros(rs.getFloat("litrosBebida"));
+				be.setFoto(rs.getString("imagen"));
 			}
 
 		} catch (SQLException e) {
@@ -200,6 +203,7 @@ public class BebidaDAO {
 					bebida.setNombre(rs.getString("nombreBebida"));
 					bebida.setPrecio(rs.getInt("precioBebida"));
 					bebida.setLitros(rs.getFloat("litrosBebida"));
+					bebida.setFoto(rs.getString("imagen"));
 					
 					
 					lp.setProducto(bebida);

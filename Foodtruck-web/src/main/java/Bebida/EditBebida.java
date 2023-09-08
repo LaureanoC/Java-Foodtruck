@@ -1,23 +1,36 @@
 package Bebida;
 
+import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.LinkedList;
+import java.util.Random;
 
 import javax.servlet.ServletException;
+import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.Part;
 
 import data.BebidaDAO;
+import data.PlatoDAO;
 import entities.Bebida;
 
 /**
  * Servlet implementation class editBebida
  */
 @WebServlet("/editbebida")
+@MultipartConfig
 public class EditBebida extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+	private String pathFiles = "C:\\Users\\stefano\\Documents\\javaProjects\\Java-Foodtruck-7.9\\Java-Foodtruck\\Foodtruck-web\\src\\main\\webapp\\img\\";
+	private File uploads = new File(pathFiles);
+	private String[] extens = {".ico", ".png", ".jpg", ".jpeg"};
        
     /**
      * @see HttpServlet#HttpServlet()
@@ -26,10 +39,6 @@ public class EditBebida extends HttpServlet {
         super();
         // TODO Auto-generated constructor stub
     }
-
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		
@@ -60,12 +69,67 @@ public class EditBebida extends HttpServlet {
 		nuevaBebida.setLitros(litros);
 		nuevaBebida.setNombre(nombre);
 		nuevaBebida.setPrecio(precio);
-		BebidaDAO bebidadao = new BebidaDAO();
-		bebidadao.updateBebida(nuevaBebida);
 		
+		
+		
+		
+		Part part = request.getPart("imagen");
+		
+		if(part == null) {
+			System.out.println("No ha seleccionado un archivo");
+			return;
+		}
+		
+		if(isExtension(part.getSubmittedFileName(), extens)) {
+			String photo = saveFile(part,uploads);
+			nuevaBebida.setFoto(photo);
+		}
+		
+		BebidaDAO bdao = new BebidaDAO();
+		bdao.updateBebida(nuevaBebida);
 		response.sendRedirect("altabebida");
 		
+	}
+	
+private String saveFile(Part part, File pathUploads) {
+		
+		String pathAbsolute = "";
+		String fileName = "";
+		
+		try {
+			
+			Path path = Paths.get(part.getSubmittedFileName());
+			Random random = new Random();
+			fileName = (random.nextInt(1000) + 1) + path.getFileName().toString();
+			
+			InputStream input = part.getInputStream();
+			
+			if(input != null) {
+				File file = new File(pathUploads, fileName);
+				pathAbsolute = file.getAbsolutePath();
+				
+				// Guardamos el archivo
+				Files.copy(input, file.toPath()); 
+			}
+			
+			
+		} catch (Exception e) {
+			
+		}
+		
+		return "img/" + fileName;
 		
 	}
+	
+	private boolean isExtension(String fileName, String[] extensions) {
+		for(String et : extensions) {
+			if(fileName.toLowerCase().endsWith(et)) {
+				return true;
+			}
+		}
+		return false;
+	}
+	
+	
 
 }
