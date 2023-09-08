@@ -28,7 +28,7 @@ import entities.Bebida;
 @MultipartConfig
 public class EditBebida extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	private String pathFiles = "C:\\Users\\stefano\\Documents\\javaProjects\\Java-Foodtruck-7.9\\Java-Foodtruck\\Foodtruck-web\\src\\main\\webapp\\img\\";
+	private String pathFiles = "C:\\Users\\Usuario\\Desktop\\Laureano\\Universidad\\2023\\Java (elect)\\Food2\\Java-Foodtruck\\Foodtruck-web\\src\\main\\webapp\\img";
 	private File uploads = new File(pathFiles);
 	private String[] extens = {".ico", ".png", ".jpg", ".jpeg"};
        

@@ -91,3 +91,7 @@ table{
     cursor: pointer;
 }
 
+img {
+	border-radius: 0.5rem;
+
+}
