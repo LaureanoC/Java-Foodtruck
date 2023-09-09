@@ -64,6 +64,29 @@
                         </div>
                 		
                 	<%} %>
+                	
+                	<% if (linea.getProducto() instanceof Bebida){%>
+                		<% Bebida b = (Bebida) linea.getProducto();%>
+                		<%total += b.getPrecio();%>
+                		<div class="linea">
+                        <div class="linea__item">
+                            <img src="<%=b.getFoto()%>"/>
+                            <div class="linea__container">
+                                <p class="linea__titulo"><%=b.getNombre()%></p>
+                                <p class="linea__desc"><%=b.getNombre() %></p>
+                                <p class="linea__precio">$<span class="precio"><%=b.getPrecio()%></span></p>
+                            </div>
+                        </div>
+
+                        <div class="cantidad__container">
+                            <i class="fa-solid fa-minus"></i>
+                            <input class="cantidad" name="<%=b.getNombre()%>"type="number" value="1" id="<%=b.getNombre() %>" disabled/>
+                            <i class="fa-solid fa-plus"></i>
+                        </div>
+                		
+                	<%} %>
+                	
+                	
                 
                     
 

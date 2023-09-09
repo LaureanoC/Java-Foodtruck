@@ -53,10 +53,12 @@ public class IniciarPedido extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		String[] checkboxplato = request.getParameterValues("checkboxplato");
+		String[] checkboxbebida = request.getParameterValues("checkboxbebida");
 		LinkedList<LineaPedido> lineas = new LinkedList<LineaPedido>();
 		
 		
 		PlatoDAO pdao = new PlatoDAO();
+		BebidaDAO bdao = new BebidaDAO();
 		
 		if (checkboxplato != null) {
 			for (String valor : checkboxplato) {
@@ -71,6 +73,21 @@ public class IniciarPedido extends HttpServlet {
 				
 			}
 		}
+		
+		
+		if (checkboxbebida != null) {
+			for (String valor1 : checkboxbebida) {
+			System.out.println(valor1);
+			Bebida b = new Bebida();
+			b.setId(Integer.parseInt(valor1));
+			b = bdao.getBebida(b);
+			LineaPedido lpedido = new LineaPedido();
+			lpedido.setProducto(b);
+			lpedido.setCantidad(1);
+			lineas.add(lpedido);
+			}
+		}
+		
 		
 		HttpSession session = request.getSession();
 		session.setAttribute("lineas", lineas);

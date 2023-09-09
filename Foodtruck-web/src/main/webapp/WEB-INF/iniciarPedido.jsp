@@ -34,14 +34,13 @@
             
             
                 <button class="button" type="submit">Agregar</button>	
-            </div>      
+                 
         </form>
-
+	</div> 
+	
         <div class="container">
-
             <h1>Platos</h1>
             <div class="productos">
-
 				<%for (Plato plato : platos){ %>
 				<div class ="producto">
                     <div class="producto__container" id="<%=plato.getNombre()%>">
@@ -51,15 +50,31 @@
                     </div>
                 </div>
 				<%} %>
-                
-
-
+				
             </div>
+           </div>
+          
+          
+          	<div class="container">
+            <h1>Bebidas</h1>
+            <div class ="producto">
+				<%for (Bebida b : bebidas){ %>
+				<div class ="producto">
+                    <div class="producto__container" id="<%=b.getNombre()%>">
+                        <img src="<%=b.getFoto()%>" id="<%=b.getNombre()%>"/>
+                        <p class="titulo" id="<%=b.getNombre()%>"><%=b.getNombre()%></p>
+                        <p class="precio" id="<%=b.getNombre()%>">$<%=b.getPrecio()%></p>
+                    </div>
+                </div>
+                <%} %>
+            
+            </div>
+           </div>
+           
 
-        </div>
 
 
-    </div>
+   
 
     <script src="js/iniciarpedido.js"></script>
 </body>
