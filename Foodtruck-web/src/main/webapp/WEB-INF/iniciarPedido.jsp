@@ -19,25 +19,6 @@
 <body>
 	 <jsp:include page="header.jsp"/>
 	
-	<div class="form">
-        <form action="iniciarpedido" method="post">
-			
-			<% for (Plato plato : platos){ %>
-				<label><%=plato.getNombre()%></label>
-				<input type="checkbox" name="checkboxplato" value="<%=plato.getId()%>" id="<%=plato.getNombre()%>">
-			<%} %>
-			
-			<% for (Bebida bebida : bebidas){ %>
-				<label><%=bebida.getNombre()%></label>
-				<input type="checkbox" name="checkboxbebida" value="<%=bebida.getId()%>" id="<%=bebida.getNombre()%>">
-			<%} %>
-            
-            
-                <button class="button" type="submit">Agregar</button>	
-                 
-        </form>
-	</div> 
-	
         <div class="container">
             <h1>Platos</h1>
             <div class="productos">
@@ -57,7 +38,7 @@
           
           	<div class="container">
             <h1>Bebidas</h1>
-            <div class ="producto">
+            <div class ="productos">
 				<%for (Bebida b : bebidas){ %>
 				<div class ="producto">
                     <div class="producto__container" id="<%=b.getNombre()%>">
@@ -70,6 +51,25 @@
             
             </div>
            </div>
+           
+           	<div class="form">
+        <form action="iniciarpedido" method="post">
+			
+			<% for (Plato plato : platos){ %>
+				<label><%=plato.getNombre()%></label>
+				<input type="checkbox" name="checkboxplato" value="<%=plato.getId()%>" id="<%=plato.getNombre()%>">
+			<%} %>
+			
+			<% for (Bebida bebida : bebidas){ %>
+				<label><%=bebida.getNombre()%></label>
+				<input type="checkbox" name="checkboxbebida" value="<%=bebida.getId()%>" id="<%=bebida.getNombre()%>">
+			<%} %>
+            
+            
+                <button class="button" type="submit">Crear pedido</button>	
+                 
+        </form>
+	</div> 
            
 
 
