@@ -27,7 +27,7 @@ import entities.Bebida;
  */
 @WebServlet("/altabebida")
 @MultipartConfig
-public class AltaBebida extends HttpServlet {
+public class ListadoAltaBebida extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private String pathFiles = "C:\\Users\\stefano\\Documents\\javaProjects\\Java-Foodtruck-9.8\\Foodtruck-web\\src\\main\\webapp\\img\\";
 	private File uploads = new File(pathFiles);
@@ -36,7 +36,7 @@ public class AltaBebida extends HttpServlet {
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public AltaBebida() {
+    public ListadoAltaBebida() {
         super();
         // TODO Auto-generated constructor stub
     }

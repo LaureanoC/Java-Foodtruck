@@ -26,7 +26,7 @@ import entities.Plato;
  */
 @WebServlet({ "/AltaPlato", "/altaPlato", "/Altaplato", "/altaplato" })
 @MultipartConfig
-public class AltaPlato extends HttpServlet {
+public class ListadoAltaPlato extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private String pathFiles = "C:\\Users\\stefano\\Documents\\javaProjects\\Java-Foodtruck-9.8\\Foodtruck-web\\src\\main\\webapp\\img\\";
 	private File uploads = new File(pathFiles);
@@ -36,7 +36,7 @@ public class AltaPlato extends HttpServlet {
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public AltaPlato() {
+    public ListadoAltaPlato() {
         super();
         // TODO Auto-generated constructor stub
     }

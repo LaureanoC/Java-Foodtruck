@@ -25,7 +25,7 @@
 				<%for (Plato plato : platos){ %>
 				<div class ="producto">
                     <div class="producto__container" id="<%=plato.getNombre()%>">
-                        <img src="<%=plato.getFoto()%>" id="<%=plato.getNombre()%>"/>
+                        <img class="imagen" src="<%=plato.getFoto()%>" id="<%=plato.getNombre()%>"/>
                         <p class="titulo" id="<%=plato.getNombre()%>"><%=plato.getNombre()%></p>
                         <p class="precio" id="<%=plato.getNombre()%>">$<%=plato.getPrecio()%></p>
                     </div>
@@ -42,7 +42,7 @@
 				<%for (Bebida b : bebidas){ %>
 				<div class ="producto">
                     <div class="producto__container" id="<%=b.getNombre()%>">
-                        <img src="<%=b.getFoto()%>" id="<%=b.getNombre()%>"/>
+                        <img class="imagen"src="<%=b.getFoto()%>" id="<%=b.getNombre()%>"/>
                         <p class="titulo" id="<%=b.getNombre()%>"><%=b.getNombre()%></p>
                         <p class="precio" id="<%=b.getNombre()%>">$<%=b.getPrecio()%></p>
                     </div>

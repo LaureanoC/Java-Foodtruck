@@ -18,7 +18,7 @@ h1{
 
 .productos{
     display: flex;
-    justify-content: space-around;
+    
     flex-wrap: wrap;
     gap: 1rem;
 
@@ -60,7 +60,7 @@ h1{
     color:white;
 }
 
-img{
+.imagen{
 	width: 10rem;
 	height: 10rem;
 }
@@ -86,6 +86,8 @@ label, input {
     transition: 1s;
     cursor: pointer;
 }
+
+
 
 .form {
 	display: flex;

@@ -97,7 +97,7 @@
                 </div>
                 <p class="total">Total: $<span class="numero"><%=total%></span></p>
                 <div>
-                    <button class="button" href="#">Modificar</button>
+                    
                     <button class="confirmar" id="confirmar" type="submit">Confirmar</button>	
                 </div>
             </div>      

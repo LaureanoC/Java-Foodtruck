@@ -19,13 +19,13 @@ import entities.Rol;
  * Servlet implementation class ListadoEmpleados
  */
 @WebServlet("/listadoempleados")
-public class ListadoEmpleados extends HttpServlet {
+public class ListadoAltaEmpleados extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public ListadoEmpleados() {
+    public ListadoAltaEmpleados() {
         super();
         // TODO Auto-generated constructor stub
     }

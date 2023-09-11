@@ -22,7 +22,14 @@ header {
 
 .header__container{
     display: flex;
-    padding: 2rem;
+    align-items: center;
+    justify-content: center;
+        
     gap: 5rem;
     
+}
+
+.img__header{
+	width: 100px;
+	
 }

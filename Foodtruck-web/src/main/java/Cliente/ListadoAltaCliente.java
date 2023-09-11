@@ -18,13 +18,13 @@ import entities.Cliente;
  * Servlet implementation class AltaCliente
  */
 @WebServlet("/listadoclientes")
-public class AltaCliente extends HttpServlet {
+public class ListadoAltaCliente extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public AltaCliente() {
+    public ListadoAltaCliente() {
         super();
     }
 
