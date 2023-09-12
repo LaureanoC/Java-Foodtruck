@@ -9,16 +9,7 @@
     <title>Foodtruck</title>
 </head>
 <body>
-    <header>
-        <div class="header">
-            <div class="header__container">
-                <nav><a>Logo</a></nav>
-                <nav><a>Pedidos</a></nav>
-                <nav><a>Productos</a></nav>
-                <nav><a href="administracion.html">Administración</a></nav>
-            </div>
-        </div>
-    </header>
+   <jsp:include page="header.jsp"/>
 	<div class="form">
         <form action="altaplato" method="post" enctype="multipart/form-data">
             <div class="form__container">
@@ -34,7 +25,7 @@
                     <input name="precio">
                 </div>
                  <div class="form__item">
-                    <label>Descripción</label>
+                    <label>Descripci�n</label>
                     <input name="descripcion">
                 </div>
                 

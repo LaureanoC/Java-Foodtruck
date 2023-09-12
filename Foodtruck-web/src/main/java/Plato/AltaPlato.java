@@ -24,11 +24,11 @@ import entities.Plato;
 /**
  * Servlet implementation class AltaPlato
  */
-@WebServlet({ "/AltaPlato", "/altaPlato", "/Altaplato", "/altaplato" })
+@WebServlet("/altaplato")
 @MultipartConfig
-public class ListadoAltaPlato extends HttpServlet {
+public class AltaPlato extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	private String pathFiles = "C:\\Users\\stefano\\Documents\\javaProjects\\Java-Foodtruck-9.8\\Foodtruck-web\\src\\main\\webapp\\img\\";
+	private String pathFiles = "C:\\Users\\Usuario\\Desktop\\Laureano\\Universidad\\2023\\Java (elect)\\Foodtruck\\Java-Foodtruck\\Foodtruck-web\\src\\main\\webapp\\img";
 	private File uploads = new File(pathFiles);
 	private String[] extens = {".ico", ".png", ".jpg", ".jpeg"};
 	
@@ -36,7 +36,7 @@ public class ListadoAltaPlato extends HttpServlet {
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public ListadoAltaPlato() {
+    public AltaPlato() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -46,10 +46,7 @@ public class ListadoAltaPlato extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		PlatoDAO listadoPlato = new PlatoDAO();
-		LinkedList<Plato> platos = listadoPlato.getAll();
-		request.setAttribute("listadoPlato", platos);
-		request.getRequestDispatcher("WEB-INF/listadoPlatos.jsp").forward(request, response);
+		request.getRequestDispatcher("WEB-INF/altaPlato.jsp").forward(request, response);
 		
 	}
 
@@ -82,7 +79,7 @@ public class ListadoAltaPlato extends HttpServlet {
 		
 		pdao.newPlato(p);
 		
-		response.sendRedirect("altaplato");
+		response.sendRedirect("listadoplato");
 		
 
 	}

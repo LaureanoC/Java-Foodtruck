@@ -1,6 +1,8 @@
 package Plato;
 
 import java.io.IOException;
+import java.util.LinkedList;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -11,16 +13,16 @@ import data.PlatoDAO;
 import entities.Plato;
 
 /**
- * Servlet implementation class DelPlato
+ * Servlet implementation class AltaPlato
  */
-@WebServlet("/deleteplato")
-public class DelPlato extends HttpServlet {
+@WebServlet("/listadoplato")
+public class ListadoPlato extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public DelPlato() {
+    public ListadoPlato() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -29,23 +31,18 @@ public class DelPlato extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		
-		int id = Integer.parseInt(request.getParameter("id"));
-		Plato platoBorrar = new Plato();
-		platoBorrar.setId(id);
-		PlatoDAO platoDAO = new PlatoDAO();
-		platoDAO.delPlato(platoBorrar);
-		response.sendRedirect("listadoplato");
-		
-		
+		PlatoDAO listadoPlato = new PlatoDAO();
+		LinkedList<Plato> platos = listadoPlato.getAll();
+		request.setAttribute("listadoPlato", platos);
+		request.getRequestDispatcher("WEB-INF/listadoPlatos.jsp").forward(request, response);
 		
 	}
+
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
+		
 		doGet(request, response);
 	}
 
