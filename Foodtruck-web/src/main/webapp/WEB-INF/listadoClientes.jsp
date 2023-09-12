@@ -43,7 +43,7 @@
                 
                 </tbody>
             </table>
-            <a class="button" href="altaCliente.html">Nuevo Cliente</a>
+            <a class="button" href="altacliente">Nuevo Cliente</a>
         </div>
 	</div>
 
