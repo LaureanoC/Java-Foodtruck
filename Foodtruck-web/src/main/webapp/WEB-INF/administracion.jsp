@@ -10,22 +10,13 @@
     <title>Foodtruck</title>
 </head>
 <body>
-<header>
-        <div class="header">
-            <div class="header__container">
-                <nav><a>Logo</a></nav>
-                <nav><a>Pedidos</a></nav>
-                <nav><a>Productos</a></nav>
-                <nav><a href="administracion.html">Administración</a></nav>
-            </div>
-        </div>
-    </header>
+<jsp:include page="header.jsp"/>
     <main class="admin">
         <div class="admin__container">
-            <h1>Administración</h1>
+            <h1>Administraci�n</h1>
             <div class="item_container">
                 
-                <a href="bebidaYplato.html"><div class="item">
+                <a href="menubebidaplato"><div class="item">
                     <p class="item__icon"><i class="fa-solid fa-utensils"></i></p>
                     <p class="item__desc">Productos</p>
                 </a>
