@@ -4,7 +4,7 @@
                 <nav><a href="iniciarpedido"><img class="img__header" src="img/logo.png"/></a></nav>
                 <nav><a href="iniciarpedido">Iniciar pedido</a></nav>
                 <nav><a>Pedidos</a></nav>
-                <nav><a href="administracion.html">Administración</a></nav>
+                <nav><a href="menuadmin">Administración</a></nav>
             </div>
         </div>
    </header>
