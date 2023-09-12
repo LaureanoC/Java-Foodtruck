@@ -47,7 +47,7 @@
 			<%} %>
 			</tbody>
 		</table>
-		<a class="button" href="nuevaBebida.html">Nueva bebida</a>
+		<a class="button" href="altabebida">Nueva bebida</a>
 		</div>
 	</div>
 

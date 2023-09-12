@@ -6,7 +6,6 @@ import java.io.InputStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.LinkedList;
 import java.util.Random;
 
 import javax.servlet.ServletException;
@@ -18,16 +17,14 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.Part;
 
 import data.BebidaDAO;
-
 import entities.Bebida;
-
 
 /**
  * Servlet implementation class AltaBebida
  */
 @WebServlet("/altabebida")
 @MultipartConfig
-public class ListadoAltaBebida extends HttpServlet {
+public class AltaBebida extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private String pathFiles = "C:\\Users\\stefano\\Documents\\javaProjects\\Java-Foodtruck-9.8\\Foodtruck-web\\src\\main\\webapp\\img\\";
 	private File uploads = new File(pathFiles);
@@ -36,26 +33,23 @@ public class ListadoAltaBebida extends HttpServlet {
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public ListadoAltaBebida() {
+    public AltaBebida() {
         super();
         // TODO Auto-generated constructor stub
     }
-    
-    
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-    	
-    	//Listamos bebida
-		BebidaDAO listadoBebida = new BebidaDAO();
-		LinkedList<Bebida> bebidas = listadoBebida.getAll();
-		request.setAttribute("listadoBebida", bebidas);
-		request.getRequestDispatcher("WEB-INF/listadoBebida.jsp").forward(request, response);
-		
-	}
-    
+
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		request.getRequestDispatcher("WEB-INF/altaBebida.jsp").forward(request, response);
+		
+	}
+
+	/**
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 */
+protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		float precio = Float.parseFloat(request.getParameter("precio"));
 		String nombre = request.getParameter("nombre");
@@ -82,7 +76,7 @@ public class ListadoAltaBebida extends HttpServlet {
 		
 		bdao.newBebida(b);
 		
-		response.sendRedirect("altabebida");
+		response.sendRedirect("listadobebida");
 		
 	}
     
@@ -124,7 +118,5 @@ public class ListadoAltaBebida extends HttpServlet {
 		}
 		return false;
 	}
-    
-    
 
 }
