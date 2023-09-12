@@ -1,9 +1,6 @@
 package Empleado;
 
-
 import java.io.IOException;
-import java.util.LinkedList;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -16,16 +13,16 @@ import entities.Empleado;
 import entities.Rol;
 
 /**
- * Servlet implementation class ListadoEmpleados
+ * Servlet implementation class AltaEmpleado
  */
-@WebServlet("/listadoempleados")
-public class ListadoAltaEmpleados extends HttpServlet {
+@WebServlet("/altaempleado")
+public class AltaEmpleado extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public ListadoAltaEmpleados() {
+    public AltaEmpleado() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -35,12 +32,7 @@ public class ListadoAltaEmpleados extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		EmpleadoDAO edao = new EmpleadoDAO();
-		LinkedList<Empleado> empleados = edao.getAll();
-		
-		request.setAttribute("listaEmpleados", empleados);
-		
-		request.getRequestDispatcher("WEB-INF/listadoEmpleados.jsp").forward(request, response);
+		request.getRequestDispatcher("WEB-INF/altaEmpleado.jsp").forward(request, response);
 		
 	}
 
@@ -48,7 +40,6 @@ public class ListadoAltaEmpleados extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-			
 		String dni = request.getParameter("dni");
 		String nom = request.getParameter("nombre");
 		String tur = request.getParameter("turno");
@@ -66,7 +57,7 @@ public class ListadoAltaEmpleados extends HttpServlet {
 		e.addRol(r);
 		edao.newEmpleado(e);
 		
-		doGet(request, response);
+		response.sendRedirect("listadoempleados");
 	}
 
 }

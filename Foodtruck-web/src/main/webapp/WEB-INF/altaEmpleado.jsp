@@ -10,18 +10,9 @@
     <title>Foodtruck</title>
 </head>
 <body>
-<header>
-        <div class="header">
-            <div class="header__container">
-                <nav><a>Logo</a></nav>
-                <nav><a>Pedidos</a></nav>
-                <nav><a>Productos</a></nav>
-                <nav><a href="administracion.html">Administración</a></nav>
-            </div>
-        </div>
-    </header>
+<jsp:include page="header.jsp"/>
 	<div class="form">
-        <form action="listadoempleados" method="post">
+        <form action="altaempleado" method="post">
             <div class="form__container">
                 <h1>Nuevo Empleado</h1>
                 <div class="form__item">
@@ -49,7 +40,7 @@
                     </select>
                 </div>
                 <div class="form__item">
-                    <label>Contraseña</label>
+                    <label>Contrase�a</label>
                     <input name="password">
                 </div>
                 <button class="button" type="submit">Agregar</button>	

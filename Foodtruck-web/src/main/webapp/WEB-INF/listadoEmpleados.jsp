@@ -49,7 +49,7 @@
                 <%} }%>
                 </tbody>
             </table>
-            <a class="button" href="altaEmpleado.html">Nuevo Empleado</a>
+            <a class="button" href="altaempleado">Nuevo Empleado</a>
         </div>
 	</div>
 	
