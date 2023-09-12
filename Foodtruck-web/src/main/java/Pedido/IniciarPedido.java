@@ -92,7 +92,7 @@ public class IniciarPedido extends HttpServlet {
 		HttpSession session = request.getSession();
 		session.setAttribute("lineas", lineas);
 		
-		response.sendRedirect("nuevopedido");
+		response.sendRedirect("altapedido");
 		
 	}
 

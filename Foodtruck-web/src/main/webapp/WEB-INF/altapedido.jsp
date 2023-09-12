@@ -23,7 +23,7 @@
  <jsp:include page="header.jsp"/>
  
     <div class="form">
-        <form action="" method="post">
+        <form action="altapedido" method="post">
             <div class="form__container">
                 <h1>Nuevo Pedido</h1>
                 <div class="item__container">
@@ -59,7 +59,7 @@
 
                         <div class="cantidad__container">
                             <i class="fa-solid fa-minus"></i>
-                            <input class="cantidad" name="<%=plato.getNombre()%>"type="number" value="1" id="<%=plato.getNombre() %>" disabled/>
+                            <input class="cantidad" name="cantidad" type="number" value="1" id="<%=plato.getNombre() %>" readonly="readonly"/>
                             <i class="fa-solid fa-plus"></i>
                         </div>
                 		
@@ -80,7 +80,7 @@
 
                         <div class="cantidad__container">
                             <i class="fa-solid fa-minus"></i>
-                            <input class="cantidad" name="<%=b.getNombre()%>"type="number" value="1" id="<%=b.getNombre() %>" disabled/>
+                            <input class="cantidad" name="cantidad"type="number" value="1" id="<%=b.getNombre() %>readonly="readonly"" />
                             <i class="fa-solid fa-plus"></i>
                         </div>
                 		
