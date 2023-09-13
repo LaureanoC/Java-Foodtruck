@@ -20,236 +20,53 @@
     <h1>Pedidos</h1>
 <main>
         <div class = "pedidos">
+        
+        <% for(Pedido pedido : pedidos){ %>
+        
+        <%if (pedido.getEstado().equals("En preparación")){ %>
             <div class="pedido">
                 <div class="pedido__header">
-                    <div class="nro">24</div>
-                    
+                    <div class="nro"><%=pedido.getId()%></div>  
                 </div>
         
                 <div class="pedido__content">
-                   
                     <div class="lineas">
+                    
+                    <% for (LineaPedido lp : pedido.getLineas()){ %>
+                    
+                    <%if(lp.getProducto() instanceof Plato){ %>
+                    <%Plato plato = (Plato) lp.getProducto();%>
                         <div class="linea">
-                            
                             <div class="linea__content">
-                                <p class="linea__titulo">Doble completa</p>
-                                <p class="linea__desc">Milanesa con lechuga, tomate, morrón y cebolla caramelizada</p>
+                                <p class="linea__titulo"><%=plato.getNombre()%></p>
+                                <p class="linea__desc"><%=plato.getDescripcion()%></p>
                 
                             </div>
-                            <p class="cantidad">x1</p>
+                            <p class="cantidad">x<%=lp.getCantidad() %></p>
                         </div>
-    
-                        <div class="linea">
+                        <%} %>
                         
+                        <%if(lp.getProducto() instanceof Bebida){ %>
+                    <%Bebida b = (Bebida) lp.getProducto();%>
+                        <div class="linea">
                             <div class="linea__content">
-                                <p class="linea__titulo">Doble completa</p>
-                                <p class="linea__desc">Jamón, queso cheddar, tomate</p>
+                                <p class="linea__titulo"><%=b.getNombre()%></p>
+                                <p class="linea__desc">Litros: <%=b.getLitros()%></p>
                 
                             </div>
-                            <p class="cantidad">x1</p>
+                            <p class="cantidad">x<%=lp.getCantidad() %></p>
                         </div>
-                        <a class="button">Entregar</a>
+                        <%} %>
+    					<%} %>
+                  
                     </div>
-                </div>
-            </div>
-
-            <div class="pedido">
-                <div class="pedido__header">
-                    <div class="nro">24</div>
                     
                 </div>
-        
-                <div class="pedido__content">
-                   
-                    <div class="lineas">
-                        <div class="linea">
-                            
-                            <div class="linea__content">
-                                <p class="linea__titulo">Doble completa</p>
-                                <p class="linea__desc">Milanesa con lechuga, tomate, morrón y cebolla caramelizada</p>
-                
-                            </div>
-                            <p class="cantidad">x1</p>
-                        </div>
-    
-                        <div class="linea">
-                        
-                            <div class="linea__content">
-                                <p class="linea__titulo">Doble completa</p>
-                                <p class="linea__desc">Jamón, queso cheddar, tomate</p>
-                
-                            </div>
-                            <p class="cantidad">x1</p>
-                        </div>
-                        <a class="button">Entregar</a>
-                    </div>
-                </div>
+                <a href="entregarpedido?nro=<%=pedido.getId() %>" class="button">Entregar</a>
             </div>
-
-            <div class="pedido">
-                <div class="pedido__header">
-                    <div class="nro">24</div>
-                    
-                </div>
-        
-                <div class="pedido__content">
-                   
-                    <div class="lineas">
-                        <div class="linea">
-                            
-                            <div class="linea__content">
-                                <p class="linea__titulo">Doble completa</p>
-                                <p class="linea__desc">Milanesa con lechuga, tomate, morrón y cebolla caramelizada</p>
-                
-                            </div>
-                            <p class="cantidad">x1</p>
-                        </div>
-    
-                        <div class="linea">
-                        
-                            <div class="linea__content">
-                                <p class="linea__titulo">Doble completa</p>
-                                <p class="linea__desc">Jamón, queso cheddar, tomate</p>
-                
-                            </div>
-                            <p class="cantidad">x1</p>
-                        </div>
-                        <a class="button">Entregar</a>
-                    </div>
-                </div>
-            </div>
-
-            <div class="pedido">
-                <div class="pedido__header">
-                    <div class="nro">24</div>
-                    
-                </div>
-        
-                <div class="pedido__content">
-                   
-                    <div class="lineas">
-                        <div class="linea">
-                            
-                            <div class="linea__content">
-                                <p class="linea__titulo">Doble completa</p>
-                                <p class="linea__desc">Milanesa con lechuga, tomate, morrón y cebolla caramelizada</p>
-                
-                            </div>
-                            <p class="cantidad">x1</p>
-                        </div>
-    
-                        <div class="linea">
-                        
-                            <div class="linea__content">
-                                <p class="linea__titulo">Doble completa</p>
-                                <p class="linea__desc">Jamón, queso cheddar, tomate</p>
-                
-                            </div>
-                            <p class="cantidad">x1</p>
-                        </div>
-                        <a class="button">Entregar</a>
-                    </div>
-                </div>
-            </div>
-
-            <div class="pedido">
-                <div class="pedido__header">
-                    <div class="nro">24</div>
-                    
-                </div>
-        
-                <div class="pedido__content">
-                   
-                    <div class="lineas">
-                        <div class="linea">
-                            
-                            <div class="linea__content">
-                                <p class="linea__titulo">Doble completa</p>
-                                <p class="linea__desc">Milanesa con lechuga, tomate, morrón y cebolla caramelizada</p>
-                
-                            </div>
-                            <p class="cantidad">x1</p>
-                        </div>
-    
-                        <div class="linea">
-                        
-                            <div class="linea__content">
-                                <p class="linea__titulo">Doble completa</p>
-                                <p class="linea__desc">Jamón, queso cheddar, tomate</p>
-                
-                            </div>
-                            <p class="cantidad">x1</p>
-                        </div>
-                        <a class="button">Entregar</a>
-                    </div>
-                </div>
-            </div>
-
-            <div class="pedido">
-                <div class="pedido__header">
-                    <div class="nro">24</div>
-                    
-                </div>
-        
-                <div class="pedido__content">
-                   
-                    <div class="lineas">
-                        <div class="linea">
-                            
-                            <div class="linea__content">
-                                <p class="linea__titulo">Doble completa</p>
-                                <p class="linea__desc">Milanesa con lechuga, tomate, morrón y cebolla caramelizada</p>
-                
-                            </div>
-                            <p class="cantidad">x1</p>
-                        </div>
-    
-                        <div class="linea">
-                        
-                            <div class="linea__content">
-                                <p class="linea__titulo">Doble completa</p>
-                                <p class="linea__desc">Jamón, queso cheddar, tomate</p>
-                
-                            </div>
-                            <p class="cantidad">x1</p>
-                        </div>
-                        <a class="button">Entregar</a>
-                    </div>
-                </div>
-            </div>
-
-            <div class="pedido">
-                <div class="pedido__header">
-                    <div class="nro">24</div>
-                    
-                </div>
-        
-                <div class="pedido__content">
-                   
-                    <div class="lineas">
-                        <div class="linea">
-                            
-                            <div class="linea__content">
-                                <p class="linea__titulo">Doble completa</p>
-                                <p class="linea__desc">Milanesa con lechuga, tomate, morrón y cebolla caramelizada</p>
-                
-                            </div>
-                            <p class="cantidad">x1</p>
-                        </div>
-    
-                        <div class="linea">
-                        
-                            <div class="linea__content">
-                                <p class="linea__titulo">Doble completa</p>
-                                <p class="linea__desc">Jamón, queso cheddar, tomate</p>
-                
-                            </div>
-                            <p class="cantidad">x1</p>
-                        </div>
-                        <a class="button">Entregar</a>
-                    </div>
-                </div>
-            </div>
+ 			<% }} %>
+            
+            
         </div>
     </main>
 
