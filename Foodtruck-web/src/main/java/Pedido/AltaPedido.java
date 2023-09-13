@@ -48,42 +48,39 @@ public class AltaPedido extends HttpServlet {
 		HttpSession session = request.getSession();
 		
 		String servicio = request.getParameter("servicio");
+		String[] cantidades = request.getParameterValues("cantidad");
+		
+		LinkedList<LineaPedido> lineas = (LinkedList<LineaPedido>) session.getAttribute("lineas");
+		Pedido p = new Pedido();
+			
+		int i = 0;
+		for(LineaPedido lp : lineas) {
+				
+			lp.setCantidad(Integer.parseInt(cantidades[i]));
+			p.addLineaPedido(lp);
+			System.out.println("La cantidad del item " + i + " es " + cantidades[i]);
+			i++;
+		}
+			
+		
+		Empleado e = new Empleado();
+		Cliente c = new Cliente(); //null
+		e.setDni("52144578");
+		p.setEstado("En preparación");
+		p.setCliente(c);
+		p.setEmpleado(e);
 		
 		if(servicio.equalsIgnoreCase("delivery")) {
 			
-		}else {
-			
-			String[] cantidades = request.getParameterValues("cantidad");
-			
-			
-			LinkedList<LineaPedido> lineas = (LinkedList<LineaPedido>) session.getAttribute("lineas");
-			Pedido p = new Pedido();
-			
-			int i = 0;
-			for(LineaPedido lp : lineas) {
-				
-				lp.setCantidad(Integer.parseInt(cantidades[i]));
-				p.addLineaPedido(lp);
-				System.out.println("La cantidad del item " + i + " es " + cantidades[i]);
-				i++;
-			}
-			
-			PedidoDAO pdao = new PedidoDAO();
-			Empleado e = new Empleado();
-			Cliente c = new Cliente(); //null
-			e.setDni("52144578");
-			p.setEstado("En preparación");
-			p.setTipoPedido("Presencial");
-			p.setCliente(c);
-			p.setEmpleado(e);
-			pdao.newPedido(p);
-			
-			response.sendRedirect("pedidos.jsp");
+		} else {
+		PedidoDAO pdao = new PedidoDAO();
+		
+		p.setTipoPedido("Presencial");
+		pdao.newPedido(p);
+		response.sendRedirect("listadopedido");
+		
+		
 		}
-		
-		
-		
-		
 	}
 
 }
