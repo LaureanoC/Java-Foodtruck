@@ -17,8 +17,8 @@
 </head>
 <body>
   <jsp:include page="header.jsp"/>
-    <h1>Pedidos Con Deliveri</h1>
-    
+<h1>Pedidos Con Delivery</h1>
+
 <main>
         <div class = "pedidos">
         
@@ -30,7 +30,8 @@
             
             <div class="pedido">
                 <div class="pedido__header">
-                    <div class="nro"><%=pedido.getId()%></div>      
+                    <div class="nro"><%= pedido.getId() %></div>
+                    <p><%= pedido.getCliente().getNombre() %></p>
                 </div>
                 <div class="pedido__content">
                     <div class="lineas">

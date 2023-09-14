@@ -10,7 +10,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import data.ClienteDAO;
 import data.PedidoDAO;
 import entities.Cliente;
 import entities.Empleado;
@@ -18,35 +17,29 @@ import entities.LineaPedido;
 import entities.Pedido;
 
 /**
- * Servlet implementation class NuevoPedido
+ * Servlet implementation class PedidoDeliveri
  */
-@WebServlet("/altapedido")
-public class AltaPedido extends HttpServlet {
+@WebServlet("/PedidoDeliveri")
+public class PedidoDeliveri extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public AltaPedido() {
+    public PedidoDeliveri() {
         super();
-        
+        // TODO Auto-generated constructor stub
     }
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
-		request.getRequestDispatcher("WEB-INF/altapedido.jsp").forward(request, response);
-	}
-
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
+		// TODO Auto-generated method stub
 		
 		HttpSession session = request.getSession();
+		Cliente cliente = new Cliente();
+		cliente = (Cliente) session.getAttribute("cliente");
 		
 		String servicio = request.getParameter("servicio");
 		String[] cantidades = request.getParameterValues("cantidad");
@@ -65,31 +58,23 @@ public class AltaPedido extends HttpServlet {
 			
 		
 		Empleado e = new Empleado();
-		Cliente c = new Cliente(); //null
+		
 		e.setDni("52144578");
 		p.setEstado("En preparación");
-		p.setCliente(c);
+		p.setCliente(cliente);
 		p.setEmpleado(e);
-		
-		
-		if(servicio.equalsIgnoreCase("delivery")) {
-			p.setEstado("En preparación");
-			p.setTipoPedido("Delivery");
-			p.setEmpleado(e);
-			session.setAttribute("pedido", p);
-		request.getRequestDispatcher("WEB-INF/buscarCliente.jsp").forward(request, response);	
-		
-		
-		} else {
 		PedidoDAO pdao = new PedidoDAO();
-		
 		p.setTipoPedido("Presencial");
 		pdao.newPedido(p);
-		session.setAttribute("pedido", p);
 		response.sendRedirect("listadopedido");
-		
-		
-		}
+	}
+
+	/**
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 */
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// TODO Auto-generated method stub
+		doGet(request, response);
 	}
 
 }
