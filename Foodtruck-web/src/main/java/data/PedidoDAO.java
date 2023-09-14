@@ -146,7 +146,7 @@ public class PedidoDAO {
 		ResultSet keyRS=null;
 		try {
 			stmt = DbConnector.getInstancia().getConn()
-					.prepareStatement("INSERT INTO Pedido (estadoPedido, tipoPedido, dniEmpleado, dniCliente) VALUES (?,?,?,?)",
+					.prepareStatement("INSERT INTO Pedido (estadoPedido, tipoPedido, dniEmpleado, dniCliente,total) VALUES (?,?,?,?,?)",
 							Statement.RETURN_GENERATED_KEYS);
 
 			stmt.setString(1,p.getEstado());
@@ -158,6 +158,8 @@ public class PedidoDAO {
 			} else {
 				stmt.setString(4, null);
 			}
+			
+			stmt.setFloat(5, p.getTotal());
 			
 			
 			

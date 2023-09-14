@@ -26,7 +26,7 @@
         
         <% for(Pedido pedido : pedidos){ %>
         
-        <%if (pedido.getEstado().equals("En preparación")){ %>
+        <%if (pedido.getEstado().equals("En preparación") || pedido.getEstado().equals("En camino")){ %>
 
             <div class="pedido">
                 <div class="pedido__header">
@@ -36,26 +36,23 @@
                     <div class="lineas">
                     
                     <% for (LineaPedido lp : pedido.getLineas()){ %>
-                    
                     <%if(lp.getProducto() instanceof Plato){ %>
                     <%Plato plato = (Plato) lp.getProducto();%>
                         <div class="linea">
                             <div class="linea__content">
                                 <p class="linea__titulo"><%=plato.getNombre()%></p>
                                 <p class="linea__desc"><%=plato.getDescripcion()%></p>
-                
                             </div>
                             <p class="cantidad">x<%=lp.getCantidad() %></p>
                         </div>
                         <%} %>
                         
                         <%if(lp.getProducto() instanceof Bebida){ %>
-                    <%Bebida b = (Bebida) lp.getProducto();%>
+                    	<%Bebida b = (Bebida) lp.getProducto();%>
                         <div class="linea">
                             <div class="linea__content">
                                 <p class="linea__titulo"><%=b.getNombre()%></p>
                                 <p class="linea__desc">Litros: <%=b.getLitros()%></p>
-                
                             </div>
                             <p class="cantidad">x<%=lp.getCantidad() %></p>
                         </div>
@@ -66,10 +63,10 @@
                     
                 </div>
                 
-                <% if(pedido.getTipoPedido().equals("Delivery")){ %>
-                <a href="entregarpedido?nro=<%=pedido.getId() %>" class="button">Entregar</a>
-                <% } else { %>
-                <a href="entregarpedido?nro=<%=pedido.getId() %>" class="button">En camino</a>
+                <% if(pedido.getTipoPedido().equals("Delivery") && pedido.getEstado().equalsIgnoreCase("En preparación")){ %>
+                <a href="enviarpedido?nro=<%=pedido.getId() %>" class="button">Enviar</a>
+                <% } else if(pedido.getEstado().equalsIgnoreCase("En camino") || pedido.getTipoPedido().equals("Presencial")) { %>
+                <a href="entregarpedido?nro=<%=pedido.getId() %>" class="entregar">Entregar</a>
  				<%} %>
             </div>
  			<% }} %>
