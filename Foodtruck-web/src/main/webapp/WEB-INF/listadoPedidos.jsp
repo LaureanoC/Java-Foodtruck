@@ -13,6 +13,8 @@
     <link rel="stylesheet" href="style/listadopedidos.css">
     
 <%LinkedList<Pedido> pedidos = (LinkedList<Pedido>)request.getAttribute("pedidos"); %>
+
+
     <title>Foodtruck</title>
 </head>
 <body>
@@ -63,7 +65,12 @@
                     </div>
                     
                 </div>
+                
+                <% if(pedido.getTipoPedido().equals("Delivery")){ %>
                 <a href="entregarpedido?nro=<%=pedido.getId() %>" class="button">Entregar</a>
+                <% } else { %>
+                <a href="entregarpedido?nro=<%=pedido.getId() %>" class="button">En camino</a>
+ 				<%} %>
             </div>
  			<% }} %>
             
