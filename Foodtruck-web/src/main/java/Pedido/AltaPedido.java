@@ -59,7 +59,6 @@ public class AltaPedido extends HttpServlet {
 				
 			lp.setCantidad(Integer.parseInt(cantidades[i]));
 			p.addLineaPedido(lp);
-			System.out.println("La cantidad del item " + i + " es " + cantidades[i]);
 			i++;
 		}
 			

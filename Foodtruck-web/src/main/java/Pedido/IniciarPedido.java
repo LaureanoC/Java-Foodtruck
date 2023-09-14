@@ -62,7 +62,7 @@ public class IniciarPedido extends HttpServlet {
 		
 		if (checkboxplato != null) {
 			for (String valor : checkboxplato) {
-				System.out.println(valor);
+				
 				Plato p = new Plato();
 				p.setId(Integer.parseInt(valor));
 				p = pdao.getPlato(p);
