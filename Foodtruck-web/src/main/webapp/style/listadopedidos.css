@@ -139,7 +139,7 @@ main{
     font-family: Roboto;
     border-radius: 1.25rem;
     margin:auto;
-    margin-top: 1rem;
+    margin-bottom: 0;
     padding: 0.6rem 2.2rem;
     border: 0;
 }
