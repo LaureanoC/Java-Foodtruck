@@ -46,7 +46,13 @@ public class PedidoDAO {
 					
 					e.setDni(dniEmpleado);
 					c.setDni(dniCliente);
-	
+					
+					if (dniCliente != null) {
+						ClienteDAO cdao = new ClienteDAO();
+						c = cdao.getCliente(c);
+					}
+					
+					
 					p.setEmpleado(e);
 					p.setCliente(c);
 		

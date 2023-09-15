@@ -37,9 +37,10 @@
                 
                 <%if(pedido.getTipoPedido().equals("Delivery")) {%>
                 	 <%Cliente cli = pedido.getCliente();%>
-                	 <p><%= cli.getNombre()%></p>
+                	 <p class="nombre"><%= cli.getNombre()%></p>
+                	 <p class="direccion"><%=cli.getDireccion() %></p>
                 <%} %>
-                
+                <span class="espacio"></span>
                 
                 <div class="pedido__content">
                     <div class="lineas">
