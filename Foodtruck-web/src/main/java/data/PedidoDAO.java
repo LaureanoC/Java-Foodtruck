@@ -7,6 +7,7 @@ import java.sql.Statement;
 import java.util.LinkedList;
 import java.sql.Timestamp;
 
+import entities.Bebida;
 import entities.Cliente;
 import entities.Empleado;
 import entities.LineaPedido;
@@ -188,14 +189,29 @@ public class PedidoDAO {
 					
 				}
 				
-				
-				
-				//a terminar, solo me falta esto
+				else {
+					
+					if(lp.getProducto() instanceof Bebida ) {
+						
+						stmt = DbConnector.getInstancia().getConn()
+								.prepareStatement("INSERT INTO pedido_bebida (idPedido,idBebida,fechaHoraPedido,cantidad) VALUES (?,?,?,?)");
+						
+						Bebida b = (Bebida) lp.getProducto();
+						
+						stmt.setInt(1, p.getId());
+						stmt.setInt(2, b.getId());
+						Timestamp hora = this.getPedido(p).getFechaHora();
+						stmt.setTimestamp(3, hora);
+						stmt.setInt(4, lp.getCantidad());
+				}
 	
 
-				stmt.executeUpdate();
+				
 			}
 
+				stmt.executeUpdate();
+				
+			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {

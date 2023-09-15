@@ -36,6 +36,8 @@
                     <div class="lineas">
                     
                     <% for (LineaPedido lp : pedido.getLineas()){ %>
+                    
+                    
                     <%if(lp.getProducto() instanceof Plato){ %>
                     <%Plato plato = (Plato) lp.getProducto();%>
                         <div class="linea">
@@ -52,12 +54,12 @@
                         <div class="linea">
                             <div class="linea__content">
                                 <p class="linea__titulo"><%=b.getNombre()%></p>
-                                <p class="linea__desc">Litros: <%=b.getLitros()%></p>
+                                <p class="linea__desc"> <%=b.getLitros()%></p>
                             </div>
                             <p class="cantidad">x<%=lp.getCantidad() %></p>
                         </div>
                         <%} %>
-    					<%} %>
+    					<%} %> 
                   
                     </div>
                     
