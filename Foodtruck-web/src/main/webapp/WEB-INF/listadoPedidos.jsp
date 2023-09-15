@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <%@page import="entities.Bebida"%>
 <%@page import="entities.Plato"%>
+<%@page import="entities.Cliente"%>
 <%@page import="entities.LineaPedido"%>
 <%@page import="entities.Pedido"%>
 <%@page import="java.util.LinkedList"%>
@@ -32,6 +33,14 @@
                 <div class="pedido__header">
                     <div class="nro"><%=pedido.getId()%></div>      
                 </div>
+                
+                
+                <%if(pedido.getTipoPedido().equals("Delivery")) {%>
+                	 <%Cliente cli = pedido.getCliente();%>
+                	 <p><%= cli.getNombre()%></p>
+                <%} %>
+                
+                
                 <div class="pedido__content">
                     <div class="lineas">
                     
