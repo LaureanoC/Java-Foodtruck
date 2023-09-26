@@ -28,11 +28,8 @@ import entities.Plato;
 @MultipartConfig
 public class AltaPlato extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	private String pathFiles = "C:\\Users\\Usuario\\Desktop\\Laureano\\Universidad\\2023\\Java (elect)\\Foodtruck\\Java-Foodtruck\\Foodtruck-web\\src\\main\\webapp\\img";
-	private File uploads = new File(pathFiles);
+	private static final String UPLOAD_DIR = "img";
 	private String[] extens = {".ico", ".png", ".jpg", ".jpeg"};
-	
-       
     /**
      * @see HttpServlet#HttpServlet()
      */
@@ -62,6 +59,10 @@ public class AltaPlato extends HttpServlet {
 		
 		Plato p = new Plato(nombre,precio,descripcion);
 		
+		String pathFiles = request.getServletContext().getRealPath("") + File.separator + "img";;
+		File uploads = new File(pathFiles);
+		
+		
 		Part part = request.getPart("imagen");
 		
 		if(part == null) {
@@ -82,9 +83,12 @@ public class AltaPlato extends HttpServlet {
 		response.sendRedirect("listadoplato");
 		
 
+		
+ 
+        
 	}
 	
-	private String saveFile(Part part, File pathUploads) {
+private String saveFile(Part part, File pathUploads) {
 		
 		String pathAbsolute = "";
 		String fileName = "";
@@ -100,6 +104,8 @@ public class AltaPlato extends HttpServlet {
 			if(input != null) {
 				File file = new File(pathUploads, fileName);
 				pathAbsolute = file.getAbsolutePath();
+				
+				System.out.println(pathAbsolute);
 				
 				// Guardamos el archivo
 				Files.copy(input, file.toPath()); 
@@ -122,6 +128,11 @@ public class AltaPlato extends HttpServlet {
 		}
 		return false;
 	}
+
+	
+	
+		
+	
 	
 	
 	

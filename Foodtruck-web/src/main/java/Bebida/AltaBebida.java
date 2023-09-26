@@ -26,8 +26,7 @@ import entities.Bebida;
 @MultipartConfig
 public class AltaBebida extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	private String pathFiles = "C:\\Users\\Usuario\\Desktop\\Laureano\\Universidad\\2023\\Java (elect)\\Foodtruck\\Java-Foodtruck\\Foodtruck-web\\src\\main\\webapp\\img";
-	private File uploads = new File(pathFiles);
+	
 	private String[] extens = {".ico", ".png", ".jpg", ".jpeg"};
        
     /**
@@ -57,6 +56,8 @@ protected void doPost(HttpServletRequest request, HttpServletResponse response) 
 		
 		Bebida b = new Bebida(precio, nombre, litros);
 		
+		String pathFiles = request.getServletContext().getRealPath("") + File.separator + "img";;
+		File uploads = new File(pathFiles);
 		
 		
 		Part part = request.getPart("imagen");
@@ -96,6 +97,8 @@ protected void doPost(HttpServletRequest request, HttpServletResponse response) 
 			if(input != null) {
 				File file = new File(pathUploads, fileName);
 				pathAbsolute = file.getAbsolutePath();
+				
+				System.out.println(pathAbsolute);
 				
 				// Guardamos el archivo
 				Files.copy(input, file.toPath()); 
