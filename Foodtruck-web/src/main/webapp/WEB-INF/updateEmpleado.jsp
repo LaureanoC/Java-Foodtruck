@@ -35,14 +35,15 @@
                     <label>Turno</label>
                     <select name="turno">
                     	<option value="none" selected disabled hidden>Select an Option</option>
-                        <option value="Tarde">Tarde</option>
-                        <option value="Noche">Noche</option>
+                        <option value="Tarde" <%if(e.getTurno().equalsIgnoreCase("Tarde")){ %><%="selected" %><%}%>>Tarde</option>
+                        <option value="Noche"<%if(e.getTurno().equalsIgnoreCase("Noche")){ %><%="selected" %><%}%>>Noche</option>
                     </select>
                 </div>
                 
                  <div class="form__item">
                     <label>Rol</label>
                     <select name="rol">
+                    <option value="none" selected disabled hidden>Selecciona una opción</option>
 						<option value="Chef">Chef</option>
                         <option value="Delivery">Delivery</option>
                         <option value="Mozo">Mozo</option>
