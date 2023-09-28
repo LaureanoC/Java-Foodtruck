@@ -68,7 +68,7 @@ public class IniciarPedido extends HttpServlet {
 				p = pdao.getPlato(p);
 				LineaPedido lp = new LineaPedido();
 				lp.setProducto(p);
-				lp.setCantidad(1); //por cada uno le doy cantidad 1, y luego se acumulan
+				lp.setCantidad(1); 
 				lineas.add(lp);
 				
 			}

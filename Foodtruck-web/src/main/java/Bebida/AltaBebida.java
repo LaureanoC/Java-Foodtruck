@@ -56,7 +56,7 @@ protected void doPost(HttpServletRequest request, HttpServletResponse response) 
 		
 		Bebida b = new Bebida(precio, nombre, litros);
 		
-		String pathFiles = request.getServletContext().getRealPath("") + File.separator + "img";;
+		String pathFiles = request.getServletContext().getRealPath("") + File.separator + "img";
 		File uploads = new File(pathFiles);
 		
 		

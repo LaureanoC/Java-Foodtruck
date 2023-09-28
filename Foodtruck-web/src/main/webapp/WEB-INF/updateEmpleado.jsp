@@ -43,7 +43,7 @@
                  <div class="form__item">
                     <label>Rol</label>
                     <select name="rol">
-                    <option value="none" selected disabled hidden>Selecciona una opción</option>
+                    <option value="none" selected disabled hidden>Seleccione una opción</option>
 						<option value="Chef">Chef</option>
                         <option value="Delivery">Delivery</option>
                         <option value="Mozo">Mozo</option>

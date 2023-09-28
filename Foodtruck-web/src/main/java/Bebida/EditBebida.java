@@ -28,8 +28,6 @@ import entities.Bebida;
 @MultipartConfig
 public class EditBebida extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	private String pathFiles = "C:\\Users\\Usuario\\Desktop\\Laureano\\Universidad\\2023\\Java (elect)\\Foodtruck\\Java-Foodtruck\\Foodtruck-web\\src\\main\\webapp\\img";
-	private File uploads = new File(pathFiles);
 	private String[] extens = {".ico", ".png", ".jpg", ".jpeg"};
        
     /**
@@ -71,7 +69,8 @@ public class EditBebida extends HttpServlet {
 		nuevaBebida.setPrecio(precio);
 		
 		
-		
+		String pathFiles = request.getServletContext().getRealPath("") + File.separator + "img";
+		File uploads = new File(pathFiles);
 		
 		Part part = request.getPart("imagen");
 		

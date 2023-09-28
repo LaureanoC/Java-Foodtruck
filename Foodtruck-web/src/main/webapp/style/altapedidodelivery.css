@@ -104,6 +104,7 @@ input:focus{
 .pedido{
     display: flex;
     flex-direction: column;
+    flex-wrap: wrap;
     background-color: #fff;
     border-radius: 1.25rem;
     padding: 2rem 2rem;

@@ -55,8 +55,9 @@
                             <p class="cantidad">x<%=lp.getCantidad()%></p>
                         </div>
                         <%} %>
+                        <%} %>
                     </div>
-                    <%} %>
+                    
                    <p class="total">Total: $<span class="numero"><%=p.getTotal()%></span></p>
                 </div>
                  
