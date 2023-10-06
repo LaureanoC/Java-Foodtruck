@@ -82,7 +82,7 @@ public void newPlato(Plato newPlato) {
 	}
 ////////////////////////////////////////////////////////////////////
 
-public void delPlato(Plato delPlato) {
+public void delPlato(Plato delPlato) throws SQLException {
 	
 	PreparedStatement stmt = null;
 	try {
@@ -93,6 +93,7 @@ public void delPlato(Plato delPlato) {
 
 	} catch (SQLException ex) {
 		ex.printStackTrace();
+		throw ex;
 	} finally {
 		try {
 			if (stmt != null) {

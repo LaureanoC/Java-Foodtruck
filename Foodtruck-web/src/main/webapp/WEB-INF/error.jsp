@@ -4,10 +4,23 @@
 <html>
 <head>
 <%String mensaje = (String) request.getAttribute("mensaje"); %>
+<%String servlet = (String) request.getAttribute("servlet"); %>
 <meta charset="UTF-8">
-<title>ERROR</title>
+<title>Foodtruck</title>
+ <link rel="stylesheet" href="style/reset.css">
+<link rel="stylesheet" href="style/error.css">
+<link rel="stylesheet" href="style/header.css">
 </head>
 <body>
-<p><%=mensaje %></p>
+<jsp:include page="header.jsp"/>
+<main>
+	<div class="container">
+	<p class="error"><%=mensaje %></p>
+	
+	<a href="<%=servlet%>" class="button">Volver</a>
+	</div>
+	
+</main>
+
 </body>
 </html>
