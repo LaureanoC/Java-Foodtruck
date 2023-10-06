@@ -41,16 +41,29 @@ public class EditPlato extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
+		try {
 		int id = Integer.parseInt(request.getParameter("id"));
+		
+		System.out.println(id);
 		
 		Plato plato = new Plato();
 		plato.setId(id);
 		
 		PlatoDAO pdao = new PlatoDAO();
 		plato = pdao.getPlato(plato);
+		if(request.getParameter("mensaje") == null) {
+			request.setAttribute("mensaje", " ");
+		}else {
+			request.setAttribute("mensaje", "Complete los datos correctamente");
+		}
 		
 		request.setAttribute("plato", plato);
 		request.getRequestDispatcher("WEB-INF/editPlato.jsp").forward(request, response);
+		}
+		catch(Exception e) {
+			request.setAttribute("mensaje", e.getMessage());
+			request.getRequestDispatcher("WEB-INF/error.jsp").forward(request, response);
+		}
 	}
 
 	/**
@@ -58,17 +71,27 @@ public class EditPlato extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
+		PlatoDAO pdao = new PlatoDAO();
+		Plato plato = new Plato();
+		try {
+			
 		int id = Integer.parseInt(request.getParameter("id"));
+		plato.setId(id);
+		
 		String nombre = request.getParameter("nombre");
 		Float precio = Float.parseFloat(request.getParameter("precio"));
 		String descripcion = request.getParameter("descripcion");
+	
 		
-		Plato plato = new Plato();
 		
 		plato.setDescripcion(descripcion);
-		plato.setId(id);
 		plato.setNombre(nombre);
 		plato.setPrecio(precio);
+		
+		
+		if(nombre.equals("") | descripcion.equals("") | precio == null) {
+			throw new IllegalArgumentException();
+		}
 		
 		String pathFiles = request.getServletContext().getRealPath("") + File.separator + "img";
 		File uploads = new File(pathFiles);
@@ -85,10 +108,19 @@ public class EditPlato extends HttpServlet {
 			plato.setFoto(photo);
 		}
 		
-		PlatoDAO pdao = new PlatoDAO();
+		
 		pdao.updatePlato(plato);
 		response.sendRedirect("listadoplato");
-
+		
+		}catch (IllegalArgumentException e) {
+			
+			response.sendRedirect("editplato?id=" + plato.getId()+"&mensaje=true");
+			
+		} 
+		catch(Exception e) {
+			request.setAttribute("mensaje", "Un error ha ocurrido");
+			request.getRequestDispatcher("WEB-INF/error.jsp").forward(request, response);
+		}
 
 		
 	}

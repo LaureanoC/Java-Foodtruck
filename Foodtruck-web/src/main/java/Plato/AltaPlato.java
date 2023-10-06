@@ -28,7 +28,6 @@ import entities.Plato;
 @MultipartConfig
 public class AltaPlato extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	private static final String UPLOAD_DIR = "img";
 	private String[] extens = {".ico", ".png", ".jpg", ".jpeg"};
     /**
      * @see HttpServlet#HttpServlet()
@@ -43,6 +42,7 @@ public class AltaPlato extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
+		request.setAttribute("mensaje", " ");
 		request.getRequestDispatcher("WEB-INF/altaPlato.jsp").forward(request, response);
 		
 	}
@@ -52,7 +52,8 @@ public class AltaPlato extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-
+		try {
+			
 		String nombre = request.getParameter("nombre");
 		float precio = Float.parseFloat(request.getParameter("precio"));
 		String descripcion = request.getParameter("descripcion");
@@ -77,8 +78,16 @@ public class AltaPlato extends HttpServlet {
 		
 		
 		PlatoDAO pdao = new PlatoDAO();
-		
 		pdao.newPlato(p);
+			
+		} catch (IllegalArgumentException e) {
+			request.setAttribute("mensaje", "Complete los datos correctamente");
+			request.getRequestDispatcher("WEB-INF/altaPlato.jsp").forward(request, response);
+		} catch (Exception e) {
+			request.setAttribute("mensaje", "Un error ha ocurrido");
+			request.getRequestDispatcher("WEB-INF/error.jsp").forward(request, response);
+		}
+		
 		
 		response.sendRedirect("listadoplato");
 		

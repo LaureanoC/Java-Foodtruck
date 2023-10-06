@@ -31,10 +31,16 @@ public class ListadoPlato extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+		try {
 		PlatoDAO listadoPlato = new PlatoDAO();
 		LinkedList<Plato> platos = listadoPlato.getAll();
 		request.setAttribute("listadoPlato", platos);
 		request.getRequestDispatcher("WEB-INF/listadoPlatos.jsp").forward(request, response);
+		} catch(Exception e) {
+			request.setAttribute("mensaje", "Un error ha ocurrido");
+			request.getRequestDispatcher("WEB-INF/error.jsp").forward(request, response);
+		}
 		
 	}
 

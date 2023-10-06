@@ -170,11 +170,12 @@ public class PedidoDAO {
 			
 			
 			
-			stmt.executeUpdate();
+			stmt.executeUpdate(); // Se activa un trigger que inicializa la fecha y hora en la db
 			keyRS= stmt.getGeneratedKeys();
 			
 			if(keyRS != null && keyRS.next()) {
-				p.setId(keyRS.getInt(1));
+				p.setId(keyRS.getInt(1)); //
+				
 			}
 			
 			

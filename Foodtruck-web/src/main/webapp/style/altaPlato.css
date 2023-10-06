@@ -102,3 +102,8 @@ select:hover{
     cursor: pointer;
 }
 
+.error {
+	color:darkred;
+	font-size: 0.7rem;
+}
+

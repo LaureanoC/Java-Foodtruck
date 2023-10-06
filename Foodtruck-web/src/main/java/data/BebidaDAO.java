@@ -59,19 +59,13 @@ public class BebidaDAO {
 			
 			
 			stmt = DbConnector.getInstancia().getConn()
-			.prepareStatement("insert into bebida (precioBebida, nombreBebida, litrosBebida, imagen)" + "values(?,?,?,?)",
-					Statement.RETURN_GENERATED_KEYS);
+			.prepareStatement("insert into bebida (precioBebida, nombreBebida, litrosBebida, imagen)" + "values(?,?,?,?)");
 			
 			stmt.setFloat(1, newBebida.getPrecio());
 			stmt.setString(2, newBebida.getNombre());
 			stmt.setFloat(3, newBebida.getLitros());
 			stmt.setString(4, newBebida.getFoto());
 			stmt.executeUpdate();
-			keyRS= stmt.getGeneratedKeys();
-			
-			if(keyRS != null && keyRS.next()) {
-				newBebida.setId(keyRS.getInt(1));
-			}
 			
 		} catch (SQLException e) {
 			e.printStackTrace();

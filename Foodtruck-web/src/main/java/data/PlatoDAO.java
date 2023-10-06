@@ -58,19 +58,14 @@ public void newPlato(Plato newPlato) {
 			
 			
 			stmt = DbConnector.getInstancia().getConn()
-			.prepareStatement("insert into plato (nombrePlato, precioPlato, descripcion, imagen)" + "values(?,?,?,?)",
-					Statement.RETURN_GENERATED_KEYS);
+			.prepareStatement("insert into plato (nombrePlato, precioPlato, descripcion, imagen)" + "values(?,?,?,?)");
 			
 			stmt.setString(1, newPlato.getNombre());
 			stmt.setFloat(2, newPlato.getPrecio());
 			stmt.setString(3, newPlato.getDescripcion());
 			stmt.setString(4, newPlato.getFoto());
 			stmt.executeUpdate();
-			keyRS= stmt.getGeneratedKeys();
 			
-			if(keyRS != null && keyRS.next()) {
-				newPlato.setId(keyRS.getInt(1));
-			}
 			
 		} catch (SQLException e) {
 			e.printStackTrace();

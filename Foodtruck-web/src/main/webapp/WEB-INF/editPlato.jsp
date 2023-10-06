@@ -10,7 +10,7 @@
     <title>Foodtruck</title>
     
     <% Plato plato = (Plato) request.getAttribute("plato");%>
-    
+    <% String mensaje = (String) request.getAttribute("mensaje"); %>
 </head>
 <body>
     <jsp:include page="header.jsp"/>
@@ -39,7 +39,7 @@
                     <label>Imagen</label>
                     <input name="imagen" type="file" value="<%=plato.getFoto()%>">
                 </div>
-               
+               	<p class="error"><%=mensaje%></p>
                  <button class="button" type="submit">Editar</button>
                </div>
         </form>

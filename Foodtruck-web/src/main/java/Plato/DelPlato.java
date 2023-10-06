@@ -6,7 +6,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
+import java.sql.SQLException;
 import data.PlatoDAO;
 import entities.Plato;
 
@@ -30,7 +30,8 @@ public class DelPlato extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		
+	
+
 		int id = Integer.parseInt(request.getParameter("id"));
 		Plato platoBorrar = new Plato();
 		platoBorrar.setId(id);
