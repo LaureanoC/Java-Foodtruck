@@ -63,6 +63,9 @@ public class AltaPlato extends HttpServlet {
 		String pathFiles = request.getServletContext().getRealPath("") + File.separator + "img";;
 		File uploads = new File(pathFiles);
 		
+		if(nombre.equals("") | descripcion.equals("") | precio == 0) {
+			throw new IllegalArgumentException();
+		}
 		
 		Part part = request.getPart("imagen");
 		
@@ -106,7 +109,7 @@ private String saveFile(Part part, File pathUploads) {
 			
 			Path path = Paths.get(part.getSubmittedFileName());
 			Random random = new Random();
-			fileName = (random.nextInt(1000) + 1) + path.getFileName().toString();
+			fileName = random.nextInt(1000) + path.getFileName().toString();
 			
 			InputStream input = part.getInputStream();
 			
