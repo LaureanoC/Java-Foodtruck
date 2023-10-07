@@ -1,6 +1,7 @@
 package Bebida;
 
 import java.io.IOException;
+import java.sql.SQLIntegrityConstraintViolationException;
 import java.util.LinkedList;
 
 import javax.servlet.ServletException;
@@ -31,17 +32,31 @@ public class DeleteBebida extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		int id = Integer.parseInt(request.getParameter("id"));
 		
-		Bebida be = new Bebida();
-		be.setId(id);
-		BebidaDAO bdao = new BebidaDAO();
+		try {
+			int id = Integer.parseInt(request.getParameter("id"));
+			
+			Bebida be = new Bebida();
+			be.setId(id);
+			BebidaDAO bdao = new BebidaDAO();
+			
+			bdao.delteBebida(be);
+			LinkedList<Bebida> bebidas = bdao.getAll();
+			request.setAttribute("listadoBebida", bebidas);
+			
+			request.getRequestDispatcher("WEB-INF/listadoBebida.jsp").forward(request, response);
+			
+		} catch (SQLIntegrityConstraintViolationException e) {
+			request.setAttribute("mensaje", "No se puede eliminar una bebida con un pedido asociado.");
+			request.setAttribute("servlet", "listadobebida");
+			request.getRequestDispatcher("WEB-INF/error.jsp").forward(request, response);
+
+		} catch (Exception e) {
+			request.setAttribute("mensaje", "Ha ocurrido un error.");
+			request.setAttribute("servlet", "listadobebida");
+			request.getRequestDispatcher("WEB-INF/error.jsp").forward(request, response);
+		}
 		
-		bdao.delteBebida(be);
-		LinkedList<Bebida> bebidas = bdao.getAll();
-		request.setAttribute("listadoBebida", bebidas);
-		
-		request.getRequestDispatcher("WEB-INF/listadoBebida.jsp").forward(request, response);
 		
 	}
 	/**

@@ -9,7 +9,7 @@ import entities.*;
 
 public class BebidaDAO {
 	
-	public LinkedList<Bebida> getAll(){
+	public LinkedList<Bebida> getAll() throws SQLException{
 		Statement stmt=null;
 		ResultSet rs=null;
 		LinkedList<Bebida> bebidas= new LinkedList<>();	
@@ -31,7 +31,7 @@ public class BebidaDAO {
 			}
 			
 		} catch (SQLException e) {
-			e.printStackTrace();
+			throw e;
 			
 		} finally {
 			try {
@@ -39,7 +39,7 @@ public class BebidaDAO {
 				if(stmt!=null) {stmt.close();}
 				DbConnector.getInstancia().releaseConn();
 			} catch (SQLException e) {
-				e.printStackTrace();
+				throw e;
 			}
 		}
 		
@@ -50,7 +50,7 @@ public class BebidaDAO {
 	//------------------------------------------------
 	//agregar
 	
-	public void newBebida(Bebida newBebida) {
+	public void newBebida(Bebida newBebida) throws SQLException {
 		
 		ResultSet keyRS=null;
 		PreparedStatement stmt=null;
@@ -68,7 +68,7 @@ public class BebidaDAO {
 			stmt.executeUpdate();
 			
 		} catch (SQLException e) {
-			e.printStackTrace();
+			throw e;
 		} finally {
 			try {
 				if (stmt != null) {
@@ -76,12 +76,12 @@ public class BebidaDAO {
 				}
 				DbConnector.getInstancia().releaseConn();
 			} catch (SQLException e) {
-				e.printStackTrace();
+				throw e;
 			}
 		}
 	}
 	
-	public void delteBebida(Bebida delBeb) {
+	public void delteBebida(Bebida delBeb) throws SQLException {
 		
 		PreparedStatement stmt = null;
 		try {
@@ -91,7 +91,7 @@ public class BebidaDAO {
 			stmt.executeUpdate();
 
 		} catch (SQLException ex) {
-			ex.printStackTrace();
+			throw ex;
 		} finally {
 			try {
 				if (stmt != null) {
@@ -99,14 +99,14 @@ public class BebidaDAO {
 				}
 				DbConnector.getInstancia().releaseConn();
 			} catch (SQLException ex) {
-				ex.printStackTrace();
+				throw ex;
 			}
 		}
 
 	}
 		
 	
-	public void updateBebida(Bebida updBebida) {
+	public void updateBebida(Bebida updBebida) throws SQLException {
 		PreparedStatement stmt = null;
 		try {
 			stmt = DbConnector.getInstancia().getConn()
@@ -120,7 +120,7 @@ public class BebidaDAO {
 		
 
 		} catch (SQLException ex) {
-			ex.printStackTrace();
+			throw ex;
 		} finally {
 			try {
 				if (stmt != null) {
@@ -128,7 +128,7 @@ public class BebidaDAO {
 				}
 				DbConnector.getInstancia().releaseConn();
 			} catch (SQLException ex) {
-				ex.printStackTrace();
+				throw ex;
 			}
 		}
 	
@@ -136,7 +136,7 @@ public class BebidaDAO {
 	
 	}
 	
-	public Bebida getBebida(Bebida b) {
+	public Bebida getBebida(Bebida b) throws SQLException {
 		PreparedStatement stmt = null;
 		ResultSet rs = null;
 		Bebida be = null;
@@ -158,7 +158,7 @@ public class BebidaDAO {
 			}
 
 		} catch (SQLException e) {
-			e.printStackTrace();
+			throw e;
 
 		} finally {
 			try {
@@ -170,14 +170,14 @@ public class BebidaDAO {
 				}
 				DbConnector.getInstancia().releaseConn();
 			} catch (SQLException e) {
-				e.printStackTrace();
+				throw e;
 			}
 		}
 
 		return be;
 	}
 	
-	public void setBebidas(Pedido p) {
+	public void setBebidas(Pedido p) throws SQLException {
 		
 		PreparedStatement stmt=null;
 		ResultSet rs=null;
@@ -209,14 +209,14 @@ public class BebidaDAO {
 			}
 			
 		} catch (SQLException e) {
-			e.printStackTrace();
+			throw e;
 		}finally {
 			try {
 				if(rs!=null) {rs.close();}
 				if(stmt!=null) {stmt.close();}
 				DbConnector.getInstancia().releaseConn();
 			} catch (SQLException e) {
-				e.printStackTrace();
+				throw e;
 			}
 		}
 	}

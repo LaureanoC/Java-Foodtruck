@@ -10,6 +10,7 @@
     <title>Foodtruck</title>
     
     <% Bebida be1 = (Bebida) request.getAttribute("be1");%>
+     <% String mensaje = (String) request.getAttribute("mensaje"); %>
     
 </head>
 <body>
@@ -38,6 +39,7 @@
                     <label>Imagen</label>
                     <input name="imagen" type="file" value="<%=be1.getFoto()%>">
                 </div>
+                <p class="error"><%=mensaje%></p>
                  <button class="button" type="submit">Editar</button>
                </div>
                

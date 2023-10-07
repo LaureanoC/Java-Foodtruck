@@ -8,7 +8,7 @@ import entities.*;
 
 public class PlatoDAO {
 	///////////////////////////////////////////////////////////////////////////////
-	public LinkedList<Plato> getAll(){
+	public LinkedList<Plato> getAll() throws SQLException{
 		Statement stmt=null;
 		ResultSet rs=null;
 		LinkedList<Plato> platos= new LinkedList<>();	
@@ -32,7 +32,7 @@ public class PlatoDAO {
 			}
 			
 		} catch (SQLException e) {
-			e.printStackTrace();
+			throw e;
 			
 		} finally {
 			try {
@@ -49,9 +49,8 @@ public class PlatoDAO {
 	}
 	////////////////////////////////////////////////////
 	
-public void newPlato(Plato newPlato) {
+public void newPlato(Plato newPlato) throws SQLException {
 		
-		ResultSet keyRS=null;
 		PreparedStatement stmt=null;
 		
 		try {			
@@ -76,7 +75,7 @@ public void newPlato(Plato newPlato) {
 				}
 				DbConnector.getInstancia().releaseConn();
 			} catch (SQLException e) {
-				e.printStackTrace();
+				throw e;
 			}
 		}
 	}
@@ -101,7 +100,7 @@ public void delPlato(Plato delPlato) throws SQLException {
 			}
 			DbConnector.getInstancia().releaseConn();
 		} catch (SQLException ex) {
-			ex.printStackTrace();
+			throw ex;
 		}
 	}
 
@@ -109,7 +108,7 @@ public void delPlato(Plato delPlato) throws SQLException {
 
 ////////////////////
 
-public void updatePlato(Plato updPlato) {
+public void updatePlato(Plato updPlato) throws SQLException {
 	PreparedStatement stmt = null;
 	try {
 		stmt = DbConnector.getInstancia().getConn()
@@ -131,7 +130,7 @@ public void updatePlato(Plato updPlato) {
 			}
 			DbConnector.getInstancia().releaseConn();
 		} catch (SQLException ex) {
-			ex.printStackTrace();
+			throw ex;
 		}
 	}
  }
@@ -139,7 +138,7 @@ public void updatePlato(Plato updPlato) {
 	//////////////////////////////////////
 
 
-public Plato getPlato(Plato p) {
+public Plato getPlato(Plato p) throws SQLException {
 	PreparedStatement stmt = null;
 	ResultSet rs = null;
 	Plato pl = null;
@@ -174,7 +173,7 @@ public Plato getPlato(Plato p) {
 			}
 			DbConnector.getInstancia().releaseConn();
 		} catch (SQLException e) {
-			e.printStackTrace();
+			throw e;
 		}
 	}
 
@@ -182,7 +181,7 @@ public Plato getPlato(Plato p) {
 }
 
 
-public void setPlatos(Pedido p) {
+public void setPlatos(Pedido p) throws SQLException {
 	
 	PreparedStatement stmt=null;
 	ResultSet rs=null;
@@ -213,7 +212,7 @@ public void setPlatos(Pedido p) {
 		}
 		
 	} catch (SQLException e) {
-		e.printStackTrace();
+		throw e;
 	}finally {
 		try {
 			if(rs!=null) {rs.close();}

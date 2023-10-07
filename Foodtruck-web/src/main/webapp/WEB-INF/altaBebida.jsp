@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="style/header.css">
     <link rel="stylesheet" href="style/altaBebida.css">
     <title>Foodtruck</title>
+<%String mensaje = (String) request.getAttribute("mensaje"); %>
 </head>
 <body>
  <jsp:include page="header.jsp"/>
@@ -35,6 +36,7 @@
                     <label>Imagen</label>
                     <input name="imagen" type="file">
                 </div>
+                <p class="error"><%=mensaje%></p>
                  <button class="button" type="submit">Agregar</button>
                </div>
               </div>

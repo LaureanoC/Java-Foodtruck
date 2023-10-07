@@ -6,6 +6,7 @@ import java.io.InputStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.sql.SQLException;
 import java.util.Random;
 
 import javax.servlet.ServletException;
@@ -41,6 +42,7 @@ public class AltaBebida extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		request.setAttribute("mensaje", "  ");
 		request.getRequestDispatcher("WEB-INF/altaBebida.jsp").forward(request, response);
 		
 	}
@@ -49,6 +51,10 @@ public class AltaBebida extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+	try {
+		
+		
 		
 		float precio = Float.parseFloat(request.getParameter("precio"));
 		String nombre = request.getParameter("nombre");
@@ -59,6 +65,9 @@ protected void doPost(HttpServletRequest request, HttpServletResponse response) 
 		String pathFiles = request.getServletContext().getRealPath("") + File.separator + "img";
 		File uploads = new File(pathFiles);
 		
+		if (nombre.equals("") | litros == 0 | precio == 0) {
+			throw new IllegalArgumentException();
+		}
 		
 		Part part = request.getPart("imagen");
 		
@@ -78,6 +87,16 @@ protected void doPost(HttpServletRequest request, HttpServletResponse response) 
 		bdao.newBebida(b);
 		
 		response.sendRedirect("listadobebida");
+	}
+	catch (IllegalArgumentException e) {
+		request.setAttribute("mensaje", "Complete los datos correctamente");
+		request.getRequestDispatcher("WEB-INF/altaBebida.jsp").forward(request, response);
+	} catch (Exception e) {
+		request.setAttribute("mensaje", "Ha ocurrido un error.");
+		request.setAttribute("servlet", "altabebida");
+		request.getRequestDispatcher("WEB-INF/error.jsp").forward(request, response);
+	}
+		
 		
 	}
     
@@ -90,7 +109,7 @@ protected void doPost(HttpServletRequest request, HttpServletResponse response) 
 			
 			Path path = Paths.get(part.getSubmittedFileName());
 			Random random = new Random();
-			fileName = (random.nextInt(1000) + 1) + path.getFileName().toString();
+			fileName = random.nextInt(1000) + path.getFileName().toString();
 			
 			InputStream input = part.getInputStream();
 			

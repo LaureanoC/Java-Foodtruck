@@ -46,8 +46,6 @@ public class EditPlato extends HttpServlet {
 		try {
 			int id = Integer.parseInt(request.getParameter("id"));
 
-			System.out.println(id);
-
 			Plato plato = new Plato();
 			plato.setId(id);
 
@@ -62,6 +60,7 @@ public class EditPlato extends HttpServlet {
 
 			request.setAttribute("plato", plato);
 			request.getRequestDispatcher("WEB-INF/editPlato.jsp").forward(request, response);
+			
 		} catch (Exception e) {
 			request.setAttribute("mensaje", "Ha ocurrido un error.");
 			request.setAttribute("servlet", "listadoplato");

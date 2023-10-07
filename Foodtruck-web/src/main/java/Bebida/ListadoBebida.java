@@ -41,11 +41,18 @@ public class ListadoBebida extends HttpServlet {
     
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
     	
-    	//Listamos bebida
-		BebidaDAO listadoBebida = new BebidaDAO();
-		LinkedList<Bebida> bebidas = listadoBebida.getAll();
-		request.setAttribute("listadoBebida", bebidas);
-		request.getRequestDispatcher("WEB-INF/listadoBebida.jsp").forward(request, response);
+    	try {
+    		BebidaDAO listadoBebida = new BebidaDAO();
+    		LinkedList<Bebida> bebidas = listadoBebida.getAll();
+    		request.setAttribute("listadoBebida", bebidas);
+    		request.getRequestDispatcher("WEB-INF/listadoBebida.jsp").forward(request, response);
+    	}
+    	catch(Exception e) {
+    		request.setAttribute("mensaje", "Ha ocurrido un error.");
+			request.setAttribute("servlet", "menubebidaplato");
+			request.getRequestDispatcher("WEB-INF/error.jsp").forward(request, response);
+    	}
+		
 		
 	}
     
