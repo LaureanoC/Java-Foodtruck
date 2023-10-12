@@ -7,7 +7,7 @@ import entities.Cliente;
 
 public class ClienteDAO {
 
-	public LinkedList<Cliente> getAll() {
+	public LinkedList<Cliente> getAll() throws SQLException{
 		Statement stmt = null;
 		ResultSet rs = null;
 		LinkedList<Cliente> clientes = new LinkedList<>();
@@ -31,7 +31,7 @@ public class ClienteDAO {
 			}
 
 		} catch (SQLException e) {
-			e.printStackTrace();
+			throw e;
 
 		} finally {
 			try {
@@ -43,14 +43,14 @@ public class ClienteDAO {
 				}
 				DbConnector.getInstancia().releaseConn();
 			} catch (SQLException e) {
-				e.printStackTrace();
+				throw e;
 			}
 		}
 
 		return clientes;
 	}
 
-	public Cliente getCliente(Cliente cli) {
+	public Cliente getCliente(Cliente cli)  throws SQLException {
 		PreparedStatement stmt = null;
 		ResultSet rs = null;
 		Cliente c = null;
@@ -70,7 +70,7 @@ public class ClienteDAO {
 			}
 
 		} catch (SQLException e) {
-			e.printStackTrace();
+			throw e;
 
 		} finally {
 			try {
@@ -82,14 +82,14 @@ public class ClienteDAO {
 				}
 				DbConnector.getInstancia().releaseConn();
 			} catch (SQLException e) {
-				e.printStackTrace();
+				throw e;
 			}
 		}
 
 		return c;
 	}
 
-	public void newCliente(Cliente c) {
+	public void newCliente(Cliente c) throws SQLException{
 		PreparedStatement stmt = null;
 		try {
 			stmt = DbConnector.getInstancia().getConn()
@@ -102,7 +102,7 @@ public class ClienteDAO {
 			stmt.executeUpdate();
 
 		} catch (SQLException e) {
-			e.printStackTrace();
+			throw e;
 		} finally {
 			try {
 				if (stmt != null) {
@@ -110,12 +110,12 @@ public class ClienteDAO {
 				}
 				DbConnector.getInstancia().releaseConn();
 			} catch (SQLException e) {
-				e.printStackTrace();
+				throw e;
 			}
 		}
 	}
 
-	public void updateCliente(Cliente c) {
+	public void updateCliente(Cliente c) throws SQLException{
 
 		PreparedStatement stmt = null;
 		try {
@@ -130,7 +130,7 @@ public class ClienteDAO {
 			stmt.executeUpdate();
 
 		} catch (SQLException e) {
-			e.printStackTrace();
+			throw e;
 		} finally {
 			try {
 				if (stmt != null) {
@@ -138,13 +138,13 @@ public class ClienteDAO {
 				}
 				DbConnector.getInstancia().releaseConn();
 			} catch (SQLException e) {
-				e.printStackTrace();
+				throw e;
 			}
 		}
 
 	}
 
-	public void deleteCliente(Cliente c) {
+	public void deleteCliente(Cliente c)  throws SQLException{
 
 		PreparedStatement stmt = null;
 		try {
@@ -154,7 +154,7 @@ public class ClienteDAO {
 			stmt.executeUpdate();
 
 		} catch (SQLException e) {
-			e.printStackTrace();
+			throw e;
 		} finally {
 			try {
 				if (stmt != null) {
@@ -162,7 +162,7 @@ public class ClienteDAO {
 				}
 				DbConnector.getInstancia().releaseConn();
 			} catch (SQLException e) {
-				e.printStackTrace();
+				throw e;
 			}
 		}
 

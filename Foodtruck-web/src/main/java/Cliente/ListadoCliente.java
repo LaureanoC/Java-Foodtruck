@@ -33,10 +33,26 @@ public class ListadoCliente extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
+		
+		try {
+			
+			
 		ClienteDAO cdao = new ClienteDAO();
 		LinkedList<Cliente> clientes = cdao.getAll();
+		
+		if (request.getParameter("mensaje") == null) {
+			request.setAttribute("mensaje", " ");
+		} else {
+			request.setAttribute("mensaje", "Complete los datos correctamente.");
+		}
 		request.setAttribute("listaclientes", clientes);
 		request.getRequestDispatcher("WEB-INF/listadoClientes.jsp").forward(request, response);
+		}
+		catch(Exception e){
+			request.setAttribute("mensaje", "Ha ocurrido un error.");
+			request.setAttribute("servlet", "listadoclientes");
+			request.getRequestDispatcher("WEB-INF/error.jsp").forward(request, response);
+		}
 		
 	}
 

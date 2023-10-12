@@ -11,7 +11,7 @@ import entities.Rol;
 
 public class EmpleadoDAO {
 	
-	public LinkedList<Empleado> getAll() {
+	public LinkedList<Empleado> getAll() throws SQLException{
 		Statement stmt = null;
 		ResultSet rs = null;
 		LinkedList<Empleado> empleados = new LinkedList<>();
@@ -40,8 +40,7 @@ public class EmpleadoDAO {
 			}
 
 		} catch (SQLException e) {
-			e.printStackTrace();
-
+				throw e;
 		} finally {
 			try {
 				if (rs != null) {
@@ -52,7 +51,7 @@ public class EmpleadoDAO {
 				}
 				DbConnector.getInstancia().releaseConn();
 			} catch (SQLException e) {
-				e.printStackTrace();
+				throw e;
 			}
 		}
 
@@ -60,7 +59,7 @@ public class EmpleadoDAO {
 
 	}
 	
-	public Empleado getEmpleado(Empleado emp) {
+	public Empleado getEmpleado(Empleado emp) throws SQLException{
 		PreparedStatement stmt = null;
 		ResultSet rs = null;
 		Empleado e = null;
@@ -83,8 +82,8 @@ public class EmpleadoDAO {
 				rdao.setRoles(e);
 			}
 
-		} catch (SQLException ex) {
-			ex.printStackTrace();
+		} catch (SQLException e1) {
+			throw e1;
 
 		} finally {
 			try {
@@ -95,15 +94,15 @@ public class EmpleadoDAO {
 					stmt.close();
 				}
 				DbConnector.getInstancia().releaseConn();
-			} catch (SQLException ex) {
-				ex.printStackTrace();
+			} catch (SQLException e1) {
+				throw e1;
 			}
 		}
 		
 		return e;
 	}
 	
-	public void newEmpleado(Empleado e) {
+	public void newEmpleado(Empleado e) throws SQLException{
 		PreparedStatement stmt = null;
 		try {
 			stmt = DbConnector.getInstancia().getConn()
@@ -128,21 +127,21 @@ public class EmpleadoDAO {
 			}
 			
 
-		} catch (SQLException ex) {
-			ex.printStackTrace();
+		} catch (SQLException e1) {
+			throw e1;
 		} finally {
 			try {
 				if (stmt != null) {
 					stmt.close();
 				}
 				DbConnector.getInstancia().releaseConn();
-			} catch (SQLException ex) {
-				ex.printStackTrace();
+			} catch (SQLException e1) {
+				throw e1;
 			}
 		}
 	}
 	
-	public void updateEmpleado(Empleado e) {
+	public void updateEmpleado(Empleado e) throws SQLException{
 
 		PreparedStatement stmt = null;
 		RolDAO rdao = new RolDAO();
@@ -172,22 +171,22 @@ public class EmpleadoDAO {
 			}
 			
 
-		} catch (SQLException ex) {
-			ex.printStackTrace();
+		} catch (SQLException e1) {
+			throw e1;
 		} finally {
 			try {
 				if (stmt != null) {
 					stmt.close();
 				}
 				DbConnector.getInstancia().releaseConn();
-			} catch (SQLException ex) {
-				ex.printStackTrace();
+			} catch (SQLException e1) {
+				throw e1;
 			}
 		}
 
 	}
 	
-	public void deleteEmpleado(Empleado e) {
+	public void deleteEmpleado(Empleado e) throws SQLException{
 
 		PreparedStatement stmt = null;
 		try {
@@ -196,22 +195,22 @@ public class EmpleadoDAO {
 			stmt.setString(1, e.getDni());
 			stmt.executeUpdate();
 
-		} catch (SQLException ex) {
-			ex.printStackTrace();
+		} catch (SQLException e1) {
+			throw e1;
 		} finally {
 			try {
 				if (stmt != null) {
 					stmt.close();
 				}
 				DbConnector.getInstancia().releaseConn();
-			} catch (SQLException ex) {
-				ex.printStackTrace();
+			} catch (SQLException e1) {
+				throw e1;
 			}
 		}
 
 	}
 	
-	public Empleado login(Empleado emp) {
+	public Empleado login(Empleado emp) throws SQLException{
 		PreparedStatement stmt = null;
 		ResultSet rs = null;
 		Empleado e = null;
@@ -231,8 +230,8 @@ public class EmpleadoDAO {
 				e.setTurno(rs.getString("turno"));
 			}
 
-		} catch (SQLException ex) {
-			ex.printStackTrace();
+		} catch (SQLException e1) {
+			throw e1;
 
 		} finally {
 			try {
@@ -243,23 +242,23 @@ public class EmpleadoDAO {
 					stmt.close();
 				}
 				DbConnector.getInstancia().releaseConn();
-			} catch (SQLException ex) {
-				ex.printStackTrace();
+			} catch (SQLException e1) {
+				throw e1;
 			}
 		}
 
 		return e;
 	}
 	
-	public void deshabilitarEmpleado(Empleado emp) {
+	public void deshabilitarEmpleado(Empleado emp) throws SQLException{
 		PreparedStatement stmt = null;
 		try {
 			stmt = DbConnector.getInstancia().getConn().prepareStatement("UPDATE empleado set habilitado=0 where dniEmpleado=?");
 			stmt.setString(1, emp.getDni());
 			stmt.executeUpdate();
 
-		} catch (SQLException ex) {
-			ex.printStackTrace();
+		} catch (SQLException e1) {
+			throw e1;
 
 		} finally {
 			try {
@@ -267,13 +266,13 @@ public class EmpleadoDAO {
 					stmt.close();
 				}
 				DbConnector.getInstancia().releaseConn();
-			} catch (SQLException ex) {
-				ex.printStackTrace();
+			} catch (SQLException e1) {
+				throw e1;
 			}
 		}
 	}
 	
-	public void habilitarEmpleado(Empleado emp) {
+	public void habilitarEmpleado(Empleado emp) throws SQLException{
 		PreparedStatement stmt = null;
 		
 		
@@ -282,8 +281,8 @@ public class EmpleadoDAO {
 			stmt.setString(1, emp.getDni());
 			stmt.executeUpdate();
 
-		} catch (SQLException ex) {
-			ex.printStackTrace();
+		} catch (SQLException e1) {
+			throw e1;
 
 		} finally {
 			try {
@@ -291,8 +290,8 @@ public class EmpleadoDAO {
 					stmt.close();
 				}
 				DbConnector.getInstancia().releaseConn();
-			} catch (SQLException ex) {
-				ex.printStackTrace();
+			} catch (SQLException e1) {
+				throw e1;
 			}
 		}
 	}

@@ -34,15 +34,23 @@ public class UpdateEmpleado extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String dni = request.getParameter("dni");
 		
+		try {
+		request.setAttribute("mensaje", "  ");
+		String dni = request.getParameter("dni");
 		EmpleadoDAO edao = new EmpleadoDAO();
 		Empleado e = new Empleado();
 		e.setDni(dni);
 		e = edao.getEmpleado(e);
 		request.setAttribute("emp", e);
-
 		request.getRequestDispatcher("WEB-INF/updateEmpleado.jsp").forward(request, response);
+		}
+		catch(Exception e) {
+			request.setAttribute("mensaje", "Ocurrio un error ");
+			request.setAttribute("servlet", "empleadoeditar");
+			request.getRequestDispatcher("WEB-INF/error.jsp").forward(request, response);
+
+		}
 		
 	}
 
@@ -50,13 +58,21 @@ public class UpdateEmpleado extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-			
-		EmpleadoDAO edao = new EmpleadoDAO();
+		
 		String dni = request.getParameter("dni");
+		EmpleadoDAO edao = new EmpleadoDAO();
+		try {
+		
+		
+		
 		String nom = request.getParameter("nombre");
 		String tur = request.getParameter("turno");
 		String pass = request.getParameter("password");
 		String rol = request.getParameter("rol");
+		
+		if(dni.equals("")||nom.equals("")||pass.equals("")||rol==null||tur==null) {
+			throw new IllegalArgumentException();
+		}
 		
 		Rol r = new Rol();
 		r.setDesc(rol);
@@ -74,5 +90,29 @@ public class UpdateEmpleado extends HttpServlet {
 		
 		request.getRequestDispatcher("WEB-INF/listadoEmpleados.jsp").forward(request, response);
 	}
+		catch(IllegalArgumentException e){
+			try {
+			Empleado e1 = new Empleado();
+			Empleado e2 = new Empleado();
+			e1.setDni(dni);
+			e2 =edao.getEmpleado(e1);
+			request.setAttribute("emp", e2);
+			request.setAttribute("mensaje", "Complete los datos correctamente.");
+			request.getRequestDispatcher("WEB-INF/updateEmpleado.jsp").forward(request, response);
+			}
+			catch(Exception en) {
+				request.setAttribute("mensaje", "Ocurrio un error ");
+				request.setAttribute("servlet", "empleadoeditar");
+				request.getRequestDispatcher("WEB-INF/error.jsp").forward(request, response);
+			}
+		}
+		catch(Exception e) {
+			request.setAttribute("mensaje", "Ocurrio un error ");
+			request.setAttribute("servlet", "empleadoeditar");
+			request.getRequestDispatcher("WEB-INF/error.jsp").forward(request, response);
+
+		}
+	}
+	
 
 }

@@ -31,20 +31,25 @@ public class AltaEmpleado extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
+		request.setAttribute("mensaje", "  ");
 		request.getRequestDispatcher("WEB-INF/altaEmpleado.jsp").forward(request, response);
-		
 	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		try {
+			//podriamos borrar ROL, ya que nunca lo usamos hablo de rol y empleadorol, ya está como atributo
 		String dni = request.getParameter("dni");
 		String nom = request.getParameter("nombre");
 		String tur = request.getParameter("turno");
 		String pass = request.getParameter("password");
 		String rol = request.getParameter("rol");
+		
+		if (dni.equals("")||nom.equals("")||tur.equals("")||pass.equals("")||rol==null) {
+			throw new IllegalArgumentException();
+		}
 		
 		Rol r = new Rol();
 		r.setDesc(rol);
@@ -59,5 +64,19 @@ public class AltaEmpleado extends HttpServlet {
 		
 		response.sendRedirect("listadoempleados");
 	}
+		
+		catch(IllegalArgumentException e){
+			request.setAttribute("mensaje", "Complete los datos correctamente");
+			request.getRequestDispatcher("WEB-INF/altaEmpleado.jsp").forward(request, response);
+		}
+		
+		catch(Exception e ) {
+			request.setAttribute("mensaje", "Ocurrio un error ");
+			request.setAttribute("servlet", "altaempleado");
+			request.getRequestDispatcher("WEB-INF/error.jsp").forward(request, response);
+
+		}
+	}
+	
 
 }

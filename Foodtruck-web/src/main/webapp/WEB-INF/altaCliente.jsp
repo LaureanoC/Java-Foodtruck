@@ -6,7 +6,7 @@
     <link rel="stylesheet" href="style/reset.css">
     <link rel="stylesheet" href="style/header.css">
     <link rel="stylesheet" href="style/altaCliente.css">
-    
+    <%String mensaje = (String) request.getAttribute("mensaje"); %>
 <title>Foodtruck</title>
 </head>
 <body>
@@ -28,6 +28,7 @@
                     <label>Dirección</label>
                     <input name="direccion">
                 </div>
+                 <p class="error"><%=mensaje%></p>
                 <button class="button" type="submit">Agregar</button>	
             </div>      
         </form>

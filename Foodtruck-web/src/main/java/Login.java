@@ -36,7 +36,7 @@ public class Login extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
+		/**
 		String dni = request.getParameter("dni");
 		String pass = request.getParameter("password");
 		
@@ -58,5 +58,6 @@ public class Login extends HttpServlet {
 		}
 		
 	}
-
+	*/
+	}
 }

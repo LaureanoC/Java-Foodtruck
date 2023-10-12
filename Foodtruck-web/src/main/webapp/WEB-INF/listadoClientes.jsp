@@ -13,6 +13,8 @@
 <title>Foodtruck</title>
 
 <%LinkedList<Cliente> lc = (LinkedList<Cliente>)request.getAttribute("listaclientes"); %>
+
+
 </head>
 <body>
 <jsp:include page="header.jsp"/>
@@ -20,6 +22,7 @@
 <div class="tabla">
 		<div class="tabla__container">
             <h1>Listado de Clientes</h1>
+          
             <table>
                 <thead>
                 <tr>
@@ -43,7 +46,11 @@
                 
                 </tbody>
             </table>
+             
             <a class="button" href="altacliente">Nuevo Cliente</a>
+        </div>
+        <div>
+        	
         </div>
 	</div>
 

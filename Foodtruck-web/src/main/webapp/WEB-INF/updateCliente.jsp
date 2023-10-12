@@ -15,12 +15,14 @@
     <title>Foodtruck</title>
     
     <% Cliente c = (Cliente) request.getAttribute("cli");%>
+    <% String mensaje = (String) request.getAttribute("mensaje"); %>
 </head>
 <body>
      <jsp:include page="header.jsp"/>
 
     <div class="form" >
-        <form action="clienteeditar?dni=<%=c.getDni()%>" method="post">
+    <p class="error"><%=mensaje%></p>
+        <form action="clienteeditar?id=<%=c.getDni()%>"  method="post">
             <div class="form__container">
                 <h1>Modificar Cliente</h1>
                 <div class="form__item">
@@ -35,13 +37,14 @@
                 <div class="form__item">
                     <label>Dirección</label>
                     <input name="direccion" type="text" value="<%=c.getDireccion()%>">
+                    
                 </div>
-                
+                 
                 <button class="button" type="submit">Modificar</button>	
             </div>      
         </form>
     </div>
-</div>
+
     
 </body>
 </html>

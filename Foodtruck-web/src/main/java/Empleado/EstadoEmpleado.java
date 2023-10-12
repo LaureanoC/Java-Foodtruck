@@ -31,7 +31,7 @@ public class EstadoEmpleado extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
+		try {
 		String dni = request.getParameter("dni");
 		
 		Empleado e = new Empleado();
@@ -51,6 +51,14 @@ public class EstadoEmpleado extends HttpServlet {
 		request.setAttribute("listaEmpleados", empleados);
 		
 		request.getRequestDispatcher("WEB-INF/listadoEmpleados.jsp").forward(request, response);
+		}
+		
+		catch(Exception e) {
+			request.setAttribute("mensaje", "Ocurrio un error ");
+			request.setAttribute("servlet", "empleadoestado");
+			request.getRequestDispatcher("WEB-INF/error.jsp").forward(request, response);
+
+		}
 		
 	}
 

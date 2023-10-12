@@ -15,6 +15,7 @@
     <title>Foodtruck</title>
     
     <% Empleado e = (Empleado) request.getAttribute("emp");%>
+    <% String mensaje = (String) request.getAttribute("mensaje"); %>
 </head>
 <body>
  <jsp:include page="header.jsp"/>
@@ -54,6 +55,7 @@
                     <label>Contraseña</label>
                     <input name="password">
                 </div>
+            	<div><p class="error"><%=mensaje%></p></div>
                 <button class="button" type="submit">Modificar</button>	
             </div>      
         </form>

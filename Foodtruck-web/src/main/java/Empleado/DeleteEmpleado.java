@@ -2,6 +2,7 @@ package Empleado;
 
 
 import java.io.IOException;
+import java.sql.SQLIntegrityConstraintViolationException;
 import java.util.LinkedList;
 
 import javax.servlet.ServletException;
@@ -33,6 +34,7 @@ public class DeleteEmpleado extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
+		try {
 		String dni = request.getParameter("dni");
 		
 		Empleado e = new Empleado();
@@ -44,7 +46,12 @@ public class DeleteEmpleado extends HttpServlet {
 		request.setAttribute("listaEmpleados", empleados);
 		
 		request.getRequestDispatcher("WEB-INF/listadoEmpleados.jsp").forward(request, response);
-		
+		}
+		catch (Exception e) {
+			request.setAttribute("mensaje", "Ah ocurrido un error");
+			request.setAttribute("servlet", "listadoempleados");
+			request.getRequestDispatcher("WEB-INF/error.jsp").forward(request, response);
+		}
 		
 	}
 

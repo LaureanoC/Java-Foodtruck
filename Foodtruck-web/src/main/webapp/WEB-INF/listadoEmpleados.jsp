@@ -16,6 +16,7 @@
     <title>Foodtruck</title>
     
     <%LinkedList<Empleado> le = (LinkedList<Empleado>)request.getAttribute("listaEmpleados");%>
+    
 </head>
 <body>
 <jsp:include page="header.jsp"/>
@@ -32,6 +33,7 @@
                     <th>Roles</th>
                     <th>Estado</th>
                     <th>Editar</th>
+                    <th>Borrar(Obsoleto)</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -44,11 +46,15 @@
                         <td><%= e.getRoles() %></td>
                         <td class="link"><a href="empleadoestado?dni=<%=e.getDni()%>"><%=(e.getHabilitado())?"<i class=\"fa-regular fa-circle-check\"></i>":"<i class=\"fa-regular fa-circle-xmark\"></i>" %></a></td>
                         <td class="link"><a href="empleadoeditar?dni=<%=e.getDni()%>"><i class="fa-solid fa-pencil"></i></a></td>
+                        <td class="link"><a href="empleadoborrar?dni=<%=e.getDni()%>"><i class="fa-solid fa-delete-left"></i></a></td>
                         
                     </tr>
                 <%} }%>
                 </tbody>
+           
             </table>
+            
+           
             <a class="button" href="altaempleado">Nuevo Empleado</a>
         </div>
 	</div>
@@ -66,6 +72,7 @@
                     <th>Roles</th>
                     <th>Estado</th>
                     <th>Editar</th>
+                    <th>Borrar</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -80,6 +87,7 @@
                         <td><%= e.getRoles() %></td>
                         <td class="link"><a href="empleadoestado?dni=<%=e.getDni()%>"><%=(e.getHabilitado())?"<i class=\"fa-regular fa-circle-check\"></i>":"<i class=\"fa-regular fa-circle-xmark\"></i>" %></a></td>
                         <td class="link"><a href="empleadoeditar?dni=<%=e.getDni()%>"><i class="fa-solid fa-pencil"></i></a></td>
+                         <td class="link"><a href="empleadoborrar?dni=<%=e.getDni()%>"><i class="fa-solid fa-pencil"></i></a></td>
                         
                     </tr>
                 <%} }%>

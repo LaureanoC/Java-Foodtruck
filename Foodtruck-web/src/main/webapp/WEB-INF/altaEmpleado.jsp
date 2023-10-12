@@ -6,7 +6,7 @@
     <link rel="stylesheet" href="style/reset.css">
     <link rel="stylesheet" href="style/header.css">
     <link rel="stylesheet" href="style/altaEmpleado.css">
-    
+     <%String mensaje = (String) request.getAttribute("mensaje"); %>
     <title>Foodtruck</title>
 </head>
 <body>
@@ -44,6 +44,7 @@
                     <input name="password">
                 </div>
                 <button class="button" type="submit">Agregar</button>	
+                <div><p class="error"><%=mensaje%></p></div>
             </div>      
         </form>
     </div>

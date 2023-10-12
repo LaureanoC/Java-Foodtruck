@@ -35,12 +35,21 @@ public class ListadoEmpleado extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
+		try {
+		request.setAttribute("mensaje", "  ");
 		EmpleadoDAO edao = new EmpleadoDAO();
 		LinkedList<Empleado> empleados = edao.getAll();
 		
+		request.setAttribute("mensaje", "  ");
 		request.setAttribute("listaEmpleados", empleados);
 		
 		request.getRequestDispatcher("WEB-INF/listadoEmpleados.jsp").forward(request, response);
+		}
+		catch(Exception e) {
+			request.setAttribute("mensaje", "Ha ocurrido un error.");
+			request.setAttribute("servlet", "listadoempleados");
+			request.getRequestDispatcher("WEB-INF/error.jsp").forward(request, response);
+		}
 		
 	}
 

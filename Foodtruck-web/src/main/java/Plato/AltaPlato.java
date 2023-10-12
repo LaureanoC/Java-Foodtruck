@@ -44,10 +44,8 @@ public class AltaPlato extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-
-		request.setAttribute("mensaje", " ");
+		request.setAttribute("mensaje", "  ");
 		request.getRequestDispatcher("WEB-INF/altaPlato.jsp").forward(request, response);
-
 	}
 
 	/**
