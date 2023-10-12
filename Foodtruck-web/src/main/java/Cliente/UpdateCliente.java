@@ -1,6 +1,7 @@
 package Cliente;
 
 import java.io.IOException;
+import java.sql.SQLIntegrityConstraintViolationException;
 import java.util.LinkedList;
 
 import javax.servlet.ServletException;
@@ -37,12 +38,13 @@ public class UpdateCliente extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
+		Cliente c = new Cliente();
 		try {
 		//me traigo el id
 		String dni = request.getParameter("dni");
 		
 		ClienteDAO cdao = new ClienteDAO();
-		Cliente c = new Cliente();
+		
 		c.setDni(dni);
 		c = cdao.getCliente(c);
 		
@@ -61,8 +63,8 @@ public class UpdateCliente extends HttpServlet {
 	
 		
 	 catch (Exception e) {
-		request.setAttribute("mensaje", "Ah ocurrido un error.");
-		request.setAttribute("servlet", "listadoCliente");
+		request.setAttribute("mensaje", "Ha ocurrido un error.");
+		request.setAttribute("servlet", "listadoclientes");
 		request.getRequestDispatcher("WEB-INF/error.jsp").forward(request, response);
 	}
 		
@@ -75,7 +77,7 @@ public class UpdateCliente extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		
+		Cliente c = new Cliente();
 		String dni = request.getParameter("dni");
 		ClienteDAO cdao = new ClienteDAO();
 		try {
@@ -88,7 +90,7 @@ public class UpdateCliente extends HttpServlet {
 			throw new IllegalArgumentException();
 		}
 		
-		Cliente c = new Cliente(dni,nom,dir);
+		c = new Cliente(dni,nom,dir);
 	
 		cdao.updateCliente(c);
 		
@@ -100,7 +102,7 @@ public class UpdateCliente extends HttpServlet {
 		
 		catch(IllegalArgumentException e ){	
 			try {
-			Cliente c  = new Cliente();
+				
 			c.setDni(dni);
 			c = cdao.getCliente(c);
 			request.setAttribute("cli", c);
@@ -109,7 +111,7 @@ public class UpdateCliente extends HttpServlet {
 			}
 			catch(Exception en) {
 				request.setAttribute("mensaje", "Ha ocurrido un error.");
-				request.setAttribute("servlet", "clienteeditar");
+				request.setAttribute("servlet", "clienteeditar?dni=" + c.getDni());
 				request.getRequestDispatcher("WEB-INF/error.jsp").forward(request, response);
 			}
 			
@@ -117,7 +119,7 @@ public class UpdateCliente extends HttpServlet {
 		
 		catch(Exception e){
 			request.setAttribute("mensaje", "Ha ocurrido un error.");
-			request.setAttribute("servlet", "clienteeditar");
+			request.setAttribute("servlet", "clienteeditar?dni="+  c.getDni());
 			request.getRequestDispatcher("WEB-INF/error.jsp").forward(request, response);
 	
 	

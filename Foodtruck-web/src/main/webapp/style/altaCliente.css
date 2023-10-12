@@ -79,3 +79,8 @@ input:focus{
     transition: 1s;
     cursor: pointer;
 }
+
+.error {
+	color:darkred;
+	font-size: 0.7rem;
+}

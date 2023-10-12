@@ -48,7 +48,7 @@ public class DeleteEmpleado extends HttpServlet {
 		request.getRequestDispatcher("WEB-INF/listadoEmpleados.jsp").forward(request, response);
 		}
 		catch (Exception e) {
-			request.setAttribute("mensaje", "Ah ocurrido un error");
+			request.setAttribute("mensaje", "Ha ocurrido un error.");
 			request.setAttribute("servlet", "listadoempleados");
 			request.getRequestDispatcher("WEB-INF/error.jsp").forward(request, response);
 		}

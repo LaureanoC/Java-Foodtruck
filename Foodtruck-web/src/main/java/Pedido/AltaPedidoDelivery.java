@@ -50,38 +50,49 @@ public class AltaPedidoDelivery extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		HttpSession session = request.getSession();
+		
+		try {
+			
+			HttpSession session = request.getSession();
 
-		String nombre = request.getParameter("nombre");
-		String dni = request.getParameter("dni");
-		String direccion = request.getParameter("direccion");
+			String nombre = request.getParameter("nombre");
+			String dni = request.getParameter("dni");
+			String direccion = request.getParameter("direccion");
 
-		PedidoDAO pdao = new PedidoDAO();
-		ClienteDAO cdao = new ClienteDAO();
-		Cliente c = new Cliente();
-		Cliente busquedaC = new Cliente();
+			PedidoDAO pdao = new PedidoDAO();
+			ClienteDAO cdao = new ClienteDAO();
+			Cliente c = new Cliente();
+			Cliente busquedaC = new Cliente();
 
-		c.setDni(dni);
-		c.setDireccion(direccion);
-		c.setNombre(nombre);
+			c.setDni(dni);
+			c.setDireccion(direccion);
+			c.setNombre(nombre);
 
-		busquedaC = cdao.getCliente(c);
+			busquedaC = cdao.getCliente(c);
 
-		Pedido pedido = (Pedido) session.getAttribute("pedido");
+			Pedido pedido = (Pedido) session.getAttribute("pedido");
 
-		if (busquedaC != null) {
+			if (busquedaC != null) {
 
-			pedido.setCliente(c);
-			cdao.updateCliente(c);
-			pdao.newPedido(pedido);
+				pedido.setCliente(c);
+				cdao.updateCliente(c);
+				pdao.newPedido(pedido);
 
-		} else {
-			cdao.newCliente(c);
-			pedido.setCliente(c);
-			pdao.newPedido(pedido);
+			} else {
+				cdao.newCliente(c);
+				pedido.setCliente(c);
+				pdao.newPedido(pedido);
+			}
+
+			response.sendRedirect("listadopedido");
+			
+			
+		} catch(Exception e) {
+			request.setAttribute("mensaje", "Ha ocurrido un error.");
+			request.setAttribute("servlet", "listadopedido");
+			request.getRequestDispatcher("WEB-INF/error.jsp").forward(request, response);
 		}
-
-		response.sendRedirect("listadopedido");
+		
 
 	}
 

@@ -71,7 +71,7 @@ public class AltaEmpleado extends HttpServlet {
 		}
 		
 		catch(Exception e ) {
-			request.setAttribute("mensaje", "Ocurrio un error ");
+			request.setAttribute("mensaje", "Ha ocurrido un error.");
 			request.setAttribute("servlet", "altaempleado");
 			request.getRequestDispatcher("WEB-INF/error.jsp").forward(request, response);
 

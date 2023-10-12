@@ -46,7 +46,7 @@ public class UpdateEmpleado extends HttpServlet {
 		request.getRequestDispatcher("WEB-INF/updateEmpleado.jsp").forward(request, response);
 		}
 		catch(Exception e) {
-			request.setAttribute("mensaje", "Ocurrio un error ");
+			request.setAttribute("mensaje", "Ha ocurrido un error.");
 			request.setAttribute("servlet", "empleadoeditar");
 			request.getRequestDispatcher("WEB-INF/error.jsp").forward(request, response);
 
@@ -101,13 +101,13 @@ public class UpdateEmpleado extends HttpServlet {
 			request.getRequestDispatcher("WEB-INF/updateEmpleado.jsp").forward(request, response);
 			}
 			catch(Exception en) {
-				request.setAttribute("mensaje", "Ocurrio un error ");
+				request.setAttribute("mensaje", "Ha ocurrido un error.");
 				request.setAttribute("servlet", "empleadoeditar");
 				request.getRequestDispatcher("WEB-INF/error.jsp").forward(request, response);
 			}
 		}
 		catch(Exception e) {
-			request.setAttribute("mensaje", "Ocurrio un error ");
+			request.setAttribute("mensaje", "Ha ocurrido un error.");
 			request.setAttribute("servlet", "empleadoeditar");
 			request.getRequestDispatcher("WEB-INF/error.jsp").forward(request, response);
 

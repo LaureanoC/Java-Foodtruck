@@ -1,6 +1,8 @@
 package Cliente;
 
 import java.io.IOException;
+import java.sql.SQLIntegrityConstraintViolationException;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -39,9 +41,10 @@ public class AltaCliente extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
+		String dni = "";
 	try {
 		
-		String dni = request.getParameter("dni");
+		dni = request.getParameter("dni");
 		String nom = request.getParameter("nombre");
 		String dir = request.getParameter("direccion");
 		
@@ -63,8 +66,13 @@ public class AltaCliente extends HttpServlet {
 		request.setAttribute("mensaje", "Complete los datos correctamente");
 		request.getRequestDispatcher("WEB-INF/altaCliente.jsp").forward(request, response);
 	}
+	catch(SQLIntegrityConstraintViolationException e) {
+		request.setAttribute("mensaje", "El cliente con el DNI " + dni + " ya existe.");
+		request.setAttribute("servlet", "altacliente");
+		request.getRequestDispatcher("WEB-INF/error.jsp").forward(request, response);
+	}
 	catch(Exception e) {
-		request.setAttribute("mensaje", "Ocurrio un error ");
+		request.setAttribute("mensaje", "Ha ocurrido un error." + e.getMessage());
 		request.setAttribute("servlet", "altacliente");
 		request.getRequestDispatcher("WEB-INF/error.jsp").forward(request, response);
 	}

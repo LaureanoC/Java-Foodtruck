@@ -46,8 +46,15 @@ public class DeleteCliente extends HttpServlet {
 		
 		request.getRequestDispatcher("WEB-INF/listadoClientes.jsp").forward(request, response);
 		}
+		catch (SQLIntegrityConstraintViolationException e) {
+			request.setAttribute("mensaje", "No se puede eliminar un cliente con un pedido asociado.");
+			request.setAttribute("servlet", "listadoclientes");
+			request.getRequestDispatcher("WEB-INF/error.jsp").forward(request, response);
+
+		} 
+		
 		catch(Exception e){
-			request.setAttribute("mensaje", "Ah ocurrido un error.");
+			request.setAttribute("mensaje", "Ha ocurrido un error.");
 			request.setAttribute("servlet", "listadoclientes");
 			request.getRequestDispatcher("WEB-INF/error.jsp").forward(request, response);
 
