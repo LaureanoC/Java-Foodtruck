@@ -43,8 +43,9 @@
                     <label>Contraseña</label>
                     <input name="password">
                 </div>
-                <button class="button" type="submit">Agregar</button>	
                 <div><p class="error"><%=mensaje%></p></div>
+                <button class="button" type="submit">Agregar</button>	
+                
             </div>      
         </form>
     </div>
