@@ -169,7 +169,6 @@ public void deleteRolEmpleado(Empleado emp) {
 			st = DbConnector.getInstancia().getConn().prepareStatement("DELETE from empleado_rol WHERE dniEmpleado=?");
 			st.setString(1, emp.getDni());
 			st.executeUpdate();
-			System.out.println("Se elimino la fk");
 
 		} catch (SQLException e) {
 			e.printStackTrace();

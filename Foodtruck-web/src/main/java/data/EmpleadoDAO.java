@@ -188,8 +188,11 @@ public class EmpleadoDAO {
 	
 	public void deleteEmpleado(Empleado e) throws SQLException{
 
+		RolDAO rdao = new RolDAO();
 		PreparedStatement stmt = null;
 		try {
+			rdao.deleteRolEmpleado(e);
+			
 
 			stmt = DbConnector.getInstancia().getConn().prepareStatement("DELETE from Empleado WHERE dniEmpleado=?");
 			stmt.setString(1, e.getDni());

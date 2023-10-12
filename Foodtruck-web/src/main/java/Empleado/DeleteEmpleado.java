@@ -46,7 +46,13 @@ public class DeleteEmpleado extends HttpServlet {
 		request.setAttribute("listaEmpleados", empleados);
 		
 		request.getRequestDispatcher("WEB-INF/listadoEmpleados.jsp").forward(request, response);
-		}
+		} 
+		 catch (SQLIntegrityConstraintViolationException e) {
+				request.setAttribute("mensaje", "No se puede eliminar un empleado con un pedido asociado.");
+				request.setAttribute("servlet", "listadoempleados");
+				request.getRequestDispatcher("WEB-INF/error.jsp").forward(request, response);
+
+			}
 		catch (Exception e) {
 			request.setAttribute("mensaje", "Ha ocurrido un error.");
 			request.setAttribute("servlet", "listadoempleados");
