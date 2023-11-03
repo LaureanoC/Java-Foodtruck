@@ -16,32 +16,39 @@ import entities.Pedido;
 @WebServlet("/entregarpedido")
 public class EntregarPedido extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public EntregarPedido() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
 
 	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#HttpServlet()
 	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
-		int id = Integer.parseInt(request.getParameter("nro"));
-		PedidoDAO pdao = new PedidoDAO();
-		
-		Pedido p = new Pedido();
-		p.setId(id);
-		p.setEstado("Entregado");
-		pdao.updateEstadoPedido(p);
-		response.sendRedirect("listadopedido");
-		
+	public EntregarPedido() {
+		super();
+		// TODO Auto-generated constructor stub
 	}
 
-	
-	
+	/**
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
+	 *      response)
+	 */
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+
+		try {
+			int id = Integer.parseInt(request.getParameter("nro"));
+			PedidoDAO pdao = new PedidoDAO();
+
+			Pedido p = new Pedido();
+			p.setId(id);
+			p.setEstado("Entregado");
+			pdao.updateEstadoPedido(p);
+			response.sendRedirect("listadopedido");
+
+		} catch (Exception e) {
+
+			request.setAttribute("mensaje", "Ha ocurrido un error.");
+			request.setAttribute("servlet", "");
+			request.getRequestDispatcher("WEB-INF/error.jsp").forward(request, response);
+		}
+
+	}
 
 }

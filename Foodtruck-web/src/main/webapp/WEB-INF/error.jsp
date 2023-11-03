@@ -16,8 +16,9 @@
 <main>
 	<div class="container">
 	<p class="error"><%=mensaje %></p>
-	
+	<%if (!servlet.equalsIgnoreCase("")){ %>
 	<a href="<%=servlet%>" class="button">Volver</a>
+	<%} %>
 	</div>
 	
 </main>

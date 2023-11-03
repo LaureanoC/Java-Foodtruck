@@ -46,7 +46,11 @@ public class IniciarPedido extends HttpServlet {
 		request.getRequestDispatcher("WEB-INF/iniciarPedido.jsp").forward(request, response);
 		}
 		catch(Exception e) {
-			e.printStackTrace();
+			
+			request.setAttribute("mensaje", "Ha ocurrido un error.");
+			request.setAttribute("servlet", "");
+			request.getRequestDispatcher("WEB-INF/error.jsp").forward(request, response);
+			
 		}
 		
 	}
@@ -99,7 +103,9 @@ public class IniciarPedido extends HttpServlet {
 		response.sendRedirect("altapedido");
 		}
 		catch(Exception e) {
-			e.printStackTrace();
+			request.setAttribute("mensaje", "Ha ocurrido un error.");
+			request.setAttribute("servlet", "");
+			request.getRequestDispatcher("WEB-INF/error.jsp").forward(request, response);
 		}
 
 	}

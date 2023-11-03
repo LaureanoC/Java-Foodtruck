@@ -45,51 +45,60 @@ public class AltaPedido extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		
-		HttpSession session = request.getSession();
-		
-		String servicio = request.getParameter("servicio");
-		String[] cantidades = request.getParameterValues("cantidad");
-		
-		LinkedList<LineaPedido> lineas = (LinkedList<LineaPedido>) session.getAttribute("lineas");
-		Pedido p = new Pedido();
+		try {
+			HttpSession session = request.getSession();
 			
-		int i = 0;
-		for(LineaPedido lp : lineas) {
+			String servicio = request.getParameter("servicio");
+			String[] cantidades = request.getParameterValues("cantidad");
+			
+			LinkedList<LineaPedido> lineas = (LinkedList<LineaPedido>) session.getAttribute("lineas");
+			Pedido p = new Pedido();
 				
-			lp.setCantidad(Integer.parseInt(cantidades[i]));
-			p.addLineaPedido(lp);
-			i++;
-		}
+			int i = 0;
+			for(LineaPedido lp : lineas) {
+					
+				lp.setCantidad(Integer.parseInt(cantidades[i]));
+				p.addLineaPedido(lp);
+				i++;
+			}
+				
 			
-		
-		Empleado e = new Empleado();
-		Cliente c = new Cliente(); //null
-		e.setDni("52144578");
-		p.setEstado("En preparación");
-		p.setCliente(c);
-		p.setEmpleado(e);
-		
-		
-		if(servicio.equalsIgnoreCase("delivery")) {
+			Empleado e = new Empleado();
+			Cliente c = new Cliente(); //null
+			e.setDni("52144578");
+			p.setEstado("En preparación");
+			p.setCliente(c);
+			p.setEmpleado(e);
 			
-			p.setTipoPedido("Delivery");
+			
+			if(servicio.equalsIgnoreCase("delivery")) {
+				
+				p.setTipoPedido("Delivery");
+				session.setAttribute("pedido", p);
+				
+				request.getRequestDispatcher("WEB-INF/altaPedidoDelivery.jsp").forward(request, response);
+		
+			
+			
+			} else {
+			PedidoDAO pdao = new PedidoDAO();
+			
+			p.setTipoPedido("Presencial");
+			pdao.newPedido(p);
 			session.setAttribute("pedido", p);
+			response.sendRedirect("listadopedido");
 			
-			request.getRequestDispatcher("WEB-INF/altaPedidoDelivery.jsp").forward(request, response);
-	
-		
-		
-		} else {
-		PedidoDAO pdao = new PedidoDAO();
-		
-		p.setTipoPedido("Presencial");
-		pdao.newPedido(p);
-		session.setAttribute("pedido", p);
-		response.sendRedirect("listadopedido");
-		
-		
+			
+			}
+			
+		} catch(Exception e) {
+			
+			request.setAttribute("mensaje", "Ha ocurrido un error.");
+			request.setAttribute("servlet", "iniciarpedido");
+			request.getRequestDispatcher("WEB-INF/error.jsp").forward(request, response);
 		}
+		
+		
 	}
 
 }

@@ -50,7 +50,7 @@ public class ListadoCliente extends HttpServlet {
 		}
 		catch(Exception e){
 			request.setAttribute("mensaje", "Ha ocurrido un error.");
-			request.setAttribute("servlet", "listadoclientes");
+			request.setAttribute("servlet", "menuadmin");
 			request.getRequestDispatcher("WEB-INF/error.jsp").forward(request, response);
 		}
 		

@@ -55,7 +55,7 @@ public class EstadoEmpleado extends HttpServlet {
 		
 		catch(Exception e) {
 			request.setAttribute("mensaje", "Ha ocurrido un error.");
-			request.setAttribute("servlet", "empleadoestado");
+			request.setAttribute("servlet", "listadoempleados");
 			request.getRequestDispatcher("WEB-INF/error.jsp").forward(request, response);
 
 		}

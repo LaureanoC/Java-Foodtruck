@@ -30,14 +30,22 @@ public class EnCaminoPedido extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		int id = Integer.parseInt(request.getParameter("nro"));
-		PedidoDAO pdao = new PedidoDAO();
+		try {
+			int id = Integer.parseInt(request.getParameter("nro"));
+			PedidoDAO pdao = new PedidoDAO();
+			
+			Pedido p = new Pedido();
+			p.setId(id);
+			p.setEstado("En camino");
+			pdao.updateEstadoPedido(p);
+			response.sendRedirect("listadopedido");
+		} catch (Exception e) {
+			
+			request.setAttribute("mensaje", "Ha ocurrido un error.");
+			request.setAttribute("servlet", "");
+			request.getRequestDispatcher("WEB-INF/error.jsp").forward(request, response);
+		}
 		
-		Pedido p = new Pedido();
-		p.setId(id);
-		p.setEstado("En camino");
-		pdao.updateEstadoPedido(p);
-		response.sendRedirect("listadopedido");
 	}
 
 	/**

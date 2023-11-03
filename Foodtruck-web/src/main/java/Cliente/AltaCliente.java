@@ -72,8 +72,8 @@ public class AltaCliente extends HttpServlet {
 		request.getRequestDispatcher("WEB-INF/error.jsp").forward(request, response);
 	}
 	catch(Exception e) {
-		request.setAttribute("mensaje", "Ha ocurrido un error." + e.getMessage());
-		request.setAttribute("servlet", "altacliente");
+		request.setAttribute("mensaje", "Ha ocurrido un error.");
+		request.setAttribute("servlet", "listadoclientes");
 		request.getRequestDispatcher("WEB-INF/error.jsp").forward(request, response);
 	}
 	

@@ -32,12 +32,22 @@ public class ListadoPedido extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		PedidoDAO pdao = new PedidoDAO();
+		try {
+			PedidoDAO pdao = new PedidoDAO();
+			
+			LinkedList<Pedido> pedidos = pdao.getAll();
+			request.setAttribute("pedidos", pedidos);
+			
+			request.getRequestDispatcher("WEB-INF/listadoPedidos.jsp").forward(request, response);
+			
+		} catch (Exception e) {
+			
+			request.setAttribute("mensaje", "Ha ocurrido un error.");
+			request.setAttribute("servlet", "");
+			request.getRequestDispatcher("WEB-INF/error.jsp").forward(request, response);
+			
+		}
 		
-		LinkedList<Pedido> pedidos = pdao.getAll();
-		request.setAttribute("pedidos", pedidos);
-		
-		request.getRequestDispatcher("WEB-INF/listadoPedidos.jsp").forward(request, response);
 		
 	}
 
