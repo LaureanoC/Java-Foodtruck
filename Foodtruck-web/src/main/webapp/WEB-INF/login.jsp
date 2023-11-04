@@ -28,7 +28,7 @@
                     <label for="password">Contraseña</label>
                     <input class="input" type="password" name="password">
                 </div>
-                <p class="errores"><%=mensaje%></p>
+                <p class="error"><%=mensaje%></p>
                 <button class="button" type="submit">Login</button>
             </form>
         </div>

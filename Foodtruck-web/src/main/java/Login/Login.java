@@ -1,6 +1,9 @@
+package Login;
 
 
 import java.io.IOException;
+import java.util.LinkedList;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -9,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import data.EmpleadoDAO;
 import entities.Empleado;
+import entities.Rol;
 
 /**
  * Servlet implementation class Login
@@ -29,6 +33,12 @@ public class Login extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+		Empleado e = new Empleado();
+		Rol r = new Rol();
+		r.setDesc("Invitado");
+		e.getColeccionRoles().add(r);
+		request.getSession().setAttribute("empleado", e);
 		request.getRequestDispatcher("WEB-INF/login.jsp").forward(request, response);
 	}
 
@@ -36,28 +46,51 @@ public class Login extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		/**
-		String dni = request.getParameter("dni");
-		String pass = request.getParameter("password");
 		
-		Empleado e = new Empleado();
-		e.setDni(dni);
-		e.setPassword(pass);
-		System.out.println(dni + pass);
-		
-		EmpleadoDAO edao = new EmpleadoDAO();
-		Empleado emp = edao.login(e);
-		
-		if (emp != null) {
+		try {
 			
-			request.getSession().setAttribute("empleado", emp);
-			response.sendRedirect("WEB-INF/administracion.jsp");
-		} else {
+			String dni = request.getParameter("dni");
+			String pass = request.getParameter("password");
+			
+			Empleado e = new Empleado();
+			e.setDni(dni);
+			e.setPassword(pass);
+			
+			EmpleadoDAO edao = new EmpleadoDAO();
+			Empleado emp = edao.login(e);
+			
+			String roles = emp.getRoles();
+			
+			
+			if (emp != null && roles.equalsIgnoreCase("Administrador")) {
+				
+				request.getSession().setAttribute("empleado", emp);
+				response.sendRedirect("menuadmin");
+			} 
+			
+			else {
+				request.getSession().setAttribute("empleado", emp);
+				response.sendRedirect("listadopedido");
+			}
+			
+			
+		} 
+		//Si empleado es nulo
+		catch(NullPointerException e) {
 			request.setAttribute("mensaje", "Las credenciales no coinciden con nuestros datos.");
 			request.getRequestDispatcher("WEB-INF/login.jsp").forward(request, response);
 		}
 		
+		catch (Exception e) {
+			
+			e.printStackTrace();
+			request.setAttribute("mensaje", "Ha ocurrido un error.");
+			request.setAttribute("servlet", "login");
+			request.getRequestDispatcher("WEB-INF/error.jsp").forward(request, response);
+			
+		}
+		
+		
 	}
-	*/
-	}
+	
 }

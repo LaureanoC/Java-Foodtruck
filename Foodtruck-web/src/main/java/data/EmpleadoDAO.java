@@ -217,6 +217,7 @@ public class EmpleadoDAO {
 		PreparedStatement stmt = null;
 		ResultSet rs = null;
 		Empleado e = null;
+		RolDAO rdao = new RolDAO();
 		try {
 			stmt = DbConnector.getInstancia().getConn().prepareStatement("Select dniEmpleado,nombre, turno from Empleado WHERE dniEmpleado=? and password=?");
 
@@ -231,6 +232,8 @@ public class EmpleadoDAO {
 				e.setDni(rs.getString("dniEmpleado"));
 				e.setNombre(rs.getString("nombre"));
 				e.setTurno(rs.getString("turno"));
+				
+				rdao.setRoles(e);
 			}
 
 		} catch (SQLException e1) {
