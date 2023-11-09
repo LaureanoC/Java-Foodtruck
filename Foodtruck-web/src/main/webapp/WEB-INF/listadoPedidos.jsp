@@ -35,7 +35,7 @@
       
       	 <% for(Pedido pedido : pedidos){ %>
       	 
-      	 	  <%if (pedido.getTipoPedido().equals("Delivery") && pedido.getEstado().equals("Entregado")){ %>
+      	 	  <%if (pedido.getTipoPedido().equals("Delivery") && pedido.getEstado().equals("En camino")){ %>
       	 		
       	 		<div class="pedido">
                 <div class="pedido__header">
