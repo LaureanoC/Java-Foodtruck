@@ -29,6 +29,8 @@
                <%} %>
                 
             </div>
+            <%if (e.getRoles().equalsIgnoreCase("Administrador") || e.getRoles().equalsIgnoreCase("Delivery")){ %>
           	<nav style="margin-left:auto; align-self:center;"><a href="logout">Cerrar Sesión</a></nav>
+          	<%} %>
         </div>
    </header>
