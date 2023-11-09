@@ -1,3 +1,5 @@
+<%try{ %>
+
 <%@page import="entities.Empleado"%>
 <%Empleado e = (Empleado) session.getAttribute("empleado"); %>
 
@@ -30,7 +32,7 @@
 <main>
         <div class = "pedidos">
         
-       <%-- // --%>
+       <%-- Para delivery --%>
       <%if ( e.getRoles().equalsIgnoreCase("Delivery") ){ %>
       
       	 <% for(Pedido pedido : pedidos){ %>
@@ -94,7 +96,7 @@
       	 
      <% }} %>
       
-       <%-- // --%>
+       <%-- Para administrador --%>
         
         
         
@@ -166,3 +168,8 @@
     
 </body>
 </html>
+
+<% }catch (Exception e){
+
+	response.sendRedirect("login");
+}%>

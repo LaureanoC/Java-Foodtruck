@@ -1,3 +1,5 @@
+<% try { %>
+
 <%@page import="entities.Empleado"%>
 <%Empleado e = (Empleado) session.getAttribute("empleado"); %>
 
@@ -115,3 +117,8 @@
     <script src="js/nuevopedido.js" ></script>
 </body>
 </html>
+
+<% }catch (Exception e){
+
+	response.sendRedirect("login");
+}%>
