@@ -239,9 +239,10 @@ public class PedidoDAO {
 		try {
 
 			stmt = DbConnector.getInstancia().getConn()
-					.prepareStatement("UPDATE pedido SET estadoPedido=? where idpedido=?");
+					.prepareStatement("UPDATE pedido SET estadoPedido=?, dniEmpleado=? where idpedido=?");
 			stmt.setString(1, p.getEstado());
-			stmt.setInt(2, p.getId());
+			stmt.setString(2, p.getEmpleado().getDni());
+			stmt.setInt(3, p.getId());
 			
 
 			stmt.executeUpdate();

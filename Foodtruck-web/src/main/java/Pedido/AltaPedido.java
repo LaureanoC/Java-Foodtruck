@@ -63,9 +63,8 @@ public class AltaPedido extends HttpServlet {
 			}
 				
 			
-			Empleado e = new Empleado();
+			Empleado e = (Empleado) request.getSession().getAttribute("empleado");
 			Cliente c = new Cliente(); //null
-			e.setDni("52144578");
 			p.setEstado("En preparación");
 			p.setCliente(c);
 			p.setEmpleado(e);

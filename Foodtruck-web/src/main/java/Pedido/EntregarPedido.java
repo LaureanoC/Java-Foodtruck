@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import data.PedidoDAO;
+import entities.Empleado;
 import entities.Pedido;
 
 /**
@@ -37,6 +38,8 @@ public class EntregarPedido extends HttpServlet {
 			PedidoDAO pdao = new PedidoDAO();
 
 			Pedido p = new Pedido();
+			Empleado e = (Empleado) request.getSession().getAttribute("empleado");
+			p.setEmpleado(e);
 			p.setId(id);
 			p.setEstado("Entregado");
 			pdao.updateEstadoPedido(p);

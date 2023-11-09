@@ -79,7 +79,7 @@ public class Login extends HttpServlet {
 		
 		catch (Exception e) {
 			
-			e.printStackTrace();
+			
 			request.setAttribute("mensaje", "Ha ocurrido un error.");
 			request.setAttribute("servlet", "login");
 			request.getRequestDispatcher("WEB-INF/error.jsp").forward(request, response);
