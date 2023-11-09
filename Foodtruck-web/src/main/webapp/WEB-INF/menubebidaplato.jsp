@@ -1,3 +1,11 @@
+<%@page import="entities.Empleado"%>
+<%Empleado e = (Empleado) session.getAttribute("empleado"); %>
+
+<% if (!e.getRoles().equalsIgnoreCase("Administrador")){
+	response.sendRedirect("login");
+	}
+%>
+
 <!DOCTYPE html>
 <html lang="es">
 <head>

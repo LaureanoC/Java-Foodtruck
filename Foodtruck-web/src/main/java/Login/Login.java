@@ -75,11 +75,7 @@ public class Login extends HttpServlet {
 			
 			
 		} 
-		//Si empleado es nulo
-		catch(NullPointerException e) {
-			request.setAttribute("mensaje", "Las credenciales no coinciden con nuestros datos.");
-			request.getRequestDispatcher("WEB-INF/login.jsp").forward(request, response);
-		}
+		
 		
 		catch (Exception e) {
 			
