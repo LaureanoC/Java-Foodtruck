@@ -38,6 +38,8 @@ public class Login extends HttpServlet {
 		Rol r = new Rol();
 		r.setDesc("Invitado");
 		e.getColeccionRoles().add(r);
+		
+		
 		request.getSession().setAttribute("empleado", e);
 		request.getRequestDispatcher("WEB-INF/login.jsp").forward(request, response);
 	}

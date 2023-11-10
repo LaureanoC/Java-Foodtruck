@@ -34,6 +34,7 @@
                 <button class="button" type="submit">Login</button>
             </form>
         </div>
+        <a style=" margin-top:2rem;font-size:0.75rem;"href="listadopedido">Soy invitado</a>
 	</div>
 </body>
 </html>

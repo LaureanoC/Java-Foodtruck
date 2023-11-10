@@ -33,8 +33,9 @@ public class ListadoPedido extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		try {
-			PedidoDAO pdao = new PedidoDAO();
 			
+			
+			PedidoDAO pdao = new PedidoDAO();
 			LinkedList<Pedido> pedidos = pdao.getAll();
 			request.setAttribute("pedidos", pedidos);
 			
