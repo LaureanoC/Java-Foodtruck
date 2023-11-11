@@ -4,8 +4,12 @@
 <%Empleado e = (Empleado) session.getAttribute("empleado"); %>
 
 <% if (!e.getRoles().equalsIgnoreCase("Administrador")){
-	response.sendRedirect("login");
+	request.getRequestDispatcher("/login").forward(request,response);
 	}
+%>
+<% }catch(Exception e){
+	request.getRequestDispatcher("/login").forward(request,response);
+}
 %>
 
 
@@ -117,7 +121,4 @@
     <script src="js/nuevopedido.js" ></script>
 </body>
 </html>
-<% }catch(Exception e){
-	request.getRequestDispatcher("/login").forward(request,response);
-}
-%>
+
