@@ -8,6 +8,11 @@
 	}
 %>
 
+<% }catch (Exception e){
+
+	response.sendRedirect("login");
+}%>
+
 
 <!DOCTYPE html>
 <html>
@@ -18,6 +23,7 @@
     <link rel="stylesheet" href="style/header.css">
     <link rel="stylesheet" href="style/altaCliente.css">
     <%String mensaje = (String) request.getAttribute("mensaje"); %>
+    
 <title>Foodtruck</title>
 </head>
 <body>
@@ -47,7 +53,3 @@
 </body>
 </html>
 
-<% }catch (Exception e){
-
-	response.sendRedirect("login");
-}%>

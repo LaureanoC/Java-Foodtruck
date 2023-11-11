@@ -1,13 +1,6 @@
 <%try { %>
-
 <%@page import="entities.Empleado"%>
-<%Empleado e = (Empleado) session.getAttribute("empleado"); %>
-
-<% if (!e.getRoles().equalsIgnoreCase("Administrador")){
-	response.sendRedirect("login");
-	}
-%>
-
+<%Empleado e = (Empleado) session.getAttribute("empleado");%>
 
 <!DOCTYPE html>
 <%@page import="entities.Bebida"%>
@@ -23,7 +16,7 @@
     <link rel="stylesheet" href="style/altapedidodelivery.css">
     
 <% Pedido p = (Pedido)session.getAttribute("pedido"); %>
-<%  %>
+
     <title>Foodtruck</title>
 </head>
 <body>
@@ -103,7 +96,7 @@
 </body>
 </html>
 
-<% }catch (Exception e){
-
-	response.sendRedirect("login");
-}%>
+<% }catch(Exception e){
+	request.getRequestDispatcher("/login").forward(request,response);
+}
+%>

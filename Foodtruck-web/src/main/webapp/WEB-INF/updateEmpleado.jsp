@@ -1,13 +1,4 @@
-<%try{ %>
-
 <%@page import="entities.Empleado"%>
-<%Empleado em = (Empleado) session.getAttribute("empleado"); %>
-
-<% if (!em.getRoles().equalsIgnoreCase("Administrador")){
-	response.sendRedirect("login");
-	}
-%>
-
 <%@page import="entities.Empleado"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
@@ -22,7 +13,23 @@
     <link rel="stylesheet" href="style/header.css">
     <link rel="stylesheet" href="style/updateEmpleado.css">
     <script src="https://kit.fontawesome.com/b95dc486b7.js" crossorigin="anonymous"></script>
+    
+    
     <title>Foodtruck</title>
+    <%
+    if (session.getAttribute("empleado")!=null){
+    
+    Empleado em = (Empleado) session.getAttribute("empleado"); 
+
+	if (!em.getRoles().equalsIgnoreCase("Administrador")){
+	response.sendRedirect("login");//
+	}
+    }
+	else {
+		response.sendRedirect("login");//
+	}
+    
+%>
     
     <% Empleado e = (Empleado) request.getAttribute("emp");%>
     <% String mensaje = (String) request.getAttribute("mensaje"); %>
@@ -75,7 +82,3 @@
 </body>
 </html>
 
-<% }catch (Exception e){
-
-	response.sendRedirect("login");
-}%>

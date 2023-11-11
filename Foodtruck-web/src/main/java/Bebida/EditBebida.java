@@ -50,6 +50,10 @@ public class EditBebida extends HttpServlet {
 			BebidaDAO bdao = new BebidaDAO();
 			be = bdao.getBebida(be);
 			
+			if(be == null) {
+				throw new Exception();
+			}
+			
 			request.setAttribute("be1", be);
 			
 			if (request.getParameter("mensaje") == null) {

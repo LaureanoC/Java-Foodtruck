@@ -48,7 +48,9 @@ public class UpdateCliente extends HttpServlet {
 		c.setDni(dni);
 		c = cdao.getCliente(c);
 		
-		
+		if(c == null) {
+			throw new Exception();
+		}
 		
 		request.setAttribute("cli", c);
 		if (request.getParameter("mensaje") == null) {

@@ -1,13 +1,17 @@
-<%try { %>
+
 
 <%@page import="entities.Empleado"%>
+<%try { %>
 <%Empleado e = (Empleado) session.getAttribute("empleado"); %>
 
 <% if (!e.getRoles().equalsIgnoreCase("Administrador")){
 	response.sendRedirect("login");
 	}
 %>
+<% }catch (Exception e){
 
+	response.sendRedirect("login");
+}%>
 
 
 <!DOCTYPE html>
@@ -54,7 +58,3 @@
 </body>
 </html>
 
-<% }catch (Exception e){
-
-	response.sendRedirect("login");
-}%>

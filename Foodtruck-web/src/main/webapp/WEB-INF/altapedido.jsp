@@ -117,8 +117,7 @@
     <script src="js/nuevopedido.js" ></script>
 </body>
 </html>
-
-<% }catch (Exception e){
-
-	response.sendRedirect("login");
-}%>
+<% }catch(Exception e){
+	request.getRequestDispatcher("/login").forward(request,response);
+}
+%>

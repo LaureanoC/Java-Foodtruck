@@ -43,6 +43,9 @@ public class UpdateEmpleado extends HttpServlet {
 		e.setDni(dni);
 		e = edao.getEmpleado(e);
 		request.setAttribute("emp", e);
+		if(e == null) {
+			throw new Exception();
+		}
 		request.getRequestDispatcher("WEB-INF/updateEmpleado.jsp").forward(request, response);
 		}
 		catch(Exception e) {

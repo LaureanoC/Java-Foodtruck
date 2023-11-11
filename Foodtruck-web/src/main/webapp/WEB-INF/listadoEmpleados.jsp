@@ -1,12 +1,4 @@
-<% try { %>
 
-<%@page import="entities.Empleado"%>
-<%Empleado em = (Empleado) session.getAttribute("empleado"); %>
-
-<% if (!em.getRoles().equalsIgnoreCase("Administrador")){
-	response.sendRedirect("login");
-	}
-%>
 
 <%@page import="java.util.LinkedList"%>
 <%@page import="entities.Empleado"%>
@@ -24,6 +16,17 @@
     <script src="https://kit.fontawesome.com/b95dc486b7.js" crossorigin="anonymous"></script>
     
     <title>Foodtruck</title>
+    
+    <% try { %>
+
+<%@page import="entities.Empleado"%>
+<%Empleado em = (Empleado) session.getAttribute("empleado"); %>
+
+<% if (!em.getRoles().equalsIgnoreCase("Administrador")){
+	response.sendRedirect("login");
+	}
+%>
+
     
     <%LinkedList<Empleado> le = (LinkedList<Empleado>)request.getAttribute("listaEmpleados");%>
     
@@ -111,7 +114,6 @@
 	
 </body>
 </html>
-
 <% }catch (Exception e){
 
 	response.sendRedirect("login");

@@ -9,6 +9,7 @@
 %>
 
 
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -19,6 +20,9 @@
     <link rel="stylesheet" href="style/altaBebida.css">
     <title>Foodtruck</title>
 <%String mensaje = (String) request.getAttribute("mensaje"); %>
+
+
+
 </head>
 <body>
  <jsp:include page="header.jsp"/>
@@ -57,7 +61,6 @@
     
 </body>
 </html>
-
 <% }catch (Exception e){
 
 	response.sendRedirect("login");
