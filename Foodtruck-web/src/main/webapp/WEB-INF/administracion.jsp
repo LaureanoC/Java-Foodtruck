@@ -32,6 +32,12 @@
             <h1>Administración</h1>
             <div class="item_container">
                 
+                <a href="listadopedido"><div class="item">
+                    <p class="item__icon"><i class="fa-solid fa-truck-fast"></i></p>
+                    <p class="item__desc">Pedidos</p>
+                </a>
+                </div>
+                
                 <a href="menubebidaplato"><div class="item">
                     <p class="item__icon"><i class="fa-solid fa-utensils"></i></p>
                     <p class="item__desc">Productos</p>
@@ -49,6 +55,7 @@
                     <p class="item__desc">Clientes</p>
                 </a>
                 </div>
+                
                 
                            
             </div>

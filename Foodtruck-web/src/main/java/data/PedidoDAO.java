@@ -19,7 +19,7 @@ import entities.Plato;
 public class PedidoDAO {
 
 	
-	public LinkedList<Pedido> getAll() {
+	public LinkedList<Pedido> getAll() throws SQLException {
 		Statement stmt = null;
 		ResultSet rs = null;
 		LinkedList<Pedido> pedidos = new LinkedList<Pedido>();
@@ -69,7 +69,7 @@ public class PedidoDAO {
 			}
 
 		} catch (SQLException e) {
-			e.printStackTrace();
+			throw e;
 
 		} finally {
 			try {
@@ -81,14 +81,93 @@ public class PedidoDAO {
 				}
 				DbConnector.getInstancia().releaseConn();
 			} catch (SQLException e) {
-				e.printStackTrace();
+				throw e;
 			}
 		}
 
 		return pedidos;
 	}
 	
-	public Pedido getPedido(Pedido p) {
+	
+	
+	public LinkedList<Pedido> getPedidoByFecha(String fecha) throws SQLException {
+		PreparedStatement stmt = null;
+		ResultSet rs = null;
+		LinkedList<Pedido> pedidos = new LinkedList<Pedido>();
+		PlatoDAO pdao = new PlatoDAO();
+		BebidaDAO bdao = new BebidaDAO();
+
+		try {
+			stmt = DbConnector.getInstancia().getConn().prepareStatement(" Select * from pedido where fechaHoraPedido like Concat(?,'%') order by fechaHoraPedido ");
+
+			stmt.setString(1, fecha);
+			rs = stmt.executeQuery();
+
+			if (rs != null) {
+				while (rs.next()) {
+					
+					
+					
+					Pedido p = new Pedido();
+					Empleado e = new Empleado();
+					Cliente c = new Cliente();
+					
+					p.setId(rs.getInt("idPedido"));
+					p.setEstado(rs.getString("estadoPedido"));
+					p.setTipoPedido(rs.getString("tipoPedido"));
+					p.setFechaHora(rs.getTimestamp("fechaHoraPedido"));
+					String dniEmpleado = rs.getString("dniEmpleado");
+					String dniCliente = rs.getString("dniCliente");
+					
+					e.setDni(dniEmpleado);
+					c.setDni(dniCliente);
+					
+					if (dniCliente != null) {
+						ClienteDAO cdao = new ClienteDAO();
+						c = cdao.getCliente(c);
+					}
+					
+					
+					p.setEmpleado(e);
+					p.setCliente(c);
+		
+					pdao.setPlatos(p);
+					bdao.setBebidas(p);
+					
+					
+					pedidos.add(p);
+					
+					
+				}
+				
+				
+			}
+
+		} catch (SQLException e) {
+			throw e;
+
+		} finally {
+			try {
+				if (rs != null) {
+					rs.close();
+				}
+				if (stmt != null) {
+					stmt.close();
+				}
+				DbConnector.getInstancia().releaseConn();
+			} catch (SQLException e) {
+				throw e;
+			}
+		}
+
+		return pedidos;
+	}
+	
+	
+	
+	
+	
+	public Pedido getPedido(Pedido p)  throws SQLException{
 		PreparedStatement stmt = null;
 		ResultSet rs = null;
 		Pedido pe = null;
@@ -129,7 +208,7 @@ public class PedidoDAO {
 			}
 
 		} catch (SQLException e) {
-			e.printStackTrace();
+			throw e;
 
 		} finally {
 			try {
@@ -141,14 +220,14 @@ public class PedidoDAO {
 				}
 				DbConnector.getInstancia().releaseConn();
 			} catch (SQLException e) {
-				e.printStackTrace();
+				throw e;
 			}
 		}
 
 		return pe;
 	}
 	
-	public void newPedido(Pedido p) {
+	public void newPedido(Pedido p)  throws SQLException {
 		PreparedStatement stmt = null;
 		ResultSet keyRS=null;
 		try {
@@ -220,7 +299,7 @@ public class PedidoDAO {
 				
 			}
 		} catch (SQLException e) {
-			e.printStackTrace();
+			throw e;
 		} finally {
 			try {
 				if (stmt != null) {
@@ -228,12 +307,12 @@ public class PedidoDAO {
 				}
 				DbConnector.getInstancia().releaseConn();
 			} catch (SQLException e) {
-				e.printStackTrace();
+				throw e;
 			}
 		}
 	}
 	
-	public void updateEstadoPedido(Pedido p) {
+	public void updateEstadoPedido(Pedido p) throws SQLException {
 
 		PreparedStatement stmt = null;
 		try {
@@ -248,7 +327,7 @@ public class PedidoDAO {
 			stmt.executeUpdate();
 
 		} catch (SQLException e) {
-			e.printStackTrace();
+			throw e;
 		} finally {
 			try {
 				if (stmt != null) {
@@ -256,7 +335,7 @@ public class PedidoDAO {
 				}
 				DbConnector.getInstancia().releaseConn();
 			} catch (SQLException e) {
-				e.printStackTrace();
+				throw e;
 			}
 		}
 

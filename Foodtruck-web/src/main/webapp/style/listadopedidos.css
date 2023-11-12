@@ -44,6 +44,14 @@ main{
     
 }
 
+.buscar{
+ 	display: flex;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    padding: 2rem 2rem;
+    
+}
+
 
 
 .pedido__header {

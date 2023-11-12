@@ -15,6 +15,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style/reset.css">
     <link rel="stylesheet" href="style/header.css">
@@ -27,10 +28,12 @@
 </head>
 <body>
   <jsp:include page="header.jsp"/>
-    <h1>Pedidos</h1>
-    
+	    <div class="pedido">
+	    		<h1>Pedidos</h1>             	    
+        </div>
+
+
 <main>
-      <div class = "pedidos">
         
        <%-- Para delivery --%>
       <%if ( e.getRoles().equalsIgnoreCase("Delivery") ){ %>
@@ -223,12 +226,30 @@
  				<%} %>
             </div>
  			<% }} %>
-            
-            
-        </div>
+      
         <% } %>
     </main>
 
+	<div class="row">
+		<div class="mx-auto">
+	
+
+	         	<form action="listadopedidoporfecha" method="get">
+
+		            	<div class="form__item">
+		                    <input class="form-control" name="fecha" value="" placeholder="aaaa-mm-dd">
+		                </div>
+		                <div class="row">
+		                <div class="mx-auto">
+		                 <div class="input-group-prepend">
+		                <button  class="btn btn-outline-secondary " type="submit">Buscar</button>	
+		                </div>
+		                </div>
+						</div>
+		                </form>
+		</div>
+	 </div>
+	    
     
 </body>
 </html>
