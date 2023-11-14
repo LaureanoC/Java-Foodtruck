@@ -1,6 +1,8 @@
 package Pedido;
 
 import java.io.IOException;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.LinkedList;
 
 import javax.servlet.ServletException;
@@ -32,14 +34,18 @@ public class ListadoPedidoPorFecha extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		try {
+		
 		String fecha = request.getParameter("fecha");
-		System.out.println(fecha);
+		if(request.getParameter("fecha") == null) {
+			
+			fecha = "";
+		}
+		
 		PedidoDAO pdao = new PedidoDAO();
 		LinkedList<Pedido> pedidos  = pdao.getPedidoByFecha(fecha);
 		
 		request.setAttribute("pedidos", pedidos);
 		request.getRequestDispatcher("WEB-INF/listadoPedidoPorFecha.jsp").forward(request, response);
-		System.out.println(pedidos);
 		}
 	catch(Exception e) {
 		request.setAttribute("mensaje", "Ha ocurrido un error.");
