@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import data.EmpleadoDAO;
 import entities.Empleado;
+import entities.Hash;
 import entities.Rol;
 
 /**
@@ -56,7 +57,7 @@ public class Login extends HttpServlet {
 			
 			Empleado e = new Empleado();
 			e.setDni(dni);
-			e.setPassword(pass);
+			e.setPassword(Hash.doHashing(pass));
 			
 			EmpleadoDAO edao = new EmpleadoDAO();
 			Empleado emp = edao.login(e);

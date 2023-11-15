@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 import data.EmpleadoDAO;
 import data.RolDAO;
 import entities.Empleado;
+import entities.Hash;
 import entities.Rol;
 
 /**
@@ -66,11 +67,9 @@ public class UpdateEmpleado extends HttpServlet {
 		EmpleadoDAO edao = new EmpleadoDAO();
 		try {
 		
-		
-		
 		String nom = request.getParameter("nombre");
 		String tur = request.getParameter("turno");
-		String pass = request.getParameter("password");
+		String pass = Hash.doHashing(request.getParameter("password"));
 		String rol = request.getParameter("rol");
 		
 		if(dni.equals("")||nom.equals("")||pass.equals("")||rol==null||tur==null) {
