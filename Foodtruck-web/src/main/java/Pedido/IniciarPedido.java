@@ -97,6 +97,13 @@ public class IniciarPedido extends HttpServlet {
 			}
 		}
 
+		
+		if(checkboxbebida == null && checkboxplato == null) {
+			request.setAttribute("mensaje", "Debe seleccionar al menos un producto");
+			request.setAttribute("servlet", "iniciarpedido");
+			request.getRequestDispatcher("WEB-INF/error.jsp").forward(request, response);
+		}
+		
 		HttpSession session = request.getSession();
 		session.setAttribute("lineas", lineas);
 
