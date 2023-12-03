@@ -21,6 +21,7 @@ main{
     max-width: 1920px;
     justify-content: center;
     gap: 2rem;
+    flex-wrap: wrap;
     
     
     
