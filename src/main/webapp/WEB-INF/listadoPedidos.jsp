@@ -100,7 +100,7 @@
      
 
      
-      <%if ( e.getRoles().equalsIgnoreCase("Invitado") ){ %>
+      <%if ( e.getRoles().equalsIgnoreCase("Invitado") || e.getRoles().equalsIgnoreCase("Chef") || e.getRoles().equalsIgnoreCase("Mozo")  ){ %>
       	
       	<% for(Pedido pedido : pedidos){ %>
         
